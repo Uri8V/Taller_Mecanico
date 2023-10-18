@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD8DCA20-F28C-4242-B580-DC3222D57FF4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Taller_Mecanico.Windows</RootNamespace>
+    <AssemblyName>Taller_Mecanico.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmsVehiculos\frmClienteAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmClienteAE.Designer.cs">
+      <DependentUpon>frmClienteAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmClientes.Designer.cs">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaborales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaborales.Designer.cs">
+      <DependentUpon>frmHorariosLaborales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaboralesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaboralesAE.Designer.cs">
+      <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaboralesFiltro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHorariosLaboralesFiltro.Designer.cs">
+      <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMarcas.Designer.cs">
+      <DependentUpon>frmMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMarcasAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMarcasAE.Designer.cs">
+      <DependentUpon>frmMarcasAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRoles.Designer.cs">
+      <DependentUpon>frmRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRolesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRolesAE.Designer.cs">
+      <DependentUpon>frmRolesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDePago.Designer.cs">
+      <DependentUpon>frmTipoDePago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDePagoAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDePagoAE.Designer.cs">
+      <DependentUpon>frmTipoDePagoAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDeVehiculoAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoDeVehiculoAE.Designer.cs">
+      <DependentUpon>frmTipoDeVehiculoAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTiposDeClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTiposDeClientes.Designer.cs">
+      <DependentUpon>frmTiposDeClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTiposDeClientesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTiposDeClientesAE.Designer.cs">
+      <DependentUpon>frmTiposDeClientesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTipoVehiculo.Designer.cs">
+      <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ComboHelper.cs" />
+    <Compile Include="Helpers\formHelper.cs" />
+    <Compile Include="Helpers\GridHelpers.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmsVehiculos\frmClienteAE.resx">
+      <DependentUpon>frmClienteAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmClientes.resx">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaborales.resx">
+      <DependentUpon>frmHorariosLaborales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaboralesAE.resx">
+      <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaboralesFiltro.resx">
+      <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmMarcas.resx">
+      <DependentUpon>frmMarcas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmMarcasAE.resx">
+      <DependentUpon>frmMarcasAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmRoles.resx">
+      <DependentUpon>frmRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmRolesAE.resx">
+      <DependentUpon>frmRolesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTipoDePago.resx">
+      <DependentUpon>frmTipoDePago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTipoDePagoAE.resx">
+      <DependentUpon>frmTipoDePagoAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTipoDeVehiculoAE.resx">
+      <DependentUpon>frmTipoDeVehiculoAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTiposDeClientes.resx">
+      <DependentUpon>frmTiposDeClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTiposDeClientesAE.resx">
+      <DependentUpon>frmTiposDeClientesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTipoVehiculo.resx">
+      <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete Key_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_property_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taller_Mecanico.Entidades\Taller_Mecanico.Entidades.csproj">
+      <Project>{2735dd2e-56ff-4d8a-b973-52dd0bcbc662}</Project>
+      <Name>Taller_Mecanico.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taller_Mecanico.Servicios\Taller_Mecanico.Servicios.csproj">
+      <Project>{2c6489c0-986a-4eac-be16-7f304f81b7f3}</Project>
+      <Name>Taller_Mecanico.Servicios</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Last_button_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\First_32px.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
