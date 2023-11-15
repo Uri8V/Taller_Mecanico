@@ -12,7 +12,7 @@ namespace Taller_Mecanico.Entidades.Entidades
         public string Servicio  { get; set; }
         public decimal Debe { get; set; }
         public decimal Senia { get; set; }
-        public int IdTipoPago { get; set; }
+        public int IdTipoDePago { get; set; }
         public TipoDePagos TipoDePago { get; set; }
     }
 }

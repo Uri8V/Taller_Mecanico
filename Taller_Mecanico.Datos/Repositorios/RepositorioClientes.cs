@@ -84,15 +84,13 @@ namespace Taller_Mecanico.Datos.Repositorios
             return cantidad;
         }
 
-        public List<ClienteComboDto> GetCiudadesCombos(int tipoid)
+        public List<Clientes> GetClientesCombos()
         {
-            List<ClienteComboDto> lista = new List<ClienteComboDto>();
+            List<Clientes> lista = new List<Clientes>();
             using (var conn= new SqlConnection(cadenaConexion))
             {
-                string selectQuery = @"SELECT c.IdCliente, t.TipoCliente FROM Clientes c 
-                INNER JOIN TiposDeClientes t ON c.IdTipoCliente=t.TipoCLiente
-                WHERE c.IdTipoCliente=@tipoid";
-                lista = conn.Query<ClienteComboDto>(selectQuery, new { tipoid }).ToList();
+                string selectQuery = @"SELECT c.IdCliente, c.Documento FROM Clientes c ";
+                lista = conn.Query<Clientes>(selectQuery).ToList();
             }
             return lista;
         }
@@ -110,7 +108,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             return cliente;
         }
 
-        public List<ClienteDto> GetClientesPorPagina(int cantidad, int paginaActual, TiposDeClientes tipo=null)
+        public List<ClienteDto> GetClientesPorPagina(int cantidad, int paginaActual, int? tipo)
         {
             List<ClienteDto> lista= new List<ClienteDto>();
             using (var conn= new SqlConnection(cadenaConexion))
@@ -125,7 +123,7 @@ namespace Taller_Mecanico.Datos.Repositorios
 
                     lista = conn.Query<ClienteDto>(selectQuery, new
                     {
-                        tipo=tipo.TipoCliente,
+                        tipo=tipo.Value,
                         cantidadRegistros = registrosSateados,
                         cantidadPorPagina = cantidad
                     }).ToList();

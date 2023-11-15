@@ -15,8 +15,8 @@ namespace Taller_Mecanico.Servicios.Interfaces
         bool Existe(Clientes cliente);
         bool EstaRelacionada(Clientes cliente);
         int GetCantidad(int? TipoClienteId);
-        List<ClienteDto> GetClientesPorPagina(int registrosPorPagina, int paginaActual, TiposDeClientes TipoCliente = null);
+        List<ClienteDto> GetClientesPorPagina(int registrosPorPagina, int paginaActual, int? tipo);
         Clientes GetClientePorId(int clienteId);
-        List<ClienteComboDto> GetCiudadesCombos(int paisId);
+        List<Clientes> GetClientesCombos();
     }
 }

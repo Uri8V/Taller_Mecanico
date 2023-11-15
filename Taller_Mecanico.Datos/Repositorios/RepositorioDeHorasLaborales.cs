@@ -250,6 +250,67 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public List<HorasLaborales> GetHorasLaboralesCombo()
+        {
+            List<HorasLaborales> lista = new List<HorasLaborales>();
+            using (var conn = new SqlConnection(cadenaDeConexion))
+            {
+                string selectQuery = @"SELECT IdHorasLaborales, Fecha FROM HorasLaborales
+                         ORDER BY Fecha";
+                conn.Open();
+                using (var comando = new SqlCommand(selectQuery, conn))
+                {
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var tipo = ConstruirHorasLaboralesCombo(reader);
+
+                            lista.Add(tipo);
+                        }
+
+                    }
+                }
+            }
+            return lista;
+        }
+
+        private HorasLaborales ConstruirHorasLaboralesCombo(SqlDataReader reader)
+        {
+            return new HorasLaborales
+            {
+                IdHorasLaborales = reader.GetInt32(0),
+                Fecha = reader.GetDateTime(1)
+            };
+        }
+
+        public HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales)
+        {
+            HorasLaborales horas = null;
+            using (var conn = new SqlConnection(cadenaDeConexion))
+            {
+                conn.Open();
+                string selectQuery = @"SELECT IdHorasLaborales,Fecha,HoraDeInicio,HoraDeFin,HorasExtras,HorasLaborales
+                    FROM HorasLaborales WHERE IdHorasLaborales=@idHorasLaborales";
+
+                using (var cmd = new SqlCommand(selectQuery, conn))
+                {
+                    cmd.Parameters.Add("@idHorasLaborales", SqlDbType.Int);
+                    cmd.Parameters["@idHorasLaborales"].Value = idHorasLaborales;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            horas = ConstruirHorasLaborales(reader);
+                        }
+                    }
+                }
+            }
+            return horas;
+        }
+
         private HorasLaborales ConstruirHorasLaborales(SqlDataReader reader)
         {
             HorasLaborales horas = new HorasLaborales()

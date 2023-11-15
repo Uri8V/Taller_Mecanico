@@ -65,11 +65,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\RepositorioClientes.cs" />
+    <Compile Include="Repositorios\RepositorioDeEmpleados.cs" />
+    <Compile Include="Repositorios\RepositorioDeHistoriales.cs" />
     <Compile Include="Repositorios\RepositorioDeHorasLaborales.cs" />
     <Compile Include="Repositorios\RepositorioDeMarcas.cs" />
+    <Compile Include="Repositorios\RepositorioDeMovimientos.cs" />
+    <Compile Include="Repositorios\RepositorioDeReservas.cs" />
     <Compile Include="Repositorios\RepositorioDeRoles.cs" />
+    <Compile Include="Repositorios\RepositorioDeSueldos.cs" />
+    <Compile Include="Repositorios\RepositorioDeTelefonos.cs" />
     <Compile Include="Repositorios\RepositorioDeTipoDeCliente.cs" />
     <Compile Include="Repositorios\RepositorioDeTiposDePago.cs" />
+    <Compile Include="Repositorios\RepositorioDeVehiculos.cs" />
+    <Compile Include="Repositorios\RepositorioDeVehiculosServicios.cs" />
+    <Compile Include="Repositorios\RepositorioModelos.cs" />
     <Compile Include="Repositorios\RepositorioTipoDeVehiculo.cs" />
   </ItemGroup>
   <ItemGroup>

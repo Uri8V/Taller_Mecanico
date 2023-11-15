@@ -71,6 +71,19 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
+        public Roles GetRolesPorId(int idRolEmpleado)
+        {
+            try
+            {
+                return _repositorio.GetRolesPorId(idRolEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Guardar(Roles rol)
         {
             try

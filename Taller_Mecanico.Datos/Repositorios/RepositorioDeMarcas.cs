@@ -169,6 +169,33 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public Marca GetMarcasPorId(int IdMarca)
+        {
+            Marca marca = null;
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                conn.Open();
+                string selectQuery = @"SELECT IdMarca, Marca 
+                    FROM Marcas WHERE IdMarca=@IdMarca";
+
+                using (var cmd = new SqlCommand(selectQuery, conn))
+                {
+                    cmd.Parameters.Add("@IdMarca", SqlDbType.Int);
+                    cmd.Parameters["@IdMarca"].Value = IdMarca;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            marca = ConstruirMarca(reader);
+                        }
+                    }
+                }
+            }
+            return marca;
+        }
+
         private Marca ConstruirMarca(SqlDataReader reader)
         {
             Marca marca = new Marca()

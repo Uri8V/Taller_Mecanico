@@ -41,12 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRepositorioDeMovimientos.cs" />
+    <Compile Include="Interfaces\IRepositorioDeSueldos.cs" />
     <Compile Include="Interfaces\IRepositorioClientes.cs" />
+    <Compile Include="Interfaces\IRepositorioDeEmpleados.cs" />
+    <Compile Include="Interfaces\IRepositorioDeHistoriales.cs" />
     <Compile Include="Interfaces\IRepositorioDeHorasLaborales.cs" />
+    <Compile Include="Interfaces\IRepositorioDeReservas.cs" />
     <Compile Include="Interfaces\IRepositorioDeRoles.cs" />
     <Compile Include="Interfaces\IRepositorioDeTelefonos.cs" />
     <Compile Include="Interfaces\IRepositorioDeTiposDepago.cs" />
     <Compile Include="Interfaces\IRepositorioDeMarcas.cs" />
+    <Compile Include="Interfaces\IRepositorioDeVehiculos.cs" />
+    <Compile Include="Interfaces\IRepositorioDeVehiculosServicios.cs" />
+    <Compile Include="Interfaces\IRepositorioModelos.cs" />
     <Compile Include="Interfaces\IRepositorioTipoDeCliente.cs" />
     <Compile Include="Interfaces\IRepositorioTipoDeVehiculo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

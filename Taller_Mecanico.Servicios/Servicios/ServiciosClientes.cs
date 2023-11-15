@@ -75,11 +75,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<ClienteComboDto> GetCiudadesCombos(int tipoId)
+        public List<Clientes> GetClientesCombos()
         {
             try
             {
-                return _repositorio.GetCiudadesCombos(tipoId);
+                return _repositorio.GetClientesCombos();
             }
             catch (Exception)
             {
@@ -101,7 +101,7 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<ClienteDto> GetClientesPorPagina(int registrosPorPagina, int paginaActual, TiposDeClientes TipoCliente = null)
+        public List<ClienteDto> GetClientesPorPagina(int registrosPorPagina, int paginaActual, int? TipoCliente)
         {
             try
             {

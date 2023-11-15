@@ -5,6 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Taller_Mecanico.Entidades.Dtos.Clientes;
+using Taller_Mecanico.Entidades.Dtos.Empleados;
+using Taller_Mecanico.Entidades.Dtos.Historiales;
+using Taller_Mecanico.Entidades.Dtos.Modelos;
+using Taller_Mecanico.Entidades.Dtos.Movimientos;
+using Taller_Mecanico.Entidades.Dtos.Reservas;
+using Taller_Mecanico.Entidades.Dtos.Sueldos;
+using Taller_Mecanico.Entidades.Dtos.Telefono;
+using Taller_Mecanico.Entidades.Dtos.Vehiculos;
+using Taller_Mecanico.Entidades.Dtos.VehiculoServicio;
 using Taller_Mecanico.Entidades.Entidades;
 
 namespace Taller_Mecanico.Windows.Helpers
@@ -33,7 +42,7 @@ namespace Taller_Mecanico.Windows.Helpers
                     r.Cells[0].Value = tipo.NombreTipoVehiculo;
                     break;
                 case TipoDePagos tipos:
-                    r.Cells[0].Value = tipos.TipoPago;
+                    r.Cells[0].Value = tipos.NombreDePago;
                     break;
                 case TiposDeClientes tipos:
                     r.Cells[0].Value = tipos.TipoCliente;
@@ -56,32 +65,103 @@ namespace Taller_Mecanico.Windows.Helpers
                     r.Cells[4].Value = clientes.CUIT;
                     r.Cells[5].Value = clientes.TipoCliente;
                     break;
-                //case CiudadDto ciudad:
-                //    r.Cells[0].Value = ciudad.NombrePais;
-                //    r.Cells[1].Value = ciudad.NombreCiudad;
-                //    break;
-                //case Categoria categoria:
-                //    r.Cells[0].Value = categoria.NombreCategoria;
-                //    r.Cells[1].Value = categoria.Descripcion;
-                //    break;
-                //case ClienteListDto cliente:
-                //    r.Cells[0].Value = $"{cliente.Apellido}, {cliente.Nombre}";
-                //    r.Cells[1].Value = cliente.NombrePais;
-                //    r.Cells[2].Value = cliente.NombreCiudad;
-                //    break;
-                //case ProveedorListDto proveedor:
-                //    r.Cells[0].Value = proveedor.NombreProveedor;
-                //    r.Cells[1].Value = proveedor.NombrePais;
-                //    r.Cells[2].Value = proveedor.NombreCiudad;
-                //    break;
-                //case ProductoListDto producto:
-                //    r.Cells[0].Value = producto.NombreProducto;
-                //    r.Cells[1].Value = producto.Categoria;
-                //    r.Cells[2].Value = producto.PrecioUnitario;
-                //    r.Cells[3].Value = producto.UnidadesEnStock;
-                //    r.Cells[4].Value = producto.Suspendido;
-                //    break;
-
+                case ModelosDto modelo:
+                    r.Cells[0].Value = modelo.Modelo;
+                    r.Cells[1].Value = modelo.Marca;
+                    break;
+                case EmpleadoDto empleado:
+                    r.Cells[0].Value = empleado.Nombre;
+                    r.Cells[1].Value = empleado.Apellido;
+                    r.Cells[2].Value = empleado.Documento;
+                    r.Cells[3].Value = empleado.Rol;
+                    break;
+                case VehiculoDto vehiculo:
+                    r.Cells[0].Value = vehiculo.Patente;
+                    r.Cells[1].Value = vehiculo.Kilometros;
+                    r.Cells[2].Value = vehiculo.TipoVehiculo;
+                    r.Cells[3].Value = vehiculo.Modelo;
+                    break;
+                case TelefonoDto telefono:
+                    if (!string.IsNullOrEmpty(telefono.DocumentoCliente))
+                    {
+                        r.Cells[0].Value = $"{telefono.ApellidoCliente.ToUpper()}, {telefono.NombreCliente} ({telefono.DocumentoCliente})";
+                        r.Cells[1].Value = "";
+                        r.Cells[2].Value = telefono.Telefono;
+                        r.Cells[3].Value = telefono.TipoDeTelefono;
+                    }
+                    else
+                    {
+                        r.Cells[0].Value = "";
+                        r.Cells[1].Value = $"{telefono.ApellidoEmpleado.ToUpper()}, {telefono.NombreEmpleado} ({telefono.DocumentoEmpleado})";
+                        r.Cells[2].Value = telefono.Telefono;
+                        r.Cells[3].Value = telefono.TipoDeTelefono;
+                    }
+                    break;
+                case ReservaDto reserva:
+                    r.Cells[0].Value = $"{reserva.Apellido.ToUpper()}, {reserva.Nombre} ({reserva.Documento})";
+                    r.Cells[1].Value = reserva.FechaEntrada.ToShortDateString();
+                    r.Cells[2].Value = reserva.HoraEntrada;
+                    if (reserva.FechaSalida == new DateTime(2023, 01, 01) && reserva.HoraSalida == TimeSpan.Zero)
+                    {
+                        r.Cells[3].Value = "Se desconoce el día en el que el vehiculo este en condiciones";
+                        r.Cells[4].Value = "Se desconoce la hora en el que el vehículo este en condiciones";
+                    }
+                    else
+                    {
+                        r.Cells[3].Value = reserva.FechaSalida.ToShortDateString();
+                        r.Cells[4].Value = reserva.HoraSalida;
+                    }
+                    if (reserva.SePresento == true)
+                    {
+                        r.Cells[5].Value = "SI";
+                    }
+                    else
+                    {
+                        r.Cells[5].Value = "NO";
+                    }
+                    if (reserva.EsSobreturno == true)
+                    {
+                        r.Cells[6].Value = "SI";
+                    }
+                    else
+                    {
+                        r.Cells[6].Value = "NO";
+                    }
+                    break;
+                case HistorialDto historial:
+                    r.Cells[0].Value = $"{historial.Apellido.ToUpper()}, {historial.Nombre} ({historial.Documento})";
+                    r.Cells[1].Value = historial.FechaEntrada.ToShortDateString();
+                    r.Cells[2].Value = historial.HoraEntrada.ToString();
+                    r.Cells[3].Value = $"{historial.ApellidoCliente.ToUpper()}, {historial.NombreCliente} ({historial.DocumentoCliente})";
+                    r.Cells[4].Value=historial.ValorPorHora.ToString();
+                    r.Cells[5].Value=historial.ValorPorHoraExtra.ToString();
+                    r.Cells[6].Value = historial.Patente;
+                    break;
+                case SueldosDto sueldos:
+                    r.Cells[0].Value = $"{sueldos.Apellido.ToUpper()}, {sueldos.Nombre} ({sueldos.Documento})";
+                    r.Cells[1].Value = sueldos.Fecha.ToShortDateString();
+                    r.Cells[2].Value = sueldos.HorasLaborales.ToString();
+                    r.Cells[3].Value = sueldos.HorasExtras.ToString();
+                    r.Cells[4].Value = sueldos.ValorPorHora.ToString();
+                    r.Cells[5].Value = sueldos.ValorPorHoraExtra.ToString();
+                    r.Cells[6].Value = sueldos.TotalAPagar.ToString();
+                    r.Cells[7].Value = sueldos.TotalExtra.ToString();
+                    break;
+                case MovimientosDto movimientos:
+                    r.Cells[0].Value = movimientos.Servicio;
+                    r.Cells[1].Value = movimientos.Debe;
+                    r.Cells[2].Value = movimientos.Senia;
+                    r.Cells[3].Value = movimientos.NombreDePago;
+                    break;
+                case VehiculosServiciosDto servicios:
+                    r.Cells[0].Value = servicios.Patente;
+                    r.Cells[1].Value = $"{servicios.Apellido.ToUpper()}, {servicios.Nombre} ({servicios.Documento})";
+                    r.Cells[2].Value = $"{servicios.Servicio}, Debe:{servicios.DebeServicio}, Seña:{servicios.Senia}";
+                    r.Cells[3].Value = (servicios.Debe - servicios.Senia).ToString();
+                    r.Cells[4].Value = servicios.Haber;
+                    r.Cells[5].Value = servicios.Descripcion;
+                    r.Cells[6].Value = servicios.Fecha.ToShortDateString();
+                    break;
             }
             r.Tag = obj;
 

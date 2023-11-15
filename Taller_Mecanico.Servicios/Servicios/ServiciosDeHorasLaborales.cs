@@ -83,6 +83,32 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
+        public List<HorasLaborales> GetHorasLaboralesCombo()
+        {
+            try
+            {
+                return _repo.GetHorasLaboralesCombo();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales)
+        {
+            try
+            {
+                return _repo.GetHorasLaboralesPorId(idHorasLaborales);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Guardar(HorasLaborales horas)
         {
             try

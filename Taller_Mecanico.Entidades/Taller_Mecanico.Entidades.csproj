@@ -43,14 +43,24 @@
   <ItemGroup>
     <Compile Include="Dtos\Clientes\ClienteComboDto.cs" />
     <Compile Include="Dtos\Clientes\ClienteDto.cs" />
+    <Compile Include="Dtos\Empleados\EmpleadoComboDto.cs" />
+    <Compile Include="Dtos\Empleados\EmpleadoDto.cs" />
+    <Compile Include="Dtos\Historiales\HistorialDto.cs" />
+    <Compile Include="Dtos\Modelos\ModeloComboDto.cs" />
+    <Compile Include="Dtos\Modelos\ModelosDto.cs" />
+    <Compile Include="Dtos\Movimientos\MovimientosDto.cs" />
+    <Compile Include="Dtos\Reservas\ReservaDto.cs" />
+    <Compile Include="Dtos\Sueldos\SueldosDto.cs" />
     <Compile Include="Dtos\Telefono\TelefonoComboDto.cs" />
     <Compile Include="Dtos\Telefono\TelefonoDto.cs" />
+    <Compile Include="Dtos\VehiculoServicio\VehiculosServiciosDto.cs" />
+    <Compile Include="Dtos\Vehiculos\VehiculoDto.cs" />
     <Compile Include="Entidades\Clientes.cs" />
     <Compile Include="Entidades\Empleado.cs" />
     <Compile Include="Entidades\Historiales.cs" />
     <Compile Include="Entidades\HorasLaborales.cs" />
     <Compile Include="Entidades\Marca.cs" />
-    <Compile Include="Entidades\Modelos.cs" />
+    <Compile Include="Entidades\Model.cs" />
     <Compile Include="Entidades\Movimientos.cs" />
     <Compile Include="Entidades\Reservas.cs" />
     <Compile Include="Entidades\Roles.cs" />

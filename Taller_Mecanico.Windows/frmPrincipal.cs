@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Taller_Mecanico.Windows.FrmsVehiculos;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmMOVIMIENTOS;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS;
 
 namespace Taller_Mecanico.Windows
 {
@@ -62,6 +67,60 @@ namespace Taller_Mecanico.Windows
         private void btnClientes_Click(object sender, EventArgs e)
         {
             frmClientes frm= new frmClientes();
+            frm.ShowDialog(this);
+        }
+
+        private void btnModelos_Click(object sender, EventArgs e)
+        {
+            frmModelos frm= new frmModelos();
+            frm.ShowDialog(this);
+        }
+
+        private void btnEmpleados_Click(object sender, EventArgs e)
+        {
+            frmEmpleados frm= new frmEmpleados();
+            frm.ShowDialog(this);
+        }
+
+        private void btnVehiculos_Click(object sender, EventArgs e)
+        {
+            frmVehiculos frm= new frmVehiculos();
+            frm.ShowDialog(this);
+        }
+
+        private void btnTelefonos_Click(object sender, EventArgs e)
+        {
+            frmTelefonos frm= new frmTelefonos();
+            frm.ShowDialog(this);
+        }
+
+        private void btnReservas_Click(object sender, EventArgs e)
+        {
+            frmReserva frm= new frmReserva();
+            frm.ShowDialog(this);
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            frmHistoriales frm= new frmHistoriales();
+            frm.ShowDialog(this);
+        }
+
+        private void btnSueldos_Click(object sender, EventArgs e)
+        {
+            frmSueldos frm= new frmSueldos();
+            frm.ShowDialog(this);
+        }
+
+        private void btnMovimientos_Click(object sender, EventArgs e)
+        {
+            frmMovimientos frm= new frmMovimientos();
+            frm.ShowDialog(this);
+        }
+
+        private void btnVehiculosServicios_Click(object sender, EventArgs e)
+        {
+            frmVehiculosServicios frm= new frmVehiculosServicios();
             frm.ShowDialog(this);
         }
     }

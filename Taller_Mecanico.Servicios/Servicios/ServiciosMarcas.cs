@@ -90,5 +90,18 @@ namespace Taller_Mecanico.Servicios.Servicios
                 throw;
             }
         }
+
+        public Marca GetMarcasPorId(int idMarca)
+        {
+            try
+            {
+                return _servicio.GetMarcasPorId(idMarca);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

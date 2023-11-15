@@ -8,7 +8,7 @@ namespace Taller_Mecanico.Entidades.Entidades
 {
     public class TipoVehiculo
     {
-        public int TipoVehiculoId { get; set; }
+        public int IdTipoVehiculo { get; set; }
         public string NombreTipoVehiculo { get; set; }
         public object Clone()
         {

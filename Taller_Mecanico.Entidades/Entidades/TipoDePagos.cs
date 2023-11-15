@@ -9,7 +9,7 @@ namespace Taller_Mecanico.Entidades.Entidades
     public class TipoDePagos
     {
         public int IdTipoPagos { get; set; }
-        public string TipoPago{ get; set; }
+        public string NombreDePago{ get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

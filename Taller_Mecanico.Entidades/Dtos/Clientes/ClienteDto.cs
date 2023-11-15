@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Taller_Mecanico.Entidades.Dtos.Clientes
 {
-    public class ClienteDto:ICloneable
+    public class ClienteDto : ICloneable
     {
         public int IdCliente { get; set; }
         public string Nombre { get; set; }

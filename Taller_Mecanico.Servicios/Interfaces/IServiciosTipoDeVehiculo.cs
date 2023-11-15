@@ -14,5 +14,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         bool Existe(TipoVehiculo tipo);
         int GetCantidad(string textoFiltro);
         List<TipoVehiculo> GetTipoVehiculos();
+        TipoVehiculo GetTipoVehiculosPorId(int idVehiculo);
     }
 }

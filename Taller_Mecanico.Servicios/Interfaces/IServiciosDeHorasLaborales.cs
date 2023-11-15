@@ -15,5 +15,7 @@ namespace Taller_Mecanico.Servicios.Interfaces
         int GetCantidad(DateTime? Fecha);
         List<HorasLaborales> GetHoras();
         List<HorasLaborales> Filtrar(DateTime horas);
+        HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales);
+        List<HorasLaborales> GetHorasLaboralesCombo();
     }
 }

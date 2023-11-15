@@ -25,12 +25,12 @@ namespace Taller_Mecanico.Datos.Repositorios
         {
             using (var conn = new SqlConnection(cadenaDeConexion))
             {
-                string insertQuery = "INSERT INTO TiposDePagos (NombreDePago) VALUES(@TipoPago); SELECT SCOPE_IDENTITY()";
+                string insertQuery = "INSERT INTO TiposDePagos (NombreDePago) VALUES(@NombreDePago); SELECT SCOPE_IDENTITY()";
                 conn.Open();
                 using (var comando = new SqlCommand(insertQuery, conn))
                 {
-                    comando.Parameters.Add("@TipoPago", SqlDbType.NVarChar);
-                    comando.Parameters["@TipoPago"].Value = tipo.TipoPago;
+                    comando.Parameters.Add("@NombreDePago", SqlDbType.NVarChar);
+                    comando.Parameters["@NombreDePago"].Value = tipo.NombreDePago;
 
                     int tipoId = Convert.ToInt32(comando.ExecuteScalar());
                     tipo.IdTipoPagos = tipoId;
@@ -69,11 +69,11 @@ namespace Taller_Mecanico.Datos.Repositorios
                 using (var conn = new SqlConnection(cadenaDeConexion))
                 {
                     conn.Open();
-                    string updateQuery = "UPDATE TiposDePagos SET NombreDePago=@TipoPago WHERE IdTipoDePago=@IdTiposPagos";
+                    string updateQuery = "UPDATE TiposDePagos SET NombreDePago=@NombreDePago WHERE IdTipoDePago=@IdTiposPagos";
                     using (var comando = new SqlCommand(updateQuery, conn))
                     {
-                        comando.Parameters.Add("@TipoPago", SqlDbType.NVarChar);
-                        comando.Parameters["@TipoPago"].Value =tipo.TipoPago;
+                        comando.Parameters.Add("@NombreDePago", SqlDbType.NVarChar);
+                        comando.Parameters["@NombreDePago"].Value =tipo.NombreDePago;
 
                         comando.Parameters.Add("@IdTiposPagos", SqlDbType.NVarChar);
                         comando.Parameters["@IdTiposPagos"].Value = tipo.IdTipoPagos;
@@ -100,16 +100,16 @@ namespace Taller_Mecanico.Datos.Repositorios
                     string selectQuery;
                     if (tipo.IdTipoPagos== 0)
                     {
-                        selectQuery = "SELECT COUNT(*) FROM TiposDePagos WHERE NombreDePago=@TipoPago";
+                        selectQuery = "SELECT COUNT(*) FROM TiposDePagos WHERE NombreDePago=@Tipo";
                     }
                     else
                     {
-                        selectQuery = "SELECT COUNT(*) FROM TiposDePagos WHERE NombreDePago=@TipoPago AND IdTipoDePago!=@IdTiposPagos";
+                        selectQuery = "SELECT COUNT(*) FROM TiposDePagos WHERE NombreDePago=@Tipo AND IdTipoDePago!=@IdTiposPagos";
                     }
                     using (var comando = new SqlCommand(selectQuery, conn))
                     {
-                        comando.Parameters.Add("@TipoPago", SqlDbType.NVarChar);
-                        comando.Parameters["@TipoPago"].Value = tipo.TipoPago;
+                        comando.Parameters.Add("@Tipo", SqlDbType.NVarChar);
+                        comando.Parameters["@Tipo"].Value = tipo.NombreDePago;
 
                         if (tipo.IdTipoPagos != 0)
                         {
@@ -168,12 +168,39 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public TipoDePagos GetTipoDePagosPorId(int IdTipoDePago)
+        {
+            TipoDePagos tipo = null;
+            using (var conn = new SqlConnection(cadenaDeConexion))
+            {
+                conn.Open();
+                string selectQuery = @"SELECT IdTipoDePago,NombreDePago
+                    FROM TiposDePagos WHERE IdTipoDePago=@IdTipoDePago";
+
+                using (var cmd = new SqlCommand(selectQuery, conn))
+                {
+                    cmd.Parameters.Add("@IdTipoDePago", SqlDbType.Int);
+                    cmd.Parameters["@IdTipoDePago"].Value = IdTipoDePago;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            tipo = ConstruirTipoDePago(reader);
+                        }
+                    }
+                }
+            }
+            return tipo;
+        }
+
         private TipoDePagos ConstruirTipoDePago(SqlDataReader reader)
         {
             TipoDePagos tipo = new TipoDePagos()
             {
                 IdTipoPagos = reader.GetInt32(0),
-                TipoPago = reader.GetString(1)
+                NombreDePago = reader.GetString(1)
             };
             return tipo;
         }

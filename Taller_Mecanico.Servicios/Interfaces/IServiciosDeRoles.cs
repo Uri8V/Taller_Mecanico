@@ -14,5 +14,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         bool Existe(Roles rol);
         int GetCantidad(string textoFiltro);
         List<Roles> GetRoles();
+        Roles GetRolesPorId(int idRolEmpleado);
     }
 }

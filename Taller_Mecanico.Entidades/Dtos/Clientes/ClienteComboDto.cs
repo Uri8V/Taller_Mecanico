@@ -9,7 +9,7 @@ namespace Taller_Mecanico.Entidades.Dtos.Clientes
     public class ClienteComboDto
     {
         public int IdCliente { get; set; }
-        public string TipoCliente { get; set; }
-
+        public string Documento { get; set; }
+     
     }
 }

@@ -15,9 +15,9 @@ namespace Taller_Mecanico.Comun.Interfaces
         void Editar(Telefonos telefono);
         bool Existe(Telefonos telefono);
         bool EstaRelacionada(Telefonos telefono);
-        int GetCantidad(int? telefonoId);
-        List<TelefonoDto> GetCiudadesPorPagina(int registrosPorPagina, int paginaActual, int? telefonoId);
-        Telefonos GetCiudadPorId(int telefonoId);
-        List<TelefonoComboDto> GetCiudadesCombos(int paisId);
+        int GetCantidad(string telefonoId=null);
+        List<TelefonoDto> GetTelefonosPorPagina(int registrosPorPagina, int paginaActual, int? clienteid, int? empleadoid);
+        Telefonos GetTelefonoPorId(int telefonoId);
+        List<TelefonoComboDto> GetTelefonosCombos(int paisId);
     }
 }

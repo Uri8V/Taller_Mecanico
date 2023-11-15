@@ -33,7 +33,7 @@ namespace Taller_Mecanico.Datos.Repositorios
                     comando.Parameters["@NombreTipoVehiculo"].Value = tipo.NombreTipoVehiculo;
 
                     int TipoVehiculoId = Convert.ToInt32(comando.ExecuteScalar());
-                    tipo.TipoVehiculoId = TipoVehiculoId;
+                    tipo.IdTipoVehiculo = TipoVehiculoId;
                 }
             }
         }
@@ -45,11 +45,11 @@ namespace Taller_Mecanico.Datos.Repositorios
                 using (var conn = new SqlConnection(cadenaConexion))
                 {
                     conn.Open();
-                    string deleteQuery = "DELETE FROM TiposDeVehiculo WHERE IdTipoVehiculo=@TipoVehiculoId";
+                    string deleteQuery = "DELETE FROM TiposDeVehiculo WHERE IdTipoVehiculo=@IdTipoVehiculo";
                     using (var comando = new SqlCommand(deleteQuery, conn))
                     {
-                        comando.Parameters.Add("@TipoVehiculoId", SqlDbType.Int);
-                        comando.Parameters["@TipoVehiculoId"].Value = tipoVehiculoId;
+                        comando.Parameters.Add("@IdTipoVehiculo", SqlDbType.Int);
+                        comando.Parameters["@IdTipoVehiculo"].Value = tipoVehiculoId;
 
                         comando.ExecuteNonQuery();
                     }
@@ -69,14 +69,14 @@ namespace Taller_Mecanico.Datos.Repositorios
                 using (var conn = new SqlConnection(cadenaConexion))
                 {
                     conn.Open();
-                    string updateQuery = "UPDATE TiposDeVehiculo SET TipoVehiculo=@NombreTipoVehiculo Where IdTipoVehiculo=@TipoVehiculoId";
+                    string updateQuery = "UPDATE TiposDeVehiculo SET TipoVehiculo=@NombreTipoVehiculo Where IdTipoVehiculo=@IdTipoVehiculo";
                     using (var comando = new SqlCommand(updateQuery, conn))
                     {
                         comando.Parameters.Add("@NombreTipoVehiculo", SqlDbType.NVarChar);
                         comando.Parameters["@NombreTipoVehiculo"].Value = tipo.NombreTipoVehiculo;
 
-                        comando.Parameters.Add("@TipoVehiculoId", SqlDbType.NVarChar);
-                        comando.Parameters["@TipoVehiculoId"].Value = tipo.TipoVehiculoId;
+                        comando.Parameters.Add("@IdTipoVehiculo", SqlDbType.NVarChar);
+                        comando.Parameters["@IdTipoVehiculo"].Value = tipo.IdTipoVehiculo;
 
                         comando.ExecuteNonQuery();
                     }
@@ -98,23 +98,23 @@ namespace Taller_Mecanico.Datos.Repositorios
                 {
                     conn.Open();
                     string selectQuery;
-                    if (tipo.TipoVehiculoId == 0)
+                    if (tipo.IdTipoVehiculo == 0)
                     {
                         selectQuery = "SELECT COUNT(*) FROM TiposDeVehiculo WHERE TipoVehiculo=@NombreTipoVehiculo";
                     }
                     else
                     {
-                        selectQuery = "SELECT COUNT(*) FROM TiposDeVehiculo WHERE TipoVehiculo=@NombreTipoVehiculo AND IdTipoVehiculo!=@TipoVehiculoId";
+                        selectQuery = "SELECT COUNT(*) FROM TiposDeVehiculo WHERE TipoVehiculo=@NombreTipoVehiculo AND IdTipoVehiculo!=@IdTipoVehiculo";
                     }
                     using (var comando = new SqlCommand(selectQuery, conn))
                     {
                         comando.Parameters.Add("@NombreTipoVehiculo", SqlDbType.NVarChar);
                         comando.Parameters["@NombreTipoVehiculo"].Value = tipo.NombreTipoVehiculo;
 
-                        if (tipo.TipoVehiculoId != 0)
+                        if (tipo.IdTipoVehiculo != 0)
                         {
-                            comando.Parameters.Add("@TipoVehiculoId", SqlDbType.Int);
-                            comando.Parameters["@TipoVehiculoId"].Value = tipo.TipoVehiculoId;
+                            comando.Parameters.Add("@IdTipoVehiculo", SqlDbType.Int);
+                            comando.Parameters["@IdTipoVehiculo"].Value = tipo.IdTipoVehiculo;
                         }
                         cantidad = (int)comando.ExecuteScalar();
                     }
@@ -168,11 +168,44 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public TipoVehiculo GetTipoVehiculosPorId(int idVehiculo)
+        {
+            TipoVehiculo tipo = null;
+            try
+            {
+                using (var con = new SqlConnection(cadenaConexion))
+                {
+                    con.Open();
+                    string selectQuery = "SELECT IdTipoVehiculo, TipoVehiculo FROM TiposDeVehiculo WHERE IdTipoVehiculo=@IdTipoVehiculo";
+                    using (var comando = new SqlCommand(selectQuery, con))
+                    {
+                        comando.Parameters.Add("@IdTipoVehiculo", SqlDbType.Int);
+                        comando.Parameters["@IdTipoVehiculo"].Value = idVehiculo;
+
+                        using (var reader = comando.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                tipo = ConstruirTipoVehiculo(reader);
+                            }
+                        }
+                    }
+                }
+                return tipo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private TipoVehiculo ConstruirTipoVehiculo(SqlDataReader reader)
         {
             TipoVehiculo tipo = new TipoVehiculo()
             {
-                TipoVehiculoId = reader.GetInt32(0),
+                IdTipoVehiculo = reader.GetInt32(0),
                 NombreTipoVehiculo = reader.GetString(1)
             };
             return tipo;

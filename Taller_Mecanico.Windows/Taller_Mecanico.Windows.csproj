@@ -46,40 +46,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmsVehiculos\frmClienteAE.cs">
+    <Compile Include="FrmsVehiculos\frmCLIENTES\frmClienteAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmClienteAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmCLIENTES\frmClienteAE.Designer.cs">
       <DependentUpon>frmClienteAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmClientes.cs">
+    <Compile Include="FrmsVehiculos\frmCLIENTES\frmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmClientes.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmCLIENTES\frmClientes.Designer.cs">
       <DependentUpon>frmClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaborales.cs">
+    <Compile Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleadoAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaborales.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleadoAE.Designer.cs">
+      <DependentUpon>frmEmpleadoAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleados.Designer.cs">
+      <DependentUpon>frmEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHISTORIALES\frmHistoriales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHISTORIALES\frmHistoriales.Designer.cs">
+      <DependentUpon>frmHistoriales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHISTORIALES\frmHistorialesAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHISTORIALES\frmHistorialesAE.Designer.cs">
+      <DependentUpon>frmHistorialesAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaborales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaborales.Designer.cs">
       <DependentUpon>frmHorariosLaborales.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaboralesAE.cs">
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaboralesAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesAE.Designer.cs">
       <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaboralesFiltro.cs">
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHorariosLaboralesFiltro.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.Designer.cs">
       <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmMarcas.cs">
+    <Compile Include="FrmsVehiculos\frmMARCAS\frmMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmMarcas.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmMARCAS\frmMarcas.Designer.cs">
       <DependentUpon>frmMarcas.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrincipal.cs">
@@ -88,112 +112,259 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmMarcasAE.cs">
+    <Compile Include="FrmsVehiculos\frmMARCAS\frmMarcasAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmMarcasAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmMARCAS\frmMarcasAE.Designer.cs">
       <DependentUpon>frmMarcasAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmRoles.cs">
+    <Compile Include="FrmsVehiculos\frmMODELOS\frmModelos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmRoles.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmMODELOS\frmModelos.Designer.cs">
+      <DependentUpon>frmModelos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMODELOS\frmModelosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMODELOS\frmModelosAE.Designer.cs">
+      <DependentUpon>frmModelosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientos.Designer.cs">
+      <DependentUpon>frmMovimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientosAE.Designer.cs">
+      <DependentUpon>frmMovimientosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRESERVAS\frmReserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRESERVAS\frmReserva.Designer.cs">
+      <DependentUpon>frmReserva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRESERVAS\frmReservasAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmRESERVAS\frmReservasAE.Designer.cs">
+      <DependentUpon>frmReservasAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmROLES\frmRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmROLES\frmRoles.Designer.cs">
       <DependentUpon>frmRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmRolesAE.cs">
+    <Compile Include="FrmsVehiculos\frmROLES\frmRolesAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmRolesAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmROLES\frmRolesAE.Designer.cs">
       <DependentUpon>frmRolesAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDePago.cs">
+    <Compile Include="FrmsVehiculos\frmSUELDOS\frmSueldos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDePago.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmSUELDOS\frmSueldos.Designer.cs">
+      <DependentUpon>frmSueldos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmSUELDOS\frmSueldosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmSUELDOS\frmSueldosAE.Designer.cs">
+      <DependentUpon>frmSueldosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.Designer.cs">
+      <DependentUpon>frmTelefonosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.Designer.cs">
+      <DependentUpon>frmSeleccionarTipoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonos.Designer.cs">
+      <DependentUpon>frmTelefonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePago.Designer.cs">
       <DependentUpon>frmTipoDePago.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDePagoAE.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePagoAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDePagoAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePagoAE.Designer.cs">
       <DependentUpon>frmTipoDePagoAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDeVehiculoAE.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoDeVehiculoAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoDeVehiculoAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoDeVehiculoAE.Designer.cs">
       <DependentUpon>frmTipoDeVehiculoAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTiposDeClientes.cs">
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTiposDeClientes.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientes.Designer.cs">
       <DependentUpon>frmTiposDeClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTiposDeClientesAE.cs">
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientesAE.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTiposDeClientesAE.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientesAE.Designer.cs">
       <DependentUpon>frmTiposDeClientesAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoVehiculo.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoVehiculo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTipoVehiculo.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoVehiculo.Designer.cs">
       <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServicios.Designer.cs">
+      <DependentUpon>frmVehiculosServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServiciosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServiciosAE.Designer.cs">
+      <DependentUpon>frmVehiculosServiciosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOS\frmVehiculos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOS\frmVehiculos.Designer.cs">
+      <DependentUpon>frmVehiculos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOS\frmVehiculosAE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOS\frmVehiculosAE.Designer.cs">
+      <DependentUpon>frmVehiculosAE.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ComboHelper.cs" />
     <Compile Include="Helpers\formHelper.cs" />
     <Compile Include="Helpers\GridHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmsVehiculos\frmClienteAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmCLIENTES\frmClienteAE.resx">
       <DependentUpon>frmClienteAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmClientes.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmCLIENTES\frmClientes.resx">
       <DependentUpon>frmClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaborales.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleadoAE.resx">
+      <DependentUpon>frmEmpleadoAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleados.resx">
+      <DependentUpon>frmEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHISTORIALES\frmHistoriales.resx">
+      <DependentUpon>frmHistoriales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHISTORIALES\frmHistorialesAE.resx">
+      <DependentUpon>frmHistorialesAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaborales.resx">
       <DependentUpon>frmHorariosLaborales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaboralesAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesAE.resx">
       <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmHorariosLaboralesFiltro.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.resx">
       <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmMarcas.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmMARCAS\frmMarcas.resx">
       <DependentUpon>frmMarcas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmMarcasAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmMARCAS\frmMarcasAE.resx">
       <DependentUpon>frmMarcasAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmRoles.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmMODELOS\frmModelos.resx">
+      <DependentUpon>frmModelos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmMODELOS\frmModelosAE.resx">
+      <DependentUpon>frmModelosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientos.resx">
+      <DependentUpon>frmMovimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientosAE.resx">
+      <DependentUpon>frmMovimientosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmRESERVAS\frmReserva.resx">
+      <DependentUpon>frmReserva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmRESERVAS\frmReservasAE.resx">
+      <DependentUpon>frmReservasAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmROLES\frmRoles.resx">
       <DependentUpon>frmRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmRolesAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmROLES\frmRolesAE.resx">
       <DependentUpon>frmRolesAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTipoDePago.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmSUELDOS\frmSueldos.resx">
+      <DependentUpon>frmSueldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmSUELDOS\frmSueldosAE.resx">
+      <DependentUpon>frmSueldosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.resx">
+      <DependentUpon>frmTelefonosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.resx">
+      <DependentUpon>frmSeleccionarTipoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTELEFONOS\frmTelefonos.resx">
+      <DependentUpon>frmTelefonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePago.resx">
       <DependentUpon>frmTipoDePago.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTipoDePagoAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPOSDEPAGOS\frmTipoDePagoAE.resx">
       <DependentUpon>frmTipoDePagoAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTipoDeVehiculoAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoDeVehiculoAE.resx">
       <DependentUpon>frmTipoDeVehiculoAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTiposDeClientes.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientes.resx">
       <DependentUpon>frmTiposDeClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTiposDeClientesAE.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPODECLIENTE\frmTiposDeClientesAE.resx">
       <DependentUpon>frmTiposDeClientesAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTipoVehiculo.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoVehiculo.resx">
       <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServicios.resx">
+      <DependentUpon>frmVehiculosServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServiciosAE.resx">
+      <DependentUpon>frmVehiculosServiciosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOS\frmVehiculos.resx">
+      <DependentUpon>frmVehiculos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOS\frmVehiculosAE.resx">
+      <DependentUpon>frmVehiculosAE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -257,6 +428,60 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\First_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wayofpay_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TypeOfCar_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customer_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customer_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Brand_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\models_32_px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hourglass_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rol_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\workers_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time_machine_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time_machine_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money_box_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\initiate_money_transfer_32px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

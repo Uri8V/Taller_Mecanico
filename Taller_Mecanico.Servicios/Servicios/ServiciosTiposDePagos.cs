@@ -91,5 +91,18 @@ namespace Taller_Mecanico.Servicios.Servicios
                 throw;
             }
         }
+
+        public TipoDePagos GetTipoDePagosPorId(int idMovimiento)
+        {
+            try
+            {
+                return _servicio.GetTipoDePagosPorId(idMovimiento);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

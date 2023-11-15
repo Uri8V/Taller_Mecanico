@@ -8,6 +8,16 @@ namespace Taller_Mecanico.Entidades.Entidades
 {
     public class Empleado
     {
+        public Empleado(int idEmpleado, string documento)
+        {
+            IdEmpleado = idEmpleado;
+            Documento = documento;
+        }
+        public Empleado()
+        {
+            
+        }
+
         public int IdEmpleado { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }

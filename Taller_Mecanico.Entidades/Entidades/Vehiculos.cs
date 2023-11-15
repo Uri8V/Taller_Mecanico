@@ -14,6 +14,6 @@ namespace Taller_Mecanico.Entidades.Entidades
         public int IdTipoVehiculo { get; set; }
         public int IdModelo { get; set; }
         public TipoVehiculo NombreTipoVehiculo { get; set; }
-        public Modelos NombreModelo { get; set; }
+        public Model NombreModelo { get; set; }
     }
 }

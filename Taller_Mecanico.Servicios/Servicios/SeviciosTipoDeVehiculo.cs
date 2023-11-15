@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -71,11 +72,24 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
+        public TipoVehiculo GetTipoVehiculosPorId(int idVehiculo)
+        {
+            try
+            {
+                return _servicios.GetTipoVehiculosPorId(idVehiculo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Guardar(TipoVehiculo tipo)
         {
             try
             {
-                if (tipo.TipoVehiculoId == 0)
+                if (tipo.IdTipoVehiculo == 0)
                 {
                    _servicios.Agregar(tipo);
                 }

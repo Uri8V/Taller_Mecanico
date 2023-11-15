@@ -41,20 +41,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IServicioModelos.cs" />
     <Compile Include="Interfaces\IServiciosClientes.cs" />
     <Compile Include="Interfaces\IServiciosDeHorasLaborales.cs" />
     <Compile Include="Interfaces\IServiciosDeRoles.cs" />
     <Compile Include="Interfaces\IServiciosDeTiposDeClientes.cs" />
+    <Compile Include="Interfaces\IServiciosEmpleados.cs" />
+    <Compile Include="Interfaces\IServiciosHistoriales.cs" />
     <Compile Include="Interfaces\IServiciosMarcas.cs" />
+    <Compile Include="Interfaces\IServiciosMovimientos.cs" />
+    <Compile Include="Interfaces\IServiciosReservas.cs" />
+    <Compile Include="Interfaces\IServiciosSueldos.cs" />
     <Compile Include="Interfaces\IServiciosTipoDePago.cs" />
     <Compile Include="Interfaces\IServiciosTipoDeVehiculo.cs" />
+    <Compile Include="Interfaces\IServiciosVehiculos.cs" />
+    <Compile Include="Interfaces\IServiciosTelefonos.cs" />
+    <Compile Include="Interfaces\IServiciosVehiculosServicios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\ServicioModelos.cs" />
     <Compile Include="Servicios\ServiciosClientes.cs" />
     <Compile Include="Servicios\ServiciosDeHorasLaborales.cs" />
     <Compile Include="Servicios\ServiciosDeTiposDeClientes.cs" />
+    <Compile Include="Servicios\ServiciosEmpleados.cs" />
+    <Compile Include="Servicios\ServiciosHistoriales.cs" />
     <Compile Include="Servicios\ServiciosMarcas.cs" />
+    <Compile Include="Servicios\ServiciosMovimientos.cs" />
+    <Compile Include="Servicios\ServiciosReservas.cs" />
     <Compile Include="Servicios\ServiciosRoles.cs" />
+    <Compile Include="Servicios\ServiciosTelefonos.cs" />
     <Compile Include="Servicios\ServiciosTiposDePagos.cs" />
+    <Compile Include="Servicios\ServicioSueldos.cs" />
+    <Compile Include="Servicios\ServiciosVehiculos.cs" />
+    <Compile Include="Servicios\ServiciosVehiculosServicios.cs" />
     <Compile Include="Servicios\SeviciosTipoDeVehiculo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +88,9 @@
       <Project>{2735dd2e-56ff-4d8a-b973-52dd0bcbc662}</Project>
       <Name>Taller_Mecanico.Entidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Servicios\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -168,6 +168,32 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public Roles GetRolesPorId(int idRolEmpleado)
+        {
+            Roles rol = null;
+            using (var conn = new SqlConnection(cadenaDeConexion))
+            {
+                conn.Open();
+                string selectQuery = "SELECT IdRolEmpleado,Rol FROM Roles WHERE IdRolEmpleado=@idRolEMpleado";
+
+                using (var cmd = new SqlCommand(selectQuery, conn))
+                {
+                    cmd.Parameters.Add("@idRolEmpleado", SqlDbType.Int);
+                    cmd.Parameters["@idRolEmpleado"].Value = idRolEmpleado;
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            rol = ConstruirRol(reader);
+                        }
+                    }
+                }
+            }
+            return rol;
+        }
+
         private Roles ConstruirRol(SqlDataReader reader)
         {
             Roles rol = new Roles()
