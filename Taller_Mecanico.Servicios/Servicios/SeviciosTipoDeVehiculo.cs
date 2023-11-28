@@ -14,17 +14,30 @@ namespace Taller_Mecanico.Servicios.Servicios
 {
     public class SeviciosTipoDeVehiculo : IServiciosTipoDeVehiculo
     {
-        private readonly IRepositorioTipoDeVehiculo _servicios;
+        private readonly IRepositorioTipoDeVehiculo _repo;
         public SeviciosTipoDeVehiculo()
         {
-            _servicios = new RepositorioTipoDeVehiculo();
+            _repo = new RepositorioTipoDeVehiculo();
         }
 
         public void Borrar(int tipoVehiculoId)
         {
             try
             {
-                _servicios.Borrar(tipoVehiculoId);
+                _repo.Borrar(tipoVehiculoId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool EstaRelacionado(TipoVehiculo TIPO)
+        {
+            try
+            {
+                return _repo.EstaRelacionado(TIPO);
             }
             catch (Exception)
             {
@@ -37,7 +50,7 @@ namespace Taller_Mecanico.Servicios.Servicios
         {
             try
             {
-                return _servicios.Existe(tipo);
+                return _repo.Existe(tipo);
             }
             catch (Exception)
             {
@@ -50,7 +63,7 @@ namespace Taller_Mecanico.Servicios.Servicios
         {
             try
             {
-                return _servicios.GetCantidad(null);
+                return _repo.GetCantidad(null);
             }
             catch (Exception)
             {
@@ -63,7 +76,7 @@ namespace Taller_Mecanico.Servicios.Servicios
         {
             try
             {
-                return _servicios.GetTipoVehiculos();
+                return _repo.GetTipoVehiculos();
             }
             catch (Exception)
             {
@@ -76,7 +89,7 @@ namespace Taller_Mecanico.Servicios.Servicios
         {
             try
             {
-                return _servicios.GetTipoVehiculosPorId(idVehiculo);
+                return _repo.GetTipoVehiculosPorId(idVehiculo);
             }
             catch (Exception)
             {
@@ -91,11 +104,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             {
                 if (tipo.IdTipoVehiculo == 0)
                 {
-                   _servicios.Agregar(tipo);
+                   _repo.Agregar(tipo);
                 }
                 else
                 {
-                    _servicios.Editar(tipo);
+                    _repo.Editar(tipo);
                 }
 
             }

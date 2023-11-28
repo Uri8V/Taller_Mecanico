@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.colVehiculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +38,10 @@
             this.colHaber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnUltimo = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnPrimero = new System.Windows.Forms.Button();
             this.lblPaginas = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblPaginaActual = new System.Windows.Forms.Label();
@@ -45,17 +49,18 @@
             this.lblRegistros = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnUltimo = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
-            this.btnAnterior = new System.Windows.Forms.Button();
-            this.btnPrimero = new System.Windows.Forms.Button();
             this.toolStripButtonCerrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButtonFiltrar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.vehiculoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonActualizar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -110,11 +115,13 @@
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDatos.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDatos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(800, 339);
             this.dgvDatos.TabIndex = 1;
+            this.dgvDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellClick);
+            this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
             // colVehiculo
             // 
@@ -161,6 +168,46 @@
             this.colFecha.HeaderText = "Fecha";
             this.colFecha.Name = "colFecha";
             this.colFecha.ReadOnly = true;
+            // 
+            // btnUltimo
+            // 
+            this.btnUltimo.Image = global::Taller_Mecanico.Windows.Properties.Resources.Last_button_32px;
+            this.btnUltimo.Location = new System.Drawing.Point(604, 7);
+            this.btnUltimo.Name = "btnUltimo";
+            this.btnUltimo.Size = new System.Drawing.Size(75, 32);
+            this.btnUltimo.TabIndex = 79;
+            this.btnUltimo.UseVisualStyleBackColor = true;
+            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Image = global::Taller_Mecanico.Windows.Properties.Resources.next_32px;
+            this.btnSiguiente.Location = new System.Drawing.Point(523, 7);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(75, 32);
+            this.btnSiguiente.TabIndex = 80;
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Image = global::Taller_Mecanico.Windows.Properties.Resources.previous_32px;
+            this.btnAnterior.Location = new System.Drawing.Point(442, 7);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 32);
+            this.btnAnterior.TabIndex = 81;
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // btnPrimero
+            // 
+            this.btnPrimero.Image = global::Taller_Mecanico.Windows.Properties.Resources.First_32px;
+            this.btnPrimero.Location = new System.Drawing.Point(361, 7);
+            this.btnPrimero.Name = "btnPrimero";
+            this.btnPrimero.Size = new System.Drawing.Size(75, 32);
+            this.btnPrimero.TabIndex = 82;
+            this.btnPrimero.UseVisualStyleBackColor = true;
+            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // lblPaginas
             // 
@@ -227,58 +274,15 @@
             this.toolStripButtonBorrar,
             this.toolStripButtonEditar,
             this.toolStripSeparator1,
-            this.toolStripButtonFiltrar,
-            this.toolStripButtonActualizar});
+            this.toolStripDropDownButtonFiltrar,
+            this.toolStripButtonActualizar,
+            this.toolStripLabel1,
+            this.toolStripTextBox1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 54);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
-            // 
-            // btnUltimo
-            // 
-            this.btnUltimo.Image = global::Taller_Mecanico.Windows.Properties.Resources.Last_button_32px;
-            this.btnUltimo.Location = new System.Drawing.Point(604, 7);
-            this.btnUltimo.Name = "btnUltimo";
-            this.btnUltimo.Size = new System.Drawing.Size(75, 32);
-            this.btnUltimo.TabIndex = 79;
-            this.btnUltimo.UseVisualStyleBackColor = true;
-            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
-            // 
-            // btnSiguiente
-            // 
-            this.btnSiguiente.Image = global::Taller_Mecanico.Windows.Properties.Resources.next_32px;
-            this.btnSiguiente.Location = new System.Drawing.Point(523, 7);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(75, 32);
-            this.btnSiguiente.TabIndex = 80;
-            this.btnSiguiente.UseVisualStyleBackColor = true;
-            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
-            // 
-            // btnAnterior
-            // 
-            this.btnAnterior.Image = global::Taller_Mecanico.Windows.Properties.Resources.previous_32px;
-            this.btnAnterior.Location = new System.Drawing.Point(442, 7);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(75, 32);
-            this.btnAnterior.TabIndex = 81;
-            this.btnAnterior.UseVisualStyleBackColor = true;
-            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
-            // 
-            // btnPrimero
-            // 
-            this.btnPrimero.Image = global::Taller_Mecanico.Windows.Properties.Resources.First_32px;
-            this.btnPrimero.Location = new System.Drawing.Point(361, 7);
-            this.btnPrimero.Name = "btnPrimero";
-            this.btnPrimero.Size = new System.Drawing.Size(75, 32);
-            this.btnPrimero.TabIndex = 82;
-            this.btnPrimero.UseVisualStyleBackColor = true;
-            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // toolStripButtonCerrar
             // 
@@ -325,15 +329,45 @@
             this.toolStripButtonEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonEditar.Click += new System.EventHandler(this.toolStripButtonEditar_Click);
             // 
-            // toolStripButtonFiltrar
+            // toolStripSeparator1
             // 
-            this.toolStripButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
-            this.toolStripButtonFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFiltrar.Name = "toolStripButtonFiltrar";
-            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
-            this.toolStripButtonFiltrar.Text = "Filtrar";
-            this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
+            // 
+            // toolStripDropDownButtonFiltrar
+            // 
+            this.toolStripDropDownButtonFiltrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vehiculoToolStripMenuItem,
+            this.serviciosToolStripMenuItem,
+            this.fechaToolStripMenuItem});
+            this.toolStripDropDownButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
+            this.toolStripDropDownButtonFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButtonFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonFiltrar.Name = "toolStripDropDownButtonFiltrar";
+            this.toolStripDropDownButtonFiltrar.Size = new System.Drawing.Size(50, 51);
+            this.toolStripDropDownButtonFiltrar.Text = "Filtrar";
+            this.toolStripDropDownButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // vehiculoToolStripMenuItem
+            // 
+            this.vehiculoToolStripMenuItem.Name = "vehiculoToolStripMenuItem";
+            this.vehiculoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vehiculoToolStripMenuItem.Text = "Vehiculo";
+            this.vehiculoToolStripMenuItem.Click += new System.EventHandler(this.vehiculoToolStripMenuItem_Click_1);
+            // 
+            // serviciosToolStripMenuItem
+            // 
+            this.serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
+            this.serviciosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serviciosToolStripMenuItem.Text = "Servicios";
+            this.serviciosToolStripMenuItem.Click += new System.EventHandler(this.serviciosToolStripMenuItem_Click);
+            // 
+            // fechaToolStripMenuItem
+            // 
+            this.fechaToolStripMenuItem.Name = "fechaToolStripMenuItem";
+            this.fechaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fechaToolStripMenuItem.Text = "Fecha";
+            this.fechaToolStripMenuItem.Click += new System.EventHandler(this.fechaToolStripMenuItem_Click);
             // 
             // toolStripButtonActualizar
             // 
@@ -346,6 +380,19 @@
             this.toolStripButtonActualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonActualizar.Click += new System.EventHandler(this.toolStripButtonActualizar_Click);
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(109, 51);
+            this.toolStripLabel1.Text = "Ingrese un Nombre";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 54);
+            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
             // frmVehiculosServicios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -355,6 +402,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmVehiculosServicios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmVehiculosServicios";
             this.Load += new System.EventHandler(this.frmVehiculosServicios_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -390,7 +438,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonBorrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonFiltrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVehiculo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
@@ -399,5 +446,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHaber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFecha;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonFiltrar;
+        private System.Windows.Forms.ToolStripMenuItem vehiculoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
     }
 }

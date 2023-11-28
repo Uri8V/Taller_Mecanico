@@ -15,5 +15,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         int GetCantidad(string textoFiltro);
         List<TipoVehiculo> GetTipoVehiculos();
         TipoVehiculo GetTipoVehiculosPorId(int idVehiculo);
+        bool EstaRelacionado(TipoVehiculo TIPO);
     }
 }

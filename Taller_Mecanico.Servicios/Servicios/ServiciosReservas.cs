@@ -36,19 +36,35 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Reservas reserva)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(reserva);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Reservas reserva)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(reserva);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(int? reservaId)
+        public int GetCantidad(int? reservaId, DateTime? FechaEntrada)
         {
             try
             {
-                return _repo.GetCantidad(reservaId);
+                return _repo.GetCantidad(reservaId, FechaEntrada);
             }
             catch (Exception)
             {
@@ -83,11 +99,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<ReservaDto> GetReservasPorPagina(int registrosPorPagina, int paginaActual, int? clienteId)
+        public List<ReservaDto> GetReservasPorPagina(int registrosPorPagina, int paginaActual, int? clienteId, DateTime? FechaEntrada)
         {
             try
             {
-                return _repo.GetReservasPorPagina(registrosPorPagina, paginaActual, clienteId);
+                return _repo.GetReservasPorPagina(registrosPorPagina, paginaActual, clienteId, FechaEntrada);
             }
             catch (Exception)
             {

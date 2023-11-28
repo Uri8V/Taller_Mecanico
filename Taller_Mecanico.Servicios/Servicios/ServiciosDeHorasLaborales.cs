@@ -31,6 +31,19 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
+        public bool EstRelacionada(HorasLaborales horas)
+        {
+            try
+            {
+                return _repo.EstRelacionada(horas);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool Existe(HorasLaborales horas)
         {
             try

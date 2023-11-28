@@ -22,23 +22,36 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            ComboHelper.CargarComboClientes(ref comboClientes);
             ComboHelper.CargarComboEmpleados(ref comboEmpleados);
+            ComboHelper.CargarComboClientesPersonas(ref comboClientes);
+            ComboHelper.CargarComboClientesEmpresas(ref comboEmpresa);
             if (telefonos != null)
             {
-                    txtTelefono.Text = telefonos.Telefono;
-                    txtTipoDeTelefono.Text = telefonos.TipoDeTelefono;
-               
-                if (telefonos.IdCliente!=0)
+                txtTelefono.Text = telefonos.Telefono;
+                txtTipoDeTelefono.Text = telefonos.TipoDeTelefono;
+
+                if (telefonos.IdCliente != 0)
                 {
-                    comboClientes.SelectedValue = telefonos.IdCliente;
-                    comboEmpleados.SelectedIndex = 0;
-                    CheckBoxCliente.Checked = true;
+                    if (checkBoxEmpresa.Checked == true)
+                    {
+                        comboEmpresa.SelectedValue = telefonos.IdCliente;
+                        comboEmpleados.SelectedIndex = 0;
+                        comboClientes.SelectedIndex = 0;
+                        CheckBoxCliente.Checked = true;
+                    }
+                    else
+                    {
+                        comboClientes.SelectedValue = telefonos.IdCliente;
+                        comboEmpleados.SelectedIndex = 0;
+                        comboEmpresa.SelectedIndex = 0;
+                        CheckBoxCliente.Checked = true;
+                    }
                 }
                 else
                 {
-                    CheckBoxCliente.Checked=false;
+                    CheckBoxCliente.Checked = false;
                     comboClientes.SelectedIndex = 0;
+                    comboEmpresa.SelectedIndex = 0;
                     comboEmpleados.SelectedValue = telefonos.IdEmpleado;
                 }
             }
@@ -46,12 +59,12 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
         private Telefonos telefonos;
         internal Telefonos GetTelefono()
         {
-           return telefonos;
+            return telefonos;
         }
 
         internal void SetTelefono(Telefonos telefono)
         {
-           this.telefonos = telefono;
+            this.telefonos = telefono;
         }
 
         private void frmTelefonosAE_Load(object sender, EventArgs e)
@@ -60,10 +73,11 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
             {
                 comboClientes.Enabled = true;
                 btnAgregarCliente.Enabled = true;
+                comboEmpresa.Enabled = false;
                 comboEmpleados.Enabled = false;
                 btnAgregarEmpleado.Enabled = false;
             }
-          
+
         }
 
         private bool ValidarDatos()
@@ -72,20 +86,31 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
             bool valido = true;
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
-                valido= false;
+                valido = false;
                 errorProvider1.SetError(txtTelefono, "Debe ingresar un Telefono");
             }
-            if(string.IsNullOrEmpty(txtTipoDeTelefono.Text))
+            if (string.IsNullOrEmpty(txtTipoDeTelefono.Text))
             {
-                valido= false;
+                valido = false;
                 errorProvider1.SetError(txtTipoDeTelefono, "Debe ingresar un Tipo De Telefono");
             }
             if (CheckBoxCliente.Checked == true)
             {
-                if (comboClientes.SelectedIndex == 0)
+                if (checkBoxEmpresa.Checked == false)
                 {
-                    valido=false;
-                    errorProvider1.SetError(comboClientes, "Debe seleccionar un Cliente");
+                    if (comboClientes.SelectedIndex == 0)
+                    {
+                        valido = false;
+                        errorProvider1.SetError(comboClientes, "Debe seleccionar un Cliente");
+                    }
+                }
+                else
+                {
+                    if (comboEmpresa.SelectedIndex == 0)
+                    {
+                        valido = false;
+                        errorProvider1.SetError(comboEmpresa, "Debe seleccionar una Empresa");
+                    }
                 }
             }
             else
@@ -106,11 +131,12 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
 
         private void btnAgregarCliente_Click(object sender, EventArgs e)
         {
-            frmClientes frm= new frmClientes();
+            frmClientes frm = new frmClientes();
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel)
             {
-                ComboHelper.CargarComboClientes(ref comboClientes);
+                ComboHelper.CargarComboClientesPersonas(ref comboClientes);
+                ComboHelper.CargarComboClientesEmpresas(ref comboEmpresa);
                 return;
             }
         }
@@ -123,12 +149,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
                 {
                     telefonos = new Telefonos();
                 }
-                telefonos.Telefono=txtTelefono.Text;
-                telefonos.TipoDeTelefono= txtTipoDeTelefono.Text;
+                telefonos.Telefono = txtTelefono.Text;
+                telefonos.TipoDeTelefono = txtTipoDeTelefono.Text;
                 if (CheckBoxCliente.Checked == true)
                 {   //No se puede convertir un objeto de tipo 'Taller_Mecanico.Entidades.Dtos.Clientes.ClienteComboDto' al tipo 'Taller_Mecanico.Entidades.Entidades.Clientes'.'
-                    telefonos.Cliente = (Clientes)comboClientes.SelectedItem;
-                    telefonos.IdCliente = (int)comboClientes.SelectedValue;
+                    if (checkBoxEmpresa.Checked == false)
+                    {
+                        telefonos.Cliente = (Clientes)comboClientes.SelectedItem;
+                        telefonos.IdCliente = (int)comboClientes.SelectedValue;
+                    }
+                    else
+                    {
+                        telefonos.Cliente = (Clientes)comboEmpresa.SelectedItem;
+                        telefonos.IdCliente = (int)comboEmpresa.SelectedValue;
+                    }
                 }
                 else
                 {
@@ -136,7 +170,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
                     telefonos.Empleado = (Empleado)comboEmpleados.SelectedItem;
                     telefonos.IdEmpleado = (int)comboEmpleados.SelectedValue;
                 }
-                DialogResult= DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
         }
 
@@ -145,6 +179,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
             if (CheckBoxCliente.Checked)
             {
                 comboClientes.Enabled = true;
+                comboEmpresa.Enabled = true;
                 btnAgregarCliente.Enabled = true;
                 comboEmpleados.Enabled = false;
                 btnAgregarEmpleado.Enabled = false;
@@ -152,6 +187,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
             else
             {
                 comboClientes.Enabled = false;
+                comboEmpresa.Enabled = false;
                 btnAgregarCliente.Enabled = false;
                 comboEmpleados.Enabled = true;
                 btnAgregarEmpleado.Enabled = true;
@@ -167,6 +203,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS
                 //Metodo que racargue el combo de empleados
                 ComboHelper.CargarComboEmpleados(ref comboEmpleados);
                 return;
+            }
+        }
+
+        private void checkBoxEmpresa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBoxEmpresa.Checked)
+            {
+                comboClientes.Enabled = true;
+                comboEmpresa.Enabled = false;
+            }
+            else
+            {
+                comboEmpresa.Enabled = true;
+                comboClientes.Enabled= false;
             }
         }
     }

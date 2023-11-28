@@ -8,7 +8,7 @@ namespace Taller_Mecanico.Entidades.Entidades
 {
     public class VehiculosServicios
     {
-        public int IdVehiculoServicios { get; set; }
+        public int IdVehiculosSevicios { get; set; }
         public int IdVehiculo { get; set; }
         public Vehiculos Vehiculo { get; set; }
         public int IdMovimiento { get; set; }

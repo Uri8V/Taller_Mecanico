@@ -30,6 +30,10 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.btnUltimo = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnPrimero = new System.Windows.Forms.Button();
             this.lblPaginas = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblPaginaActual = new System.Windows.Forms.Label();
@@ -37,21 +41,16 @@
             this.lblRegistros = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.colServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDebe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSenia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTipoDePago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnUltimo = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
-            this.btnAnterior = new System.Windows.Forms.Button();
-            this.btnPrimero = new System.Windows.Forms.Button();
             this.toolStripButtonCerrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonActualizar = new System.Windows.Forms.ToolStripButton();
+            this.colServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDebe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTipoDePago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,7 +94,6 @@
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colServicio,
             this.colDebe,
-            this.colSenia,
             this.colTipoDePago});
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.Location = new System.Drawing.Point(0, 0);
@@ -105,6 +103,46 @@
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(800, 339);
             this.dgvDatos.TabIndex = 1;
+            // 
+            // btnUltimo
+            // 
+            this.btnUltimo.Image = global::Taller_Mecanico.Windows.Properties.Resources.Last_button_32px;
+            this.btnUltimo.Location = new System.Drawing.Point(604, 7);
+            this.btnUltimo.Name = "btnUltimo";
+            this.btnUltimo.Size = new System.Drawing.Size(75, 32);
+            this.btnUltimo.TabIndex = 79;
+            this.btnUltimo.UseVisualStyleBackColor = true;
+            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Image = global::Taller_Mecanico.Windows.Properties.Resources.next_32px;
+            this.btnSiguiente.Location = new System.Drawing.Point(523, 7);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(75, 32);
+            this.btnSiguiente.TabIndex = 80;
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Image = global::Taller_Mecanico.Windows.Properties.Resources.previous_32px;
+            this.btnAnterior.Location = new System.Drawing.Point(442, 7);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 32);
+            this.btnAnterior.TabIndex = 81;
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // btnPrimero
+            // 
+            this.btnPrimero.Image = global::Taller_Mecanico.Windows.Properties.Resources.First_32px;
+            this.btnPrimero.Location = new System.Drawing.Point(361, 7);
+            this.btnPrimero.Name = "btnPrimero";
+            this.btnPrimero.Size = new System.Drawing.Size(75, 32);
+            this.btnPrimero.TabIndex = 82;
+            this.btnPrimero.UseVisualStyleBackColor = true;
+            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // lblPaginas
             // 
@@ -179,79 +217,6 @@
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
-            // 
-            // colServicio
-            // 
-            this.colServicio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colServicio.HeaderText = "Servicio";
-            this.colServicio.Name = "colServicio";
-            this.colServicio.ReadOnly = true;
-            // 
-            // colDebe
-            // 
-            this.colDebe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDebe.HeaderText = "Debe";
-            this.colDebe.Name = "colDebe";
-            this.colDebe.ReadOnly = true;
-            // 
-            // colSenia
-            // 
-            this.colSenia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colSenia.HeaderText = "Senia";
-            this.colSenia.Name = "colSenia";
-            this.colSenia.ReadOnly = true;
-            // 
-            // colTipoDePago
-            // 
-            this.colTipoDePago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTipoDePago.HeaderText = "Tipo de Pago";
-            this.colTipoDePago.Name = "colTipoDePago";
-            this.colTipoDePago.ReadOnly = true;
-            // 
-            // btnUltimo
-            // 
-            this.btnUltimo.Image = global::Taller_Mecanico.Windows.Properties.Resources.Last_button_32px;
-            this.btnUltimo.Location = new System.Drawing.Point(604, 7);
-            this.btnUltimo.Name = "btnUltimo";
-            this.btnUltimo.Size = new System.Drawing.Size(75, 32);
-            this.btnUltimo.TabIndex = 79;
-            this.btnUltimo.UseVisualStyleBackColor = true;
-            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
-            // 
-            // btnSiguiente
-            // 
-            this.btnSiguiente.Image = global::Taller_Mecanico.Windows.Properties.Resources.next_32px;
-            this.btnSiguiente.Location = new System.Drawing.Point(523, 7);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(75, 32);
-            this.btnSiguiente.TabIndex = 80;
-            this.btnSiguiente.UseVisualStyleBackColor = true;
-            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
-            // 
-            // btnAnterior
-            // 
-            this.btnAnterior.Image = global::Taller_Mecanico.Windows.Properties.Resources.previous_32px;
-            this.btnAnterior.Location = new System.Drawing.Point(442, 7);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(75, 32);
-            this.btnAnterior.TabIndex = 81;
-            this.btnAnterior.UseVisualStyleBackColor = true;
-            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
-            // 
-            // btnPrimero
-            // 
-            this.btnPrimero.Image = global::Taller_Mecanico.Windows.Properties.Resources.First_32px;
-            this.btnPrimero.Location = new System.Drawing.Point(361, 7);
-            this.btnPrimero.Name = "btnPrimero";
-            this.btnPrimero.Size = new System.Drawing.Size(75, 32);
-            this.btnPrimero.TabIndex = 82;
-            this.btnPrimero.UseVisualStyleBackColor = true;
-            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
-            // 
             // toolStripButtonCerrar
             // 
             this.toolStripButtonCerrar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -297,6 +262,11 @@
             this.toolStripButtonEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonEditar.Click += new System.EventHandler(this.toolStripButtonEditar_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
+            // 
             // toolStripButtonFiltrar
             // 
             this.toolStripButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
@@ -306,6 +276,7 @@
             this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
             this.toolStripButtonFiltrar.Text = "Filtrar";
             this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonFiltrar.Click += new System.EventHandler(this.toolStripButtonFiltrar_Click);
             // 
             // toolStripButtonActualizar
             // 
@@ -318,6 +289,27 @@
             this.toolStripButtonActualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonActualizar.Click += new System.EventHandler(this.toolStripButtonActualizar_Click);
             // 
+            // colServicio
+            // 
+            this.colServicio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colServicio.HeaderText = "Servicio";
+            this.colServicio.Name = "colServicio";
+            this.colServicio.ReadOnly = true;
+            // 
+            // colDebe
+            // 
+            this.colDebe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDebe.HeaderText = "Debe";
+            this.colDebe.Name = "colDebe";
+            this.colDebe.ReadOnly = true;
+            // 
+            // colTipoDePago
+            // 
+            this.colTipoDePago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTipoDePago.HeaderText = "Tipo de Pago";
+            this.colTipoDePago.Name = "colTipoDePago";
+            this.colTipoDePago.ReadOnly = true;
+            // 
             // frmMovimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +319,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmMovimientos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMovimientos";
             this.Load += new System.EventHandler(this.frmMovimientos_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -366,7 +359,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDebe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSenia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoDePago;
     }
 }

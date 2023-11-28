@@ -55,12 +55,28 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Model modelos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(modelos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Model modelos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(modelos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int GetCantidad(int? MarcaId)

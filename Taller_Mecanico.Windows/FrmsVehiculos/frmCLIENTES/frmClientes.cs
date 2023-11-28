@@ -29,7 +29,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         int paginaActual = 1;
         int registros = 0;
         int paginas = 0;
-        int registrosPorPagina = 3;
+        int registrosPorPagina = 6;
 
         int? tipo = null;
 
@@ -52,7 +52,15 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void MostrarPaginado()
         {
+            if (tipo==null)
+            {
             lista=_servicio.GetClientesPorPagina(registrosPorPagina, paginaActual, tipo);
+            }
+            else
+            {
+                lista = _servicio.GetClientesPorPagina(registrosPorPagina, paginaActual, tipo);
+
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -104,6 +112,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            tipo = null;
             RcargarGrilla();
             HabilitarBotones();
         }
@@ -115,6 +124,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
         }
 
         private void toolStripButtonAgregar_Click(object sender, EventArgs e)
@@ -124,12 +137,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             if (DR == DialogResult.Cancel)
             {
                 return;
-            }
+            }   
             var cliente = frm.GetCliente();
-            _servicio.Guardar(cliente);
-            registros = _servicio.GetCantidad(null);
-            paginas=formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            if (!_servicio.Existe(cliente))
+            { 
+                _servicio.Guardar(cliente);
+                registros = _servicio.GetCantidad(null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado();
+
+            }
+            else
+            {
+                MessageBox.Show("El Cliente ya existe", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -139,13 +160,21 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 return;
             }
             var r = dgvDatos.SelectedRows[0];
-            ClienteDto clienteABorrar= (ClienteDto)r.Tag;
-
+            ClienteDto clienteABorrar = (ClienteDto)r.Tag;
             DialogResult dr = MessageBox.Show($"¿Desea eliminar el cliente: {clienteABorrar.Apellido}, {clienteABorrar.Nombre}, {clienteABorrar.Documento}?", "Confirmar Selcción", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
-            GridHelpers.QuitarFila(dgvDatos, r);
-            _servicio.Borrar(clienteABorrar.IdCliente);
-            RcargarGrilla();
+            Clientes CLIENTEaborrar = _servicio.GetClientePorId(clienteABorrar.IdCliente);
+            if (!_servicio.EstaRelacionada(CLIENTEaborrar))
+            {
+                GridHelpers.QuitarFila(dgvDatos, r);
+                _servicio.Borrar(clienteABorrar.IdCliente);
+                RcargarGrilla();
+
+            }
+            else
+            {
+                MessageBox.Show("El cliente esta relacionado!!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonEditar_Click(object sender, EventArgs e)
@@ -171,25 +200,31 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     return;
                 }
                 clientes = frm.GetCliente();
-                if (clientes != null)
+                if (!_servicio.Existe(clientes))
                 {
-                    //Crear el dto
-                    clienteDto.IdCliente = clientes.IdCliente;
-                    clienteDto.Nombre = clientes.Nombre;
-                    clienteDto.Apellido = clientes.Apellido;
-                    clienteDto.Documento=clientes.Documento;
-                    clienteDto.Domicilio=clientes.Domicilio;
-                    clienteDto.CUIT=clientes.CUIT;
-                    //clienteDto.TipoCliente = clientes.TiposDeClientes.TipoCliente;
-                    clienteDto.TipoCliente = _servicioTipoCliente.GetClientesPorId(clientes.IdTipoCliente).TipoCliente;
-                    GridHelpers.SetearFila(r, clienteDto);
-                    _servicio.Guardar(clientes);
+                    if (clientes != null)
+                    {
+                        //Crear el dto
+                        clienteDto.IdCliente = clientes.IdCliente;
+                        clienteDto.Nombre = clientes.Nombre;
+                        clienteDto.Apellido = clientes.Apellido;
+                        clienteDto.Documento = clientes.Documento;
+                        clienteDto.Domicilio = clientes.Domicilio;
+                        clienteDto.CUIT = clientes.CUIT;
+                        clienteDto.TipoCliente = _servicioTipoCliente.GetClientesPorId(clientes.IdTipoCliente).TipoCliente;
+                        GridHelpers.SetearFila(r, clienteDto);
+                        _servicio.Guardar(clientes);
+                    }
+                    else
+                    {
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, CopiaCliente);
+
+                    }
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, CopiaCliente);
-
+                    MessageBox.Show("El Cliente ya existe", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception)
@@ -205,9 +240,39 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             DialogResult dr = frm.ShowDialog(this);
             if(dr == DialogResult.Cancel)
             {
+                HabilitarBotones();
                 return;
             }
-            var tipocliente = frm.GetTipoCliente();
+            var tipoCliente = frm.GetTipoCliente();
+            registros = _servicio.GetCantidad(tipoCliente.IdTipoCliente);
+            tipo = tipoCliente.IdTipoCliente;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetClientesPorPagina(registrosPorPagina, paginaActual, tipo);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)

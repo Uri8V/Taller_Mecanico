@@ -70,6 +70,24 @@
     <Compile Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleados.Designer.cs">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarRol.Designer.cs">
+      <DependentUpon>frmSeleccionarRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarServicios.Designer.cs">
+      <DependentUpon>frmSeleccionarServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarVehiculo.Designer.cs">
+      <DependentUpon>frmSeleccionarVehiculo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmsVehiculos\frmHISTORIALES\frmHistoriales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,10 +112,10 @@
     <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesAE.Designer.cs">
       <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.cs">
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmHorariosLaboralesFiltro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmHorariosLaboralesFiltro.Designer.cs">
       <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmsVehiculos\frmMARCAS\frmMarcas.cs">
@@ -130,6 +148,12 @@
     <Compile Include="FrmsVehiculos\frmMODELOS\frmModelosAE.Designer.cs">
       <DependentUpon>frmModelosAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarMarca.Designer.cs">
+      <DependentUpon>frmSeleccionarMarca.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +165,12 @@
     </Compile>
     <Compile Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientosAE.Designer.cs">
       <DependentUpon>frmMovimientosAE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoDePago.Designer.cs">
+      <DependentUpon>frmSeleccionarTipoDePago.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmsVehiculos\frmRESERVAS\frmReserva.cs">
       <SubType>Form</SubType>
@@ -178,16 +208,34 @@
     <Compile Include="FrmsVehiculos\frmSUELDOS\frmSueldosAE.Designer.cs">
       <DependentUpon>frmSueldosAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarCliente.Designer.cs">
+      <DependentUpon>frmSeleccionarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarEmpleado.Designer.cs">
+      <DependentUpon>frmSeleccionarEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarPorNombre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarPorNombre.Designer.cs">
+      <DependentUpon>frmSeleccionarPorNombre.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.Designer.cs">
       <DependentUpon>frmTelefonosAE.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.cs">
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.Designer.cs">
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoCliente.Designer.cs">
       <DependentUpon>frmSeleccionarTipoCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmsVehiculos\frmTELEFONOS\frmTelefonos.cs">
@@ -244,6 +292,18 @@
     <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServiciosAE.Designer.cs">
       <DependentUpon>frmVehiculosServiciosAE.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarModelo.Designer.cs">
+      <DependentUpon>frmSeleccionarModelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoVehiculo.Designer.cs">
+      <DependentUpon>frmSeleccionarTipoVehiculo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmsVehiculos\frmVEHICULOS\frmVehiculos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +333,15 @@
     <EmbeddedResource Include="FrmsVehiculos\frmEMPLEADOS\frmEmpleados.resx">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarRol.resx">
+      <DependentUpon>frmSeleccionarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarServicios.resx">
+      <DependentUpon>frmSeleccionarServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarVehiculo.resx">
+      <DependentUpon>frmSeleccionarVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmHISTORIALES\frmHistoriales.resx">
       <DependentUpon>frmHistoriales.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,7 +354,7 @@
     <EmbeddedResource Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesAE.resx">
       <DependentUpon>frmHorariosLaboralesAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmHORASLABORALES\frmHorariosLaboralesFiltro.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmHorariosLaboralesFiltro.resx">
       <DependentUpon>frmHorariosLaboralesFiltro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmMARCAS\frmMarcas.resx">
@@ -303,11 +372,17 @@
     <EmbeddedResource Include="FrmsVehiculos\frmMODELOS\frmModelosAE.resx">
       <DependentUpon>frmModelosAE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarMarca.resx">
+      <DependentUpon>frmSeleccionarMarca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientos.resx">
       <DependentUpon>frmMovimientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmMOVIMIENTOS\frmMovimientosAE.resx">
       <DependentUpon>frmMovimientosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoDePago.resx">
+      <DependentUpon>frmSeleccionarTipoDePago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmRESERVAS\frmReserva.resx">
       <DependentUpon>frmReserva.cs</DependentUpon>
@@ -327,10 +402,19 @@
     <EmbeddedResource Include="FrmsVehiculos\frmSUELDOS\frmSueldosAE.resx">
       <DependentUpon>frmSueldosAE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarCliente.resx">
+      <DependentUpon>frmSeleccionarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarEmpleado.resx">
+      <DependentUpon>frmSeleccionarEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarPorNombre.resx">
+      <DependentUpon>frmSeleccionarPorNombre.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmTELEFONOS\frmTelefonosAE.resx">
       <DependentUpon>frmTelefonosAE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmsVehiculos\frmTIPODECLIENTE\frmSeleccionarTipoCliente.resx">
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoCliente.resx">
       <DependentUpon>frmSeleccionarTipoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmTELEFONOS\frmTelefonos.resx">
@@ -359,6 +443,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServiciosAE.resx">
       <DependentUpon>frmVehiculosServiciosAE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarModelo.resx">
+      <DependentUpon>frmSeleccionarModelo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmFILTROS\frmSeleccionarTipoVehiculo.resx">
+      <DependentUpon>frmSeleccionarTipoVehiculo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOS\frmVehiculos.resx">
       <DependentUpon>frmVehiculos.cs</DependentUpon>
@@ -482,6 +572,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\initiate_money_transfer_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_more_32px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

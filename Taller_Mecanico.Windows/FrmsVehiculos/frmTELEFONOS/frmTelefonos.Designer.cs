@@ -50,7 +50,10 @@
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.empleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoDeTelefonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonActualizar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -83,8 +86,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.lblRegistros);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 396);
-            this.splitContainer1.SplitterDistance = 339;
+            this.splitContainer1.Size = new System.Drawing.Size(848, 423);
+            this.splitContainer1.SplitterDistance = 362;
             this.splitContainer1.TabIndex = 6;
             // 
             // dgvDatos
@@ -103,7 +106,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(800, 339);
+            this.dgvDatos.Size = new System.Drawing.Size(848, 362);
             this.dgvDatos.TabIndex = 1;
             // 
             // colCliente
@@ -243,7 +246,7 @@
             this.toolStripButtonActualizar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 54);
+            this.toolStrip1.Size = new System.Drawing.Size(848, 54);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -299,13 +302,38 @@
             // 
             // toolStripButtonFiltrar
             // 
+            this.toolStripButtonFiltrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.empleadoToolStripMenuItem,
+            this.clienteToolStripMenuItem,
+            this.tipoDeTelefonoToolStripMenuItem});
             this.toolStripButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
             this.toolStripButtonFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFiltrar.Name = "toolStripButtonFiltrar";
-            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
+            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(50, 51);
             this.toolStripButtonFiltrar.Text = "Filtrar";
             this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // empleadoToolStripMenuItem
+            // 
+            this.empleadoToolStripMenuItem.Name = "empleadoToolStripMenuItem";
+            this.empleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.empleadoToolStripMenuItem.Text = "Empleado";
+            this.empleadoToolStripMenuItem.Click += new System.EventHandler(this.empleadoToolStripMenuItem_Click);
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem.Text = "Cliente";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
+            // 
+            // tipoDeTelefonoToolStripMenuItem
+            // 
+            this.tipoDeTelefonoToolStripMenuItem.Name = "tipoDeTelefonoToolStripMenuItem";
+            this.tipoDeTelefonoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tipoDeTelefonoToolStripMenuItem.Text = "Tipo de Telefono";
+            this.tipoDeTelefonoToolStripMenuItem.Click += new System.EventHandler(this.tipoDeTelefonoToolStripMenuItem_Click);
             // 
             // toolStripButtonActualizar
             // 
@@ -322,11 +350,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(848, 477);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.MaximumSize = new System.Drawing.Size(864, 516);
+            this.MinimumSize = new System.Drawing.Size(864, 516);
             this.Name = "frmTelefonos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTelefonos";
             this.Load += new System.EventHandler(this.frmTelefonos_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -362,11 +393,14 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonBorrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonFiltrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoTelefono;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripButtonFiltrar;
+        private System.Windows.Forms.ToolStripMenuItem empleadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipoDeTelefonoToolStripMenuItem;
     }
 }

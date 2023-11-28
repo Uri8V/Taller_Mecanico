@@ -324,5 +324,18 @@ namespace Taller_Mecanico.Datos.Repositorios
             };
             return horas;
         }
+
+        public bool EstRelacionada(HorasLaborales horas)
+        {
+          
+                int cantidad = 0;
+                using (IDbConnection conn = new SqlConnection(cadenaDeConexion))
+                {
+                    string selectQuery = "SELECT COUNT(*) FROM Sueldos WHERE IdHorasLaborales=@IdHorasLaborales";
+                    cantidad = conn.QuerySingle<int>(selectQuery, new { IdHorasLaborales = horas.IdHorasLaborales });
+                }
+                return cantidad > 0;
+            
+        }
     }
 }

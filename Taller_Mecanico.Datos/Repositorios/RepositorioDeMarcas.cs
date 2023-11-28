@@ -205,5 +205,16 @@ namespace Taller_Mecanico.Datos.Repositorios
             };
            return marca;
         }
+
+        public bool EstaRelacionado(Marca marca)
+        {
+            int cantidad = 0;
+            using (IDbConnection conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery = "SELECT COUNT(*) FROM Modelos WHERE IdMarca=@IdMarca";
+                cantidad = conn.QuerySingle<int>(selectQuery, new { IdMarca =marca.MarcaId });
+            }
+            return cantidad > 0;
+        }
     }
 }

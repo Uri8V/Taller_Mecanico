@@ -97,10 +97,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 //Se debe controlar que este relacionada
                 DialogResult dr = MessageBox.Show($"¿Desea eliminar el Tipo de Vehiculo: {tipo.NombreTipoVehiculo}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.No) { return; }
-                _servicios.Borrar(tipo.IdTipoVehiculo);
-                GridHelpers.QuitarFila(dgvDatos, r);
-                MostrarCantidad();
-                MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!_servicios.EstaRelacionado(tipo))
+                {
+                    _servicios.Borrar(tipo.IdTipoVehiculo);
+                    GridHelpers.QuitarFila(dgvDatos, r);
+                    MostrarCantidad();
+                    MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se puede borrar este Tipo de Vehiculo porque está relacionado con algún Vehiculo", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

@@ -109,7 +109,7 @@ namespace Taller_Mecanico.Windows.Helpers
             combo.SelectedIndex = 0;
         }
 
-        public static void CargarComboClientes(ref ComboBox combo)
+        public static void CargarComboClientesPersonas(ref ComboBox combo)
         {
             IServiciosClientes serviciosClientes = new ServiciosClientes();
             var lista = serviciosClientes.GetClientesCombos();
@@ -121,6 +121,21 @@ namespace Taller_Mecanico.Windows.Helpers
             lista.Insert(0, defaultProveedor);
             combo.DataSource = lista;
             combo.DisplayMember = "Documento";
+            combo.ValueMember = "IdCliente";
+            combo.SelectedIndex = 0;
+        }
+        public static void CargarComboClientesEmpresas(ref ComboBox combo)
+        {
+            IServiciosClientes serviciosClientes = new ServiciosClientes();
+            var lista = serviciosClientes.GetClientesCombosEmpresa();
+            var defaultProveedor = new Clientes()
+            {
+                IdCliente = 0,
+                CUIT = "Seleccione Empresa"
+            };
+            lista.Insert(0, defaultProveedor);
+            combo.DataSource = lista;
+            combo.DisplayMember = "CUIT";
             combo.ValueMember = "IdCliente";
             combo.SelectedIndex = 0;
         }
@@ -197,6 +212,21 @@ namespace Taller_Mecanico.Windows.Helpers
             combo.DataSource = lista;
             combo.DisplayMember = "Fecha";
             combo.ValueMember = "IdHorasLaborales";
+            combo.SelectedIndex = 0;
+        }
+        internal static void CargarComboMovimiento(ref ComboBox combo)
+        {
+            IServiciosMovimientos serviciosMovimientos = new ServiciosMovimientos();
+            var lista = serviciosMovimientos.GetMovimientosCombos();
+            var defaultEmpleado = new Movimientos()
+            {
+                IdMovimiento = 0,
+                Servicio = "Seleccione el Servicio"
+            };
+            lista.Insert(0, defaultEmpleado);
+            combo.DataSource = lista;
+            combo.DisplayMember = "Servicio";
+            combo.ValueMember = "IdMovimiento";
             combo.SelectedIndex = 0;
         }
     }

@@ -54,12 +54,44 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public bool EstaRelacionada(Empleado empleado)
         {
-            throw new NotImplementedException();
+            int cantidadHistorial = 0;
+            int cantidadTelefonoss = 0;
+            using (var conn = new SqlConnection(CadenaConexion))
+            {
+                string selectQuery = @"SELECT COUNT(*) FROM Historiales WHERE IdEmpleado=@IdEmpleado;
+                                        SELECT COUNT(*) FROM Telefonos WHERE IdEmpleado=@IdEmpleado;";
+                using (var resultado = conn.QueryMultiple(selectQuery, new { IdEmpleado = empleado.IdEmpleado }))
+                {
+                    cantidadHistorial = resultado.Read<int>().First();
+                    cantidadTelefonoss = resultado.Read<int>().First();
+                }
+            }
+            return cantidadHistorial + cantidadTelefonoss > 0;
         }
 
         public bool Existe(Empleado empleado)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(CadenaConexion))
+            {
+                string selectQuery;
+                if (empleado.IdEmpleado == 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Empleados 
+                            WHERE Documento=@Documento";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Documento = empleado.Documento});
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Empleados 
+                WHERE Documento=@Documento AND IdEmpleado!=@IdEmpleado";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Documento = empleado.Documento, IdEmpleado = empleado.IdEmpleado});
+
+                }
+            }
+            return cantidad > 0;
         }
 
         public int GetCantidad(int? empleadoId)
@@ -77,7 +109,7 @@ namespace Taller_Mecanico.Datos.Repositorios
                 {
                     selectQuery = @"SELECT COUNT(*) FROM Empleados 
                         WHERE IdRolEmpleado=@empleadoId";
-                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdRolEmpleado = empleadoId });
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { empleadoId = empleadoId });
                 }
             }
             return cantidad;
@@ -93,14 +125,14 @@ namespace Taller_Mecanico.Datos.Repositorios
                 {
                     selectQuery = @"SELECT IdEmpleado, e.Nombre, e.Apellido, e.Documento, r.Rol FROM Empleados e
                                   INNER JOIN Roles r ON r.IdRolEmpleado=e.IdRolEmpleado
-                                  WHERE r.RolEmpleado=@roles 
+                                  WHERE r.IdRolEmpleado=@roles 
                                   ORDER BY e.Apellido, e.Nombre 
                                   OFFSET @cantidadRegistros ROWS FETCH NEXT @CantidadPorPagina ROWS ONLY";
                     var registrosSateados = registrosPorPagina * (paginaActual - 1);
 
                     lista = conn.Query<EmpleadoDto>(selectQuery, new
                     {
-                        rol= roles.Value,
+                        roles= roles.Value,
                         cantidadRegistros = registrosSateados,
                         cantidadPorPagina = registrosPorPagina
                     }).ToList();

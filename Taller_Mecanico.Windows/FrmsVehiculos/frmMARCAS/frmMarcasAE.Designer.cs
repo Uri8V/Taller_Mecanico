@@ -93,6 +93,7 @@
             this.MaximumSize = new System.Drawing.Size(337, 183);
             this.MinimumSize = new System.Drawing.Size(337, 183);
             this.Name = "frmMarcasAE";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMarcasAE";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

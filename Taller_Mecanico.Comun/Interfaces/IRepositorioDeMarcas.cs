@@ -15,6 +15,7 @@ namespace Taller_Mecanico.Comun.Interfaces
         bool Existe(Marca marca);
         int GetCantidad(string textoFiltro);
         List<Marca> GetMarcas();
+        bool EstaRelacionado(Marca marca);
         Marca GetMarcasPorId(int idMarca);
     }
 }

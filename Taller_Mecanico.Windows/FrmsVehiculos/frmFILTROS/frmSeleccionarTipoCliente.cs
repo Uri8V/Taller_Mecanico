@@ -34,8 +34,8 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         {
             if (ValidaDatos())
             {
-                //tipo.TipoCliente= comboBoxTipoCliente.SelectedItem;
-                //tipo.IdTipoCliente = (int)comboBoxTipoCliente.SelectedValue;
+                tipo = (TiposDeClientes)comboBoxTipoCliente.SelectedItem;
+                DialogResult= DialogResult.OK;
             }
         }
 
@@ -54,6 +54,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         internal TiposDeClientes GetTipoCliente()
         {
             return tipo;
+        }
+
+        private void btnAgregarTipoCliente_Click(object sender, EventArgs e)
+        {
+            frmTiposDeClientes frm = new frmTiposDeClientes();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                ComboHelper.CargarComboTipoCliente(ref comboBoxTipoCliente);
+                return;
+            }
         }
     }
 }

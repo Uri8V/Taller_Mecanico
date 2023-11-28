@@ -98,10 +98,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 //Se debe controlar que este relacionada
                 DialogResult dr = MessageBox.Show($"¿Desea eliminar el Tipo de Pago: {tipo.NombreDePago}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.No) { return; }
-                _servicios.Borrar(tipo.IdTipoPagos);
-                GridHelpers.QuitarFila(dgvDatos, r);
-                MostrarCantidad();
-                MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!_servicios.EstaRelacionado(tipo))
+                {
+                    _servicios.Borrar(tipo.IdTipoPagos);
+                    GridHelpers.QuitarFila(dgvDatos, r);
+                    MostrarCantidad();
+                    MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se puede eliminar el tipo de pago porque está relacionado con algún Servicio", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

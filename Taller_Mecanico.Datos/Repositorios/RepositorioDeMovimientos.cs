@@ -25,8 +25,8 @@ namespace Taller_Mecanico.Datos.Repositorios
         {
             using (var conn = new SqlConnection(candenaConexion))
             {
-                string selectQuery = @"INSERT INTO Movimientos (Servicio, Debe, Senia, IdTipoDePago) 
-                                    Values (@Servicio, @Debe, @Senia, @IdTipoDePago); SELECT SCOPE_IDENTITY();";
+                string selectQuery = @"INSERT INTO Movimientos (Servicio, Debe, IdTipoDePago) 
+                                    Values (@Servicio, @Debe, @IdTipoDePago); SELECT SCOPE_IDENTITY();";
                 int id = conn.ExecuteScalar<int>(selectQuery, movimientos);
                 movimientos.IdMovimiento = id;
             }
@@ -45,7 +45,7 @@ namespace Taller_Mecanico.Datos.Repositorios
         {
             using (var conn = new SqlConnection(candenaConexion))
             {
-                string updateQuery = @"UPDATE Movimientos SET Servicio=@Servicio, Debe=@Debe, Senia=@Senia, IdTipoDePago=@IdTipoDePago
+                string updateQuery = @"UPDATE Movimientos SET Servicio=@Servicio, Debe=@Debe, IdTipoDePago=@IdTipoDePago
                 WHERE IdMovimiento=@IdMovimiento";
                 conn.Execute(updateQuery, movimientos);
             }
@@ -53,12 +53,38 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public bool EstaRelacionada(Movimientos movimientos)
         {
-            throw new NotImplementedException();
+            int cantidad = 0;
+            using (var conn = new SqlConnection(candenaConexion))
+            {
+
+                string selectQuery = @"SELECT COUNT(*) FROM VehiculosServicios WHERE IdMovimiento=@IdMovimiento";
+                cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdMovimiento = movimientos.IdMovimiento });
+            }
+            return cantidad > 0;
         }
 
         public bool Existe(Movimientos movimientos)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(candenaConexion))
+            {
+                string selectQuery;
+                if (movimientos.IdMovimiento== 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Movimientos 
+                            WHERE Debe=@Debe AND Servicio=@Servicio AND IdTipoDePago=@IdTipoDePago";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Debe = movimientos.Debe, Servicio = movimientos.Servicio, IdTipoDePago =movimientos.IdTipoDePago });
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Movimientos 
+                WHERE Debe=@Debe AND Servicio=@Servicio AND IdTipoDePago=@IdTipoDePago AND IdMovimiento!=@IdMovimiento";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Debe = movimientos.Debe, Servicio = movimientos.Servicio, IdTipoDePago = movimientos.IdTipoDePago, IdMovimiento = movimientos.IdMovimiento });
+                }
+            }
+            return cantidad > 0;
         }
 
         public int GetCantidad(int? IdTipodePago)
@@ -84,7 +110,13 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public List<Movimientos> GetMovimientosCombos()
         {
-            throw new NotImplementedException();
+            List<Movimientos> lista = new List<Movimientos>();
+            using (var conn = new SqlConnection(candenaConexion))
+            {
+                string selectQuery = @"SELECT m.IdMovimiento, m.Servicio FROM Movimientos m ORDER BY m.Servicio ";
+                lista = conn.Query<Movimientos>(selectQuery).ToList();
+            }
+            return lista;
         }
 
         public Movimientos GetMovimientosPorId(int IdMovimiento)
@@ -92,7 +124,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             Movimientos movimiento = null;
             using (var conn = new SqlConnection(candenaConexion))
             {
-                string selectQuery = @"SELECT m.IdMovimiento,m.Servicio,m.Debe,m.Senia,m.IdTipoDePago
+                string selectQuery = @"SELECT m.IdMovimiento,m.Servicio,m.Debe,m.IdTipoDePago
                     FROM Movimientos m WHERE m.IdMovimiento=@IdMovimiento";
                 movimiento = conn.QuerySingleOrDefault<Movimientos>(selectQuery,
                     new { IdMovimiento = IdMovimiento });
@@ -106,7 +138,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             using (var conn = new SqlConnection(candenaConexion))
             {
                 StringBuilder selectQuery = new StringBuilder();
-                selectQuery.AppendLine("SELECT m.IdMovimiento,m.Servicio,m.Debe, m.Senia, t.NombreDePago");
+                selectQuery.AppendLine("SELECT m.IdMovimiento,m.Servicio,m.Debe, t.NombreDePago");
 
                 selectQuery.AppendLine("FROM Movimientos m");
                 selectQuery.AppendLine("INNER JOIN TiposDePagos t ON t.IdTipoDePago=m.IdTipoDePago");
@@ -116,7 +148,7 @@ namespace Taller_Mecanico.Datos.Repositorios
                     selectQuery.AppendLine("WHERE t.IdTipoDePago = @IdTipoDePago");
                 }
 
-                selectQuery.AppendLine("ORDER BY t.NombreDePago");
+                selectQuery.AppendLine("ORDER BY m.Servicio,t.NombreDePago");
                 selectQuery.AppendLine("OFFSET @registrosSaltados ROWS FETCH NEXT @registrosPorPagina ROWS ONLY");
 
                 var parametros = new { IdTipoDePago, registrosSaltados = registrosPorPagina * (paginaActual - 1), registrosPorPagina };

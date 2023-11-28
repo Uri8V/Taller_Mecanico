@@ -39,14 +39,22 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool Existe(VehiculosServicios vehiculosServicios)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(vehiculosServicios);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(int? IdVehiculo)
+        public int GetCantidad(int? IdVehiculo, int? IdMovimiento, int? IdCliente, DateTime? FechaServicios)
         {
             try
             {
-                return _repo.GetCantidad(IdVehiculo);
+                return _repo.GetCantidad(IdVehiculo, IdMovimiento, IdCliente, FechaServicios);
             }
             catch (Exception)
             {
@@ -73,11 +81,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<VehiculosServiciosDto> GetVehiculoServicioPorPagina(int registrosPorPagina, int paginaActual, int? IdVehiculo)
+        public List<VehiculosServiciosDto> GetVehiculoServicioPorPagina(int registrosPorPagina, int paginaActual, int? IdVehiculo, int? IdMovimiento, int? IdCliente, DateTime? FechaServicios)
         {
             try
             {
-                return _repo.GetVehiculoServicioPorPagina(registrosPorPagina, paginaActual, IdVehiculo);
+                return _repo.GetVehiculoServicioPorPagina(registrosPorPagina, paginaActual, IdVehiculo, IdMovimiento, IdCliente, FechaServicios);
             }
             catch (Exception)
             {
@@ -90,7 +98,7 @@ namespace Taller_Mecanico.Servicios.Servicios
         {
             try
             {
-                if (vehiculosServicios.IdVehiculoServicios==0)
+                if (vehiculosServicios.IdVehiculosSevicios==0)
                 {
                     _repo.Agregar(vehiculosServicios);
                 }

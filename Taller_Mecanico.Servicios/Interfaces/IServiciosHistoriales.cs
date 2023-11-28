@@ -14,8 +14,8 @@ namespace Taller_Mecanico.Servicios.Interfaces
         void Borrar(int IdHistorial);
         bool Existe(Historiales historial);
         bool EstaRelacionada(Historiales historial);
-        int GetCantidad(int? IdHistorial);
-        List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? TipoClienteId);
+        int GetCantidad(int? IdCliente, int? IdEmpresa, DateTime? Fecha);
+        List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? IdCliente, int? IdEmpresa, DateTime? Fecha);
         Historiales GetHistorialPorId(int IdHistorial);
         List<Historiales> GetHistorialesCombos();
     }

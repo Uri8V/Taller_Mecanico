@@ -82,7 +82,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void MostrarCantidad()
         {
-            txtCantidadMarcas.Text = _servicios.GetCantidad(null).ToString();
+            textBox1.Text = _servicios.GetCantidad(null).ToString();
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -98,10 +98,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 //Se debe controlar que este relacionada
                 DialogResult dr = MessageBox.Show($"¿Desea eliminar el Tipo de Cliente: {tipo.TipoCliente}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.No) { return; }
-                _servicios.Borrar(tipo.IdTipoCliente);
-                GridHelpers.QuitarFila(dgvDatos, r);
-                MostrarCantidad();
-                MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!_servicios.EstaRelacionado(tipo))
+                {
+                    _servicios.Borrar(tipo.IdTipoCliente);
+                    GridHelpers.QuitarFila(dgvDatos, r);
+                    MostrarCantidad();
+                    MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se puede eliminar el Tipo de Cliente porque está relacionado con algún cliente", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

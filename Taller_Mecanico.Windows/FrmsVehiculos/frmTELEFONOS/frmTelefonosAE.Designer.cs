@@ -43,6 +43,9 @@
             this.btnAgregarEmpleado = new System.Windows.Forms.Button();
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.CheckBoxCliente = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboEmpresa = new System.Windows.Forms.ComboBox();
+            this.checkBoxEmpresa = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,7 +109,7 @@
             // 
             this.comboEmpleados.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEmpleados.FormattingEnabled = true;
-            this.comboEmpleados.Location = new System.Drawing.Point(197, 159);
+            this.comboEmpleados.Location = new System.Drawing.Point(197, 190);
             this.comboEmpleados.Name = "comboEmpleados";
             this.comboEmpleados.Size = new System.Drawing.Size(213, 21);
             this.comboEmpleados.TabIndex = 5;
@@ -114,7 +117,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(129, 162);
+            this.label3.Location = new System.Drawing.Point(129, 193);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 2;
@@ -123,7 +126,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(129, 103);
+            this.label4.Location = new System.Drawing.Point(129, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 2;
@@ -133,7 +136,7 @@
             // 
             this.comboClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClientes.FormattingEnabled = true;
-            this.comboClientes.Location = new System.Drawing.Point(182, 100);
+            this.comboClientes.Location = new System.Drawing.Point(182, 74);
             this.comboClientes.Name = "comboClientes";
             this.comboClientes.Size = new System.Drawing.Size(213, 21);
             this.comboClientes.TabIndex = 5;
@@ -141,7 +144,7 @@
             // btnAgregarEmpleado
             // 
             this.btnAgregarEmpleado.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarEmpleado.Location = new System.Drawing.Point(436, 151);
+            this.btnAgregarEmpleado.Location = new System.Drawing.Point(436, 182);
             this.btnAgregarEmpleado.Name = "btnAgregarEmpleado";
             this.btnAgregarEmpleado.Size = new System.Drawing.Size(48, 42);
             this.btnAgregarEmpleado.TabIndex = 12;
@@ -151,7 +154,7 @@
             // btnAgregarCliente
             // 
             this.btnAgregarCliente.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarCliente.Location = new System.Drawing.Point(436, 79);
+            this.btnAgregarCliente.Location = new System.Drawing.Point(412, 85);
             this.btnAgregarCliente.Name = "btnAgregarCliente";
             this.btnAgregarCliente.Size = new System.Drawing.Size(48, 42);
             this.btnAgregarCliente.TabIndex = 13;
@@ -163,7 +166,7 @@
             this.CheckBoxCliente.AutoSize = true;
             this.CheckBoxCliente.Checked = true;
             this.CheckBoxCliente.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxCliente.Location = new System.Drawing.Point(36, 110);
+            this.CheckBoxCliente.Location = new System.Drawing.Point(36, 159);
             this.CheckBoxCliente.Name = "CheckBoxCliente";
             this.CheckBoxCliente.Size = new System.Drawing.Size(79, 17);
             this.CheckBoxCliente.TabIndex = 15;
@@ -171,12 +174,44 @@
             this.CheckBoxCliente.UseVisualStyleBackColor = true;
             this.CheckBoxCliente.CheckedChanged += new System.EventHandler(this.CheckBoxCliente_CheckedChanged);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(129, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Empresa:";
+            // 
+            // comboEmpresa
+            // 
+            this.comboEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboEmpresa.FormattingEnabled = true;
+            this.comboEmpresa.Location = new System.Drawing.Point(186, 111);
+            this.comboEmpresa.Name = "comboEmpresa";
+            this.comboEmpresa.Size = new System.Drawing.Size(209, 21);
+            this.comboEmpresa.TabIndex = 21;
+            // 
+            // checkBoxEmpresa
+            // 
+            this.checkBoxEmpresa.AutoSize = true;
+            this.checkBoxEmpresa.Location = new System.Drawing.Point(36, 99);
+            this.checkBoxEmpresa.Name = "checkBoxEmpresa";
+            this.checkBoxEmpresa.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxEmpresa.TabIndex = 23;
+            this.checkBoxEmpresa.Text = "Es Empresa?";
+            this.checkBoxEmpresa.UseVisualStyleBackColor = true;
+            this.checkBoxEmpresa.CheckedChanged += new System.EventHandler(this.checkBoxEmpresa_CheckedChanged);
+            // 
             // frmTelefonosAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 300);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBoxEmpresa);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboEmpresa);
             this.Controls.Add(this.CheckBoxCliente);
             this.Controls.Add(this.btnAgregarEmpleado);
             this.Controls.Add(this.btnAgregarCliente);
@@ -216,5 +251,8 @@
         private System.Windows.Forms.Button btnAgregarEmpleado;
         private System.Windows.Forms.Button btnAgregarCliente;
         private System.Windows.Forms.CheckBox CheckBoxCliente;
+        private System.Windows.Forms.CheckBox checkBoxEmpresa;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboEmpresa;
     }
 }

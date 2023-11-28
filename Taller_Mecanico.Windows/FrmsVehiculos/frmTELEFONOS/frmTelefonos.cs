@@ -38,23 +38,34 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         int? empleado = null;
         int? cliente = null;
+        string Texto=null;
       
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            empleado = null;
+            cliente=null;
+            Texto=null;
             RecargarGrilla();
             HabilitarBotones();
         }
 
         private void RecargarGrilla()
         {
-            registros = _servicio.GetCantidad(null);
+            registros = _servicio.GetCantidad(null, null,null);
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
             MostrarPaginado();
         }
 
         private void MostrarPaginado()
         {
-            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado);
+            if (empleado != null || cliente != null || Texto!=null)
+            {
+                lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            }
+            else
+            {
+                lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -79,6 +90,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
         }
         private void toolStripButtonCerrar_Click(object sender, EventArgs e)
         {
@@ -131,11 +146,18 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             }
             var telefono = frm.GetTelefono();
             //preguntar si existe
-            _servicio.Guardar(telefono);
-            MessageBox.Show("Telefono Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            registros = _servicio.GetCantidad(null);
-            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            if (!_servicio.Existe(telefono))
+            {
+                _servicio.Guardar(telefono);
+                MessageBox.Show("Telefono Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                registros = _servicio.GetCantidad(null, null, null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado(); 
+            }
+            else
+            {
+                MessageBox.Show("El telefono ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -177,32 +199,40 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     return;
                 }
                 telefono = frm.GetTelefono();
-                if (telefono != null)
+                if (!_servicio.Existe(telefono))
                 {
-                    //Crear el dto
-                    telefonoDto.IdTelefono = telefono.IdTelefono;
-                    telefonoDto.Telefono = telefono.Telefono;
-                    telefonoDto.TipoDeTelefono = telefono.TipoDeTelefono;
-                    if (telefono.IdEmpleado != 0)
+                    if (telefono != null)
                     {
-                        telefonoDto.ApellidoEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Apellido;
-                        telefonoDto.NombreEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Nombre;
-                        telefonoDto.DocumentoEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Documento;
+                        //Crear el dto
+                        telefonoDto.IdTelefono = telefono.IdTelefono;
+                        telefonoDto.Telefono = telefono.Telefono;
+                        telefonoDto.TipoDeTelefono = telefono.TipoDeTelefono;
+                        if (telefono.IdEmpleado != 0)
+                        {
+                            telefonoDto.ApellidoEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Apellido;
+                            telefonoDto.NombreEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Nombre;
+                            telefonoDto.DocumentoEmpleado = _servicioEmpleados.GetEmpleadoPorId(telefono.IdEmpleado).Documento;
+                        }
+                        else
+                        {
+                            telefonoDto.ApellidoCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Apellido;
+                            telefonoDto.NombreCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Nombre;
+                            telefonoDto.DocumentoCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Documento;
+                        }
+                        GridHelpers.SetearFila(r, telefonoDto);
+                        _servicio.Guardar(telefono);
                     }
                     else
                     {
-                        telefonoDto.ApellidoCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Apellido;
-                        telefonoDto.NombreCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Nombre;
-                        telefonoDto.DocumentoCliente = _serviciosClientes.GetClientePorId(telefono.IdCliente).Documento;
-                    }  
-                    GridHelpers.SetearFila(r, telefonoDto);
-                    _servicio.Guardar(telefono);
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, telefono);
+
+                    }
+
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, telefono);
-
+                    MessageBox.Show("El telefono ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception)
@@ -210,6 +240,81 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 GridHelpers.SetearFila(r, CopiaTelefono);
                 throw;
             }
+        }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarCliente frm = new frmSeleccionarCliente();
+            DialogResult dr= frm.ShowDialog(this);
+            if(dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            var clienteSeleccionado = frm.GetCliente();
+            registros = _servicio.GetCantidad(clienteSeleccionado.IdCliente,null, null);
+            cliente = clienteSeleccionado.IdCliente;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+        
+        }
+
+        private void empleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarEmpleado frm = new frmSeleccionarEmpleado();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            var empleadoSeleccionado = frm.GetEmpleado();
+            registros = _servicio.GetCantidad(null, empleadoSeleccionado.IdEmpleado, null);
+            empleado = empleadoSeleccionado.IdEmpleado;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void tipoDeTelefonoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarPorNombre frm = new frmSeleccionarPorNombre();
+            DialogResult dr = frm.ShowDialog(this);
+            if(dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            var texto = frm.GetTexto();
+            registros = _servicio.GetCantidad(null, null, texto);
+            Texto = texto;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
         }
     }
 }

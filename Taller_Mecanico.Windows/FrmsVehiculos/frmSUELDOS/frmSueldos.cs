@@ -13,6 +13,7 @@ using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
 using Taller_Mecanico.Servicios.Servicios;
 using Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmTELEFONOS;
 using Taller_Mecanico.Windows.Helpers;
 
 namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
@@ -42,26 +43,34 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
         int paginas = 0;
         int registrosPorPagina = 3;
 
-        int? IdHistorial = null;
-
+        int? IdEmpleado = null;
+        DateTime? Fecha = null;
 
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            IdEmpleado = null;
+            Fecha=null;
             RecargarGrilla();
-            
             HabilitarBotones();
         }
 
         private void RecargarGrilla()
         {
-            registros = _servicio.GetCantidad(null);
+            registros = _servicio.GetCantidad(null, null);
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
             MostrarPaginado();
         }
 
         private void MostrarPaginado()
         {
-            lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdHistorial);
+            if (IdEmpleado==null && Fecha==null)
+            {
+                lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdEmpleado, Fecha);
+            }
+            else
+            {
+                lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdEmpleado, Fecha);
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -135,12 +144,19 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
                 return;
             }
             var sueldo = frm.GetSueldo();
-            //preguntar si existe
-            _servicio.Guardar(sueldo);
-            MessageBox.Show("Sueldo agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            registros = _servicio.GetCantidad(null);
-            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            //MODIFICAR EL FORMULARIO AE
+            if (!_servicio.Existe(sueldo))
+            {
+                _servicio.Guardar(sueldo);
+                MessageBox.Show("Sueldo agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                registros = _servicio.GetCantidad(null, null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado(); 
+            }
+            else
+            {
+                MessageBox.Show("El sueldo ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -153,7 +169,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             SueldosDto sueldoABorrar = (SueldosDto)r.Tag;
             DialogResult dr = MessageBox.Show($"¿Desea eliminar el Sueldo de:{sueldoABorrar.Apellido.ToUpper()}, {sueldoABorrar.Nombre} ({sueldoABorrar.Documento})| Fecha:{sueldoABorrar.Fecha.ToShortDateString()}| Horas Laborales:{sueldoABorrar.HorasLaborales} | Horas Extra:{sueldoABorrar.HorasExtras}?", "Confirmar Selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
-            //Falta metodo de objeto relacionado
+            //Acá hace falta el metodo de relación?
             GridHelpers.QuitarFila(dgvDatos, r);
             _servicio.Borrar(sueldoABorrar.IdSueldo);
             RecargarGrilla();
@@ -182,28 +198,36 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
                     return;
                 }
                 sueldos = frm.GetSueldo();
-                if (sueldos != null)
+                if (!_servicio.Existe(sueldos))
                 {
-                    //Crear el dto
-                    sueldoDto.IdSueldo = sueldos.IdSueldo;
-                    sueldoDto.Fecha = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).Fecha;
-                    sueldoDto.HorasLaborales = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horaslaborales;
-                    sueldoDto.HorasExtras = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horasExtras;
-                    sueldoDto.ValorPorHora = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHora;
-                    sueldoDto.ValorPorHoraExtra = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHoraExtra;
-                    sueldoDto.Apellido = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdEmpleado).Apellido;
-                    sueldoDto.Nombre = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdHistorial).Nombre;
-                    sueldoDto.Documento = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdEmpleado).Documento;
-                    sueldoDto.TotalAPagar = sueldos.TotalAPagar;
-                    sueldoDto.TotalExtra=sueldos.TotalExtra;
-                    GridHelpers.SetearFila(r, sueldoDto);
-                    _servicio.Guardar(sueldos);
+                    if (sueldos != null)
+                    {
+                        //Crear el dto
+                        sueldoDto.IdSueldo = sueldos.IdSueldo;
+                        sueldoDto.Fecha = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).Fecha;
+                        sueldoDto.HorasLaborales = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horaslaborales;
+                        sueldoDto.HorasExtras = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horasExtras;
+                        sueldoDto.ValorPorHora = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHora;
+                        sueldoDto.ValorPorHoraExtra = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHoraExtra;
+                        sueldoDto.Apellido = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdEmpleado).Apellido;
+                        sueldoDto.Nombre = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdHistorial).Nombre;
+                        sueldoDto.Documento = _serviciosEmpleados.GetEmpleadoPorId(_serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).IdEmpleado).Documento;
+                        sueldoDto.TotalAPagar = sueldos.TotalAPagar;
+                        sueldoDto.TotalExtra = sueldos.TotalExtra;
+                        GridHelpers.SetearFila(r, sueldoDto);
+                        _servicio.Guardar(sueldos);
+                    }
+                    else
+                    {
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, sueldos);
+
+                    }
+
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, sueldos);
-
+                    MessageBox.Show("El sueldo ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception)
@@ -213,5 +237,58 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             }
         }
 
+        private void empleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarEmpleado frm = new frmSeleccionarEmpleado();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            var empleadoSeleccionado = frm.GetEmpleado();
+            registros = _servicio.GetCantidad(empleadoSeleccionado.IdEmpleado, null);
+            IdEmpleado = empleadoSeleccionado.IdEmpleado;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdEmpleado, Fecha);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void fechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmHorariosLaboralesFiltro frm = new frmHorariosLaboralesFiltro();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) { return; }
+            DateTime FechaSeleccionado = frm.GetFecha();
+            registros = _servicio.GetCantidad(null, FechaSeleccionado);
+            Fecha = FechaSeleccionado;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual,IdEmpleado, Fecha);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+
+        }
     }
 }

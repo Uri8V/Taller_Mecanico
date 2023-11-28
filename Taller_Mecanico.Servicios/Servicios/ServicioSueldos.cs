@@ -41,14 +41,22 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool Existe(Sueldos sueldos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(sueldos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(int? IdHistorial)
+        public int GetCantidad(int? IdEmpleado, DateTime? Fecha)
         {
             try
             {
-                return _repo.GetCantidad(IdHistorial);
+                return _repo.GetCantidad(IdEmpleado, Fecha);
             }
             catch (Exception)
             {
@@ -83,11 +91,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdHistorial)
+        public List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdEmpleado, DateTime? Fechal)
         {
             try
             {
-                return _repo.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdHistorial);
+                return _repo.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdEmpleado, Fechal);
             }
             catch (Exception)
             {

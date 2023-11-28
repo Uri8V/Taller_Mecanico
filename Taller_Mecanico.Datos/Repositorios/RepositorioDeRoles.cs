@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Taller_Mecanico.Comun.Interfaces;
 using Taller_Mecanico.Entidades.Entidades;
 using Dapper;
+using System.Text.RegularExpressions;
 
 namespace Taller_Mecanico.Datos.Repositorios
 {
@@ -87,6 +88,18 @@ namespace Taller_Mecanico.Datos.Repositorios
 
                 throw;
             }
+        }
+
+        public bool EstaRelacionado(Roles rol)
+        {
+            int cantidad = 0;
+            using (IDbConnection conn = new SqlConnection(cadenaDeConexion))
+            {
+                string selectQuery = "SELECT COUNT(*) FROM Empleados WHERE IdRolEmpleado=@IdRolEmpleado";
+                cantidad = conn.QuerySingle<int>(selectQuery, new { IdRolEmpleado = rol.IdRolEmpleado });
+            }
+            return cantidad > 0;
+
         }
 
         public bool Existe(Roles rol)

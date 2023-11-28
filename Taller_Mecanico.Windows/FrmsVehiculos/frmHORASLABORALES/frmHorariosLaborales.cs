@@ -79,10 +79,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             {
                 return;
             }
-            _servicios.Borrar(horas.IdHorasLaborales);
-            GridHelpers.QuitarFila(dgvDatos,r);
-            MostrarDatos(null);
-            MessageBox.Show("Las Horas de esa fecha han sido eliminadas");
+            if (!_servicios.EstRelacionada(horas))
+            {
+                _servicios.Borrar(horas.IdHorasLaborales);
+                GridHelpers.QuitarFila(dgvDatos, r);
+                MostrarDatos(null);
+                MessageBox.Show("Las Horas de esa fecha han sido eliminadas"); 
+            }
+            else
+            {
+                MessageBox.Show("No se pueden borrar debido a que estan relacionadas con algún sueldo", "IINFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             
         }
 
@@ -154,15 +161,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonEditar.Enabled = true;
+            toolStripButtonFiltrar.Enabled = true;
             toolStripButtonFiltrar.BackColor = Color.White;
         }
 
         private void toolStripButtonFiltrar_Click(object sender, EventArgs e)
         {
-            DeshabilitarBotones();
+            DesabilitarBotones();
             frmHorariosLaboralesFiltro frm = new frmHorariosLaboralesFiltro();
             DialogResult dr = frm.ShowDialog(this);
-            if(dr == DialogResult.Cancel) { return; }
+            if(dr == DialogResult.Cancel) 
+            {
+                HabilitarBotones();
+                return; 
+            }
             DateTime horas=frm.GetFecha();
             lista = _servicios.Filtrar(horas);
             MostrarDatos(horas);
@@ -170,12 +182,14 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         }
 
-        private void DeshabilitarBotones()
+        private void DesabilitarBotones()
         {
-            toolStripButtonAgregar.Enabled= false;
-            toolStripButtonBorrar.Enabled= false;
-            toolStripButtonEditar.Enabled= false;
-            toolStripButtonFiltrar.BackColor= Color.PaleTurquoise;
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
         }
+
     }
 }

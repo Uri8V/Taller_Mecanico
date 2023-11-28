@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.colDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +54,9 @@
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonActualizar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -111,8 +113,8 @@
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDatos.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDatos.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(800, 324);
             this.dgvDatos.TabIndex = 2;
@@ -331,13 +333,30 @@
             // 
             // toolStripButtonFiltrar
             // 
+            this.toolStripButtonFiltrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clienteToolStripMenuItem,
+            this.fechaToolStripMenuItem});
             this.toolStripButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
             this.toolStripButtonFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFiltrar.Name = "toolStripButtonFiltrar";
-            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
+            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(50, 51);
             this.toolStripButtonFiltrar.Text = "Filtrar";
             this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem.Text = "Cliente y Empresa";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
+            // 
+            // fechaToolStripMenuItem
+            // 
+            this.fechaToolStripMenuItem.Name = "fechaToolStripMenuItem";
+            this.fechaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fechaToolStripMenuItem.Text = "Fecha Entrada";
+            this.fechaToolStripMenuItem.Click += new System.EventHandler(this.fechaToolStripMenuItem_Click);
             // 
             // toolStripButtonActualizar
             // 
@@ -348,6 +367,7 @@
             this.toolStripButtonActualizar.Size = new System.Drawing.Size(63, 51);
             this.toolStripButtonActualizar.Text = "Actualizar";
             this.toolStripButtonActualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonActualizar.Click += new System.EventHandler(this.toolStripButtonActualizar_Click);
             // 
             // frmReserva
             // 
@@ -394,7 +414,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonBorrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonFiltrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDocumento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFechaEntrada;
@@ -403,5 +422,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHoraSalida;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSePresento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEsSobreturno;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripButtonFiltrar;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fechaToolStripMenuItem;
     }
 }

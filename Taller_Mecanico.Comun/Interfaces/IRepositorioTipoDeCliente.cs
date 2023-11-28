@@ -15,6 +15,7 @@ namespace Taller_Mecanico.Comun.Interfaces
         bool Existe(TiposDeClientes tipo);
         int GetCantidad(string textoFiltro);
         List<TiposDeClientes> GetTiposDeClientes();
+        bool EstaRelacionado(TiposDeClientes tipo);
         TiposDeClientes GetTipoClientePorId(int tipoId);
     }
 }

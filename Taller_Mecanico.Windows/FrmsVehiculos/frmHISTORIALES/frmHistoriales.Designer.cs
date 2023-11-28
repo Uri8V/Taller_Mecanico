@@ -54,7 +54,10 @@
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonFiltrar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.empleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fechaEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonActualizar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -330,13 +333,38 @@
             // 
             // toolStripButtonFiltrar
             // 
+            this.toolStripButtonFiltrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.empleadoToolStripMenuItem,
+            this.clienteToolStripMenuItem,
+            this.fechaEntradaToolStripMenuItem});
             this.toolStripButtonFiltrar.Image = global::Taller_Mecanico.Windows.Properties.Resources.filter_32px;
             this.toolStripButtonFiltrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonFiltrar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFiltrar.Name = "toolStripButtonFiltrar";
-            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
+            this.toolStripButtonFiltrar.Size = new System.Drawing.Size(50, 51);
             this.toolStripButtonFiltrar.Text = "Filtrar";
             this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // empleadoToolStripMenuItem
+            // 
+            this.empleadoToolStripMenuItem.Name = "empleadoToolStripMenuItem";
+            this.empleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.empleadoToolStripMenuItem.Text = "Empleado";
+            this.empleadoToolStripMenuItem.Click += new System.EventHandler(this.empleadoToolStripMenuItem_Click);
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem.Text = "Cliente y Empresa";
+            this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
+            // 
+            // fechaEntradaToolStripMenuItem
+            // 
+            this.fechaEntradaToolStripMenuItem.Name = "fechaEntradaToolStripMenuItem";
+            this.fechaEntradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fechaEntradaToolStripMenuItem.Text = "Fecha Entrada";
+            this.fechaEntradaToolStripMenuItem.Click += new System.EventHandler(this.fechaEntradaToolStripMenuItem_Click);
             // 
             // toolStripButtonActualizar
             // 
@@ -394,7 +422,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonBorrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonFiltrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmpleado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFechaEntrada;
@@ -403,5 +430,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colValorPorHora;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValorPorHoraExtra;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPatente;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripButtonFiltrar;
+        private System.Windows.Forms.ToolStripMenuItem empleadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fechaEntradaToolStripMenuItem;
     }
 }

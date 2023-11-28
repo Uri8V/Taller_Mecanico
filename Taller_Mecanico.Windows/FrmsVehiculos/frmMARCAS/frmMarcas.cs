@@ -103,10 +103,17 @@ namespace Taller_Mecanico.Windows
                 //Se debe controlar que este relacionada
                 DialogResult dr = MessageBox.Show($"¿Desea eliminar la Marca: {marca.NombreMarca}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.No) { return; }
-                _servicios.Borrar(marca.MarcaId);
-                GridHelpers.QuitarFila(dgvDatos, r);
-                MostrarCantidad();
-                MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!_servicios.EstaRelacionado(marca))
+                {
+                    _servicios.Borrar(marca.MarcaId);
+                    GridHelpers.QuitarFila(dgvDatos, r);
+                    MostrarCantidad();
+                    MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                }
+                else
+                {
+                    MessageBox.Show("No se puede borrar debido a que esta relacionada con un modelo", "INFORMACIÓN", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

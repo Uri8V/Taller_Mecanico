@@ -6,6 +6,7 @@ using Taller_Mecanico.Entidades.Dtos.Modelos;
 using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
 using Taller_Mecanico.Servicios.Servicios;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmMODELOS;
 using Taller_Mecanico.Windows.Helpers;
 
 namespace Taller_Mecanico.Windows.FrmsVehiculos
@@ -36,6 +37,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         }
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            marca = null;
             RecargarGrilla();
             HabilitarBotones();
         }
@@ -47,6 +49,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
         }
 
         private void frmModelos_Load(object sender, EventArgs e)
@@ -63,7 +69,14 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void MostrarPaginado()
         {
-            lista = _servicio.GetModelosPorPagina(registrosPorPagina, paginaActual, marca);
+            if (marca==null)
+            {
+                lista = _servicio.GetModelosPorPagina(registrosPorPagina, paginaActual, marca);
+            }
+            else
+            {
+                lista = _servicio.GetModelosPorPagina(registrosPorPagina, paginaActual, marca);
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -122,11 +135,18 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 return;
             }
             var modelo = frm.GetModelo();
-            _servicio.Guardar(modelo);
-            MessageBox.Show("Modelo Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            registros = _servicio.GetCantidad(null);
-            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            if (!_servicio.Existe(modelo))
+            {
+                _servicio.Guardar(modelo);
+                MessageBox.Show("Modelo Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                registros = _servicio.GetCantidad(null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado(); 
+            }
+            else
+            {
+                MessageBox.Show("El modelo ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -139,10 +159,18 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             ModelosDto modeloABorrar = (ModelosDto)r.Tag;
             DialogResult dr = MessageBox.Show($"¿Desea eliminar el modelo: {modeloABorrar.Modelo}, {modeloABorrar.Marca}?", "Confirmar Selcción", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
+            Model MODELOaborrar = _servicio.GetModelosPorId(modeloABorrar.IdModelo);
             //Falta metodo de objeto relacionado
-            GridHelpers.QuitarFila(dgvDatos, r);
-            _servicio.Borrar(modeloABorrar.IdModelo);
-            RecargarGrilla();
+            if (!_servicio.EstaRelacionada(MODELOaborrar))
+            {
+                GridHelpers.QuitarFila(dgvDatos, r);
+                _servicio.Borrar(modeloABorrar.IdModelo);
+                RecargarGrilla(); 
+            }
+            else
+            {
+                MessageBox.Show("El modelo no se puede eliminar porque esta relacionado con algún Vehiculo", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonEditar_Click(object sender, EventArgs e)
@@ -168,20 +196,26 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     return;
                 }
                 modelos = frm.GetModelo();
-                if (modelos != null)
+                if (!_servicio.Existe(modelos))
                 {
-                    //Crear el dto
-                    modeloDto.IdModelo = modelos.IdModelo;
-                    modeloDto.Modelo = modelos.Modelo;
-                    modeloDto.Marca = _servicioMarca.GetMarcasPorId(modelos.IdMarca).NombreMarca;
-                    GridHelpers.SetearFila(r, modeloDto);
-                    _servicio.Guardar(modelos);
+                    if (modelos != null)
+                    {
+                        //Crear el dto
+                        modeloDto.IdModelo = modelos.IdModelo;
+                        modeloDto.Modelo = modelos.Modelo;
+                        modeloDto.Marca = _servicioMarca.GetMarcasPorId(modelos.IdMarca).NombreMarca;
+                        GridHelpers.SetearFila(r, modeloDto);
+                        _servicio.Guardar(modelos);
+                    }
+                    else
+                    {
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, CopiaModelo);
+                    }
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, CopiaModelo);
-
+                    MessageBox.Show("El modelo ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception)
@@ -190,5 +224,46 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 throw;
             }
         }
+        private void toolStripButtonFiltrar_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarMarca frm = new frmSeleccionarMarca();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                HabilitarBotones();
+                return;
+            }
+            var MArca = frm.GetMarca();
+            registros = _servicio.GetCantidad(MArca.MarcaId);
+            marca = MArca.MarcaId;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetModelosPorPagina(registrosPorPagina, paginaActual, marca);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+        }
+
     }
 }

@@ -16,8 +16,8 @@ namespace Taller_Mecanico.Comun.Interfaces
         void Editar(VehiculosServicios vehiculosServicios);
         bool Existe(VehiculosServicios vehiculosServicios);
         bool EstaRelacionada(VehiculosServicios vehiculosServicios);
-        int GetCantidad(int? IdVehiculoServicio);
-        List<VehiculosServiciosDto> GetVehiculoServicioPorPagina(int registrosPorPagina, int paginaActual, int? IdTipoDePago);
+        int GetCantidad(int? IdVehiculo, int? IdMovimiento, int? IdCliente, DateTime? FechaServicios);
+        List<VehiculosServiciosDto> GetVehiculoServicioPorPagina(int registrosPorPagina, int paginaActual, int? IdVehiculo, int? IdMovimiento, int? IdCliente, DateTime? FechaServicios);
         VehiculosServicios GetVehiculoServicioPorId(int IdVehiculoServicio);
         List<VehiculosServicios> GetVehiculoServicioCombos();
     }

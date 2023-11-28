@@ -18,6 +18,7 @@ namespace Taller_Mecanico.Entidades.Dtos.Reservas
         public TimeSpan HoraSalida { get; set; }
         public bool SePresento { get; set; }
         public bool EsSobreturno { get; set; }
+        public string CUIT { get; set; }
 
         public object Clone()
         {

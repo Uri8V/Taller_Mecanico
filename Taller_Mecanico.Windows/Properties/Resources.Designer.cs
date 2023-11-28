@@ -293,6 +293,26 @@ namespace Taller_Mecanico.Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap search_32px {
+            get {
+                object obj = ResourceManager.GetObject("search_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_more_32px {
+            get {
+                object obj = ResourceManager.GetObject("search_more_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap time_machine_32px {
             get {
                 object obj = ResourceManager.GetObject("time_machine_32px", resourceCulture);

@@ -99,10 +99,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 //Se debe controlar que este relacionada
                 DialogResult dr = MessageBox.Show($"¿Desea eliminar el rol: {rol.Rol}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.No) { return; }
-                _servicios.Borrar(rol.IdRolEmpleado);
-                GridHelpers.QuitarFila(dgvDatos, r);
-                MostrarCantidad();
-                MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!_servicios.EstaRelacionado(rol))
+                {
+                    _servicios.Borrar(rol.IdRolEmpleado);
+                    GridHelpers.QuitarFila(dgvDatos, r);
+                    MostrarCantidad();
+                    MessageBox.Show("Registro Borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se puede borrar debido a que esta relacionado con un Empleado", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {

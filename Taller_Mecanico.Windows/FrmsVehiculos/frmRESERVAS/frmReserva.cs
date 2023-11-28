@@ -25,8 +25,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
         {
             InitializeComponent();
             _servicio = new ServiciosReservas();
-            _servicioClientes= new ServiciosClientes();
-
+            _servicioClientes = new ServiciosClientes();
         }
         private List<ReservaDto> lista;
         private IServiciosReservas _servicio;
@@ -37,6 +36,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
         int registrosPorPagina = 3;
 
         int? cliente = null;
+        DateTime? fecha = null;
 
         private void toolStripButtonCerrar_Click(object sender, EventArgs e)
         {
@@ -49,14 +49,21 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
         }
         private void RecargarGrilla()
         {
-            registros = _servicio.GetCantidad(null);
+            registros = _servicio.GetCantidad(null, null);
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
             MostrarPaginado();
         }
 
         private void MostrarPaginado()
         {
-            lista = _servicio.GetReservasPorPagina(registrosPorPagina, paginaActual, cliente);
+            if (fecha == null && cliente == null)
+            {
+                lista = _servicio.GetReservasPorPagina(registrosPorPagina, paginaActual, cliente, fecha);
+            }
+            else
+            {
+                lista = _servicio.GetReservasPorPagina(registrosPorPagina, paginaActual, cliente, fecha);
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -108,6 +115,8 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
 
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            cliente = null;
+            fecha = null;
             RecargarGrilla();
             HabilitarBotones();
         }
@@ -119,6 +128,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
         }
         private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
@@ -130,11 +143,18 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
             }
             var reserva = frm.GetReserva();
             //preguntar si existe
-            _servicio.Guardar(reserva);
-            MessageBox.Show("Reserva Agregada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            registros = _servicio.GetCantidad(null);
-            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            if (!_servicio.Existe(reserva))
+            {
+                _servicio.Guardar(reserva);
+                MessageBox.Show("Reserva Agregada", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                registros = _servicio.GetCantidad(null, null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado(); 
+            }
+            else
+            {
+                MessageBox.Show("La Reserva ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -145,12 +165,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
             }
             var r = dgvDatos.SelectedRows[0];
             ReservaDto reservaABorrar = (ReservaDto)r.Tag;
-            DialogResult dr = MessageBox.Show($"¿Desea eliminar la Reserva: {reservaABorrar.Apellido}, {reservaABorrar.Nombre} ({reservaABorrar.Documento})?", "Confirmar Selcción", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult dr = MessageBox.Show($"¿Desea eliminar la Reserva: {reservaABorrar.Apellido}, {reservaABorrar.Nombre} ({reservaABorrar.Documento} {reservaABorrar.CUIT})?", "Confirmar Selcción", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
             //Falta metodo de objeto relacionado
-            GridHelpers.QuitarFila(dgvDatos, r);
-            _servicio.Borrar(reservaABorrar.IdReserva);
-            RecargarGrilla();
+            Reservas RESERVAaborrar = _servicio.GetReservasPorId(reservaABorrar.IdReserva);
+            if (!_servicio.EstaRelacionada(RESERVAaborrar))
+            {
+                GridHelpers.QuitarFila(dgvDatos, r);
+                _servicio.Borrar(reservaABorrar.IdReserva);
+                RecargarGrilla();
+            }
+            else
+            {
+                MessageBox.Show("La Reserva no se puede borrar porque esta relacionada con un Historial", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonEditar_Click(object sender, EventArgs e)
@@ -176,27 +204,35 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
                     return;
                 }
                 reservas = frm.GetReserva();
-                if (reservas != null)
+                if (!_servicio.Existe(reservas))
                 {
-                    //Crear el dto
-                    reservaDto.IdReserva = reservas.IdReserva;
-                    reservaDto.SePresento = reservas.SePresento;
-                    reservaDto.EsSobreturno= reservas.EsSobreturno;
-                    reservaDto.Nombre = _servicioClientes.GetClientePorId(reservas.IdCliente).Nombre;
-                    reservaDto.Apellido = _servicioClientes.GetClientePorId(reservas.IdCliente).Apellido;
-                    reservaDto.Documento = _servicioClientes.GetClientePorId(reservas.IdCliente).Documento;
-                    reservaDto.FechaEntrada = reservas.FechaEntrada;
-                    reservaDto.HoraEntrada= reservas.HoraEntrada;
-                    reservaDto.FechaSalida = reservas.FechaSalida;
-                    reservaDto.HoraSalida = reservas.HoraSalida;
-                    GridHelpers.SetearFila(r, reservaDto);
-                    _servicio.Guardar(reservas);
+                    if (reservas != null)
+                    {
+                        //Crear el dto
+                        reservaDto.IdReserva = reservas.IdReserva;
+                        reservaDto.SePresento = reservas.SePresento;
+                        reservaDto.EsSobreturno = reservas.EsSobreturno;
+                        reservaDto.Nombre = _servicioClientes.GetClientePorId(reservas.IdCliente).Nombre;
+                        reservaDto.Apellido = _servicioClientes.GetClientePorId(reservas.IdCliente).Apellido;
+                        reservaDto.Documento = _servicioClientes.GetClientePorId(reservas.IdCliente).Documento;
+                        reservaDto.CUIT = _servicioClientes.GetClientePorId(reservas.IdCliente).CUIT;
+                        reservaDto.FechaEntrada = reservas.FechaEntrada;
+                        reservaDto.HoraEntrada = reservas.HoraEntrada;
+                        reservaDto.FechaSalida = reservas.FechaSalida;
+                        reservaDto.HoraSalida = reservas.HoraSalida;
+                        GridHelpers.SetearFila(r, reservaDto);
+                        _servicio.Guardar(reservas);
+                    }
+                    else
+                    {
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, reservas);
+
+                    } 
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, reservas);
-
+                    MessageBox.Show("La Reserva ya existe!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception)
@@ -204,6 +240,57 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
                 GridHelpers.SetearFila(r, CopiaReserva);
                 throw;
             }
+        }
+
+        private void fechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmHorariosLaboralesFiltro frm = new frmHorariosLaboralesFiltro();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel) { return; }
+            DateTime Fecha = frm.GetFecha();
+            registros = _servicio.GetCantidad(cliente, Fecha);
+            fecha = Fecha;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            MostrarPaginado();
+            DesabilitarBotones();
+        }
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+        }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarCliente frm = new frmSeleccionarCliente();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            var Cliente = frm.GetCliente();
+            registros = _servicio.GetCantidad(Cliente.IdCliente, fecha);
+            cliente = Cliente.IdCliente;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            DesabilitarBotones();
+            MostrarPaginado();
         }
     }
 }

@@ -89,6 +89,17 @@ namespace Taller_Mecanico.Datos.Repositorios
             }
         }
 
+        public bool EstaRelacionado(TipoVehiculo tipo)
+        {
+            int cantidad = 0;
+            using (IDbConnection conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery = "SELECT COUNT(*) FROM Vehiculos WHERE IdTipoVehiculo=@IdTipoVehiculo";
+                cantidad = conn.QuerySingle<int>(selectQuery, new { IdTipoVehiculo = tipo.IdTipoVehiculo });
+            }
+            return cantidad > 0;
+        }
+
         public bool Existe(TipoVehiculo tipo)
         {
             try

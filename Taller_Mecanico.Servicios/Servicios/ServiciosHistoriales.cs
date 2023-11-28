@@ -34,19 +34,35 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Historiales historial)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(historial);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Historiales historial)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(historial);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(int? IdHistorial)
+        public int GetCantidad(int? IdCliente, int? IdEmpresa, DateTime? Fecha)
         {
             try
             {
-                return _repo.GetCantidad(IdHistorial);
+                return _repo.GetCantidad(IdCliente,IdEmpresa,Fecha);
             }
             catch (Exception)
             {
@@ -68,11 +84,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? TipoClienteId)
+        public List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? IdCliente, int? IdEmpresa, DateTime? Fecha)
         {
             try
             {
-                return _repo.GetHistorialesPorPagina(registrosPorPagina, paginaActual, TipoClienteId);
+                return _repo.GetHistorialesPorPagina(registrosPorPagina, paginaActual, IdCliente, IdEmpresa, Fecha);
             }
             catch (Exception)
             {

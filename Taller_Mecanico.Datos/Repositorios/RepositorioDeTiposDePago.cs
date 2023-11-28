@@ -89,6 +89,17 @@ namespace Taller_Mecanico.Datos.Repositorios
             }
         }
 
+        public bool EstaRelacionado(TipoDePagos tipo)
+        {
+            int cantidad = 0;
+            using (IDbConnection conn = new SqlConnection(cadenaDeConexion))
+            {
+                string selectQuery = "SELECT COUNT(*) FROM Movimientos WHERE IdTipoDePago=@IdTipoDePago";
+                cantidad = conn.QuerySingle<int>(selectQuery, new { IdTipoDePago = tipo.IdTipoPagos });
+            }
+            return cantidad > 0;
+        }
+
         public bool Existe(TipoDePagos tipo)
         {
             try

@@ -23,8 +23,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         {
             base.OnLoad(e);
             ComboHelper.CargarComboTipoCliente(ref comboTipoCliente);
-            if(cliente!=null)
+          
+            if (cliente!=null)
             {
+                if (cliente.CUIT == "")
+                {
+                    checkBox1.Checked = false;
+                }
+                else
+                {
+                    checkBox1.Checked= true;
+                }
                 txtNombre.Text = cliente.Nombre;
                 txtApellido.Text = cliente.Apellido;
                 txtDomicilio.Text = cliente.Domicilio;
@@ -48,6 +57,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void frmClienteAE_Load(object sender, EventArgs e)
         {
+            txtCUIT.Enabled = false;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -85,10 +95,15 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     errorProvider1.SetError(txtApellido, "DEBE Ingresar un Apellido");
                     validar = false;
                 }
-                if ((string.IsNullOrEmpty(txtDocumento.Text)) && (string.IsNullOrEmpty(txtCUIT.Text)))
-                {
+                if (string.IsNullOrEmpty(txtDocumento.Text) && string.IsNullOrEmpty(txtCUIT.Text))
+                {   
                     errorProvider1.SetError(txtCUIT, "DEBE Ingresar un CUIT");
                     errorProvider1.SetError(txtDocumento, "DEBE Ingresar un Documento");
+                    MessageBox.Show("DEBE INGRESAR UN DOCUMENTO O UN CUIT", "MENSAJE INFORMATIVO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    validar = false;
+                }
+                else if (txtDocumento.TextLength>0 && txtCUIT.TextLength>0)
+                {
                     MessageBox.Show("DEBE INGRESAR UN DOCUMENTO O UN CUIT", "MENSAJE INFORMATIVO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     validar = false;
                 }
@@ -119,6 +134,20 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             {
                 ComboHelper.CargarComboTipoCliente(ref comboTipoCliente);
                 return;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                txtDocumento.Enabled = false;
+                txtCUIT.Enabled = true;
+            }
+            else
+            {
+                txtDocumento.Enabled = true;
+                txtCUIT.Enabled=false;
             }
         }
     }

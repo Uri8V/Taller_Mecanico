@@ -83,6 +83,16 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 errorProvider1.SetError(txtKilometros, "Debe ingresar los kilometros realizados");
                 valid = false;
             }
+            else if(!int.TryParse(txtKilometros.Text, out int klm))
+            {
+                errorProvider1.SetError(txtKilometros, "Debe ingresar números");
+                valid = false;
+            }
+            else if (klm < 0)
+            {
+                errorProvider1.SetError(txtKilometros, "Debe ingresar un número positivo");
+                valid = false;
+            }
             if (comboModelo.SelectedIndex == 0)
             {
                 errorProvider1.SetError(comboModelo, "Debe seleccionar un Modelo");

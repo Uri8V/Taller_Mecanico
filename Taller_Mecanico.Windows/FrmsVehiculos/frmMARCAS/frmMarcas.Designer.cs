@@ -181,6 +181,7 @@
             this.MaximumSize = new System.Drawing.Size(795, 343);
             this.MinimumSize = new System.Drawing.Size(795, 343);
             this.Name = "frmMarcas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMarcas";
             this.Load += new System.EventHandler(this.frmMarcas_Load);
             this.toolStrip1.ResumeLayout(false);

@@ -42,14 +42,22 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool Existe(Telefonos telefono)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(telefono);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(string telefonoId = null)
+        public int GetCantidad(int? telefonoId, int? clienteid, string texto = null)
         {
             try
             {
-                return _repo.GetCantidad(telefonoId);
+                return _repo.GetCantidad(telefonoId, clienteid,texto);
             }
             catch (Exception)
             {
@@ -76,11 +84,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             throw new NotImplementedException();
         }
 
-        public List<TelefonoDto> GetTelefonosPorPagina(int registrosPorPagina, int paginaActual, int? clienteId, int? empleadoId)
+        public List<TelefonoDto> GetTelefonosPorPagina(int registrosPorPagina, int paginaActual, int? clienteId, int? empleadoId, string texto = null)
         {
             try
             {
-                return _repo.GetTelefonosPorPagina(registrosPorPagina, paginaActual, clienteId,empleadoId);
+                return _repo.GetTelefonosPorPagina(registrosPorPagina, paginaActual, clienteId,empleadoId, texto);
             }
             catch (Exception)
             {

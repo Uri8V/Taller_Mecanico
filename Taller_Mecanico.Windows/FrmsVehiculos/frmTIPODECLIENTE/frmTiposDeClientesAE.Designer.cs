@@ -88,7 +88,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnConfirmar);
+            this.MaximumSize = new System.Drawing.Size(355, 230);
+            this.MinimumSize = new System.Drawing.Size(355, 230);
             this.Name = "frmTiposDeClientesAE";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTiposDeClientesAE";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

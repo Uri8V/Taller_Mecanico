@@ -17,6 +17,7 @@ namespace Taller_Mecanico.Entidades.Dtos.Telefono
         public string DocumentoCliente { get; set; }
         public string Telefono { get; set; }
         public string TipoDeTelefono { get; set; }
+        public string CUIT { get; set; }
 
         public object Clone()
         {

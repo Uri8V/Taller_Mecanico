@@ -15,8 +15,8 @@ namespace Taller_Mecanico.Servicios.Interfaces
         void Borrar(int IdSueldo);
         bool Existe(Sueldos sueldos);
         bool EstaRelacionada(Sueldos sueldos);
-        int GetCantidad(int? IdHistorial);
-        List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdHistorial);
+        int GetCantidad(int? IdEmpleado, DateTime? Fecha);
+        List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdEmpleado, DateTime? Fecha);
         Sueldos GetSueldosPorId(int IdSueldo);
         List<Sueldos> GetSueldosCombos();
     }

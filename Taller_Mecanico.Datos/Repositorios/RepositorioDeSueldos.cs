@@ -59,25 +59,52 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public bool Existe(Sueldos sueldos)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery;
+                if (sueldos.IdSueldo == 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Sueldos 
+                            WHERE IdHistorial=@IdHistorial AND IdHorasLaborales=@IdHorasLaborales";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdHistorial = sueldos.IdHistorial, IdHorasLaborales = sueldos.IdHorasLaborales });
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Movimientos 
+                WHERE IdHistorial=@IdHistorial AND IdHorasLaborales=@IdHorasLaborales AND IdSueldo!=@IdSueldo";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdHistorial = sueldos.IdHistorial, IdHorasLaborales = sueldos.IdHorasLaborales, IdSueldo = sueldos.IdSueldo });
+                }
+            }
+            return cantidad > 0;
         }
 
-        public int GetCantidad(int? IdHistorial)
+        public int GetCantidad(int? IdEmpleado, DateTime? Fecha)
         {
             int cantidad = 0;
             using (var conn = new SqlConnection(cadenaConexion))
             {
                 string selectQuery;
-                if (IdHistorial == null)
+                if (IdEmpleado == null && Fecha==null)
                 {
                     selectQuery = "SELECT COUNT(*) FROM Sueldos";
                     cantidad = conn.ExecuteScalar<int>(selectQuery);
                 }
-                else
+                else if(IdEmpleado == null && Fecha!=null)
                 {
-                    selectQuery = @"SELECT COUNT(*) FROM Sueldos 
-                        WHERE (IdHistorial=@IdHistorial)";
-                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdHistorial = IdHistorial });
+                    selectQuery = @"SELECT COUNT(*) FROM Sueldos s
+                        INNER JOIN HorasLaborales hl ON s.IdHorasLaborales=hl.IdHorasLaborales
+                        WHERE (hl.Fecha=CONVERT(DATE,@Fecha))";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { Fecha =Fecha });
+                }
+                else if(IdEmpleado!=null && Fecha == null)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Sueldos s
+                        INNER JOIN Historiales h ON h.IdHistorial=s.IdHistorial
+                        WHERE h.IdEmpleado=@IdEmpleado";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdEmpleado = IdEmpleado });
                 }
             }
             return cantidad;
@@ -101,7 +128,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             return sueldo;
         }
 
-        public List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdHistorial)
+        public List<SueldosDto> GetSueldosPorPagina(int registrosPorPagina, int paginaActual, int? IdEmpleado, DateTime? Fecha)
         {
             List<SueldosDto> lista = new List<SueldosDto>();
             using (var conn = new SqlConnection(cadenaConexion))
@@ -115,15 +142,15 @@ namespace Taller_Mecanico.Datos.Repositorios
                 selectQuery.AppendLine("INNER JOIN Empleados e ON e.IdEmpleado=h.IdEmpleado");
 
 
-                if (IdHistorial != null)
+                if (IdEmpleado != null || Fecha!=null)
                 {
-                    selectQuery.AppendLine("WHERE h.IdHistorial = @IdHistorial");
+                    selectQuery.AppendLine("WHERE h.IdEmpleado = @IdEmpleado OR hl.Fecha=CONVERT(DATE,@Fecha)");
                 }
 
                 selectQuery.AppendLine("ORDER BY hl.Fecha");
                 selectQuery.AppendLine("OFFSET @registrosSaltados ROWS FETCH NEXT @registrosPorPagina ROWS ONLY");
 
-                var parametros = new { IdHistorial, registrosSaltados = registrosPorPagina * (paginaActual - 1), registrosPorPagina };
+                var parametros = new { IdEmpleado,Fecha, registrosSaltados = registrosPorPagina * (paginaActual - 1), registrosPorPagina };
 
                 lista = conn.Query<SueldosDto>(selectQuery.ToString(), parametros).ToList();
                 return lista;

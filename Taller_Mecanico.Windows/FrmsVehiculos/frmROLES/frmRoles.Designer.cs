@@ -30,10 +30,10 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCantidadRoles = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripButtonCerrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
@@ -81,6 +81,13 @@
             this.dgvDatos.Size = new System.Drawing.Size(800, 321);
             this.dgvDatos.TabIndex = 0;
             // 
+            // colRol
+            // 
+            this.colRol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colRol.HeaderText = "Rol";
+            this.colRol.Name = "colRol";
+            this.colRol.ReadOnly = true;
+            // 
             // txtCantidadRoles
             // 
             this.txtCantidadRoles.Enabled = false;
@@ -112,13 +119,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(800, 54);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // colRol
-            // 
-            this.colRol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colRol.HeaderText = "Rol";
-            this.colRol.Name = "colRol";
-            this.colRol.ReadOnly = true;
             // 
             // toolStripButtonCerrar
             // 
@@ -174,6 +174,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmRoles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmRoles";
             this.Load += new System.EventHandler(this.frmRoles_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

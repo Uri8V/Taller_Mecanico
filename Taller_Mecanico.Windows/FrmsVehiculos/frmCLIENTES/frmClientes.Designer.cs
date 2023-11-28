@@ -174,8 +174,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblRegistros);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 396);
-            this.splitContainer1.SplitterDistance = 339;
+            this.splitContainer1.Size = new System.Drawing.Size(800, 207);
+            this.splitContainer1.SplitterDistance = 156;
             this.splitContainer1.TabIndex = 4;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -193,11 +193,13 @@
             this.colTipoCliente});
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.Location = new System.Drawing.Point(0, 0);
+            this.dgvDatos.MaximumSize = new System.Drawing.Size(800, 156);
+            this.dgvDatos.MinimumSize = new System.Drawing.Size(800, 156);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(800, 339);
+            this.dgvDatos.Size = new System.Drawing.Size(800, 156);
             this.dgvDatos.TabIndex = 1;
             // 
             // colNombre
@@ -343,10 +345,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 261);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.MaximumSize = new System.Drawing.Size(816, 300);
+            this.MinimumSize = new System.Drawing.Size(816, 300);
             this.Name = "frmClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmClientes";

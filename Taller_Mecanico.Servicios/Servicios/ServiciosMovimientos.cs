@@ -35,12 +35,28 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Movimientos movimientos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(movimientos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Movimientos movimientos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(movimientos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int GetCantidad(int? IdHistorial)
@@ -58,7 +74,15 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public List<Movimientos> GetMovimientosCombos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.GetMovimientosCombos();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Movimientos GetMovimientosPorId(int IdMovimiento)

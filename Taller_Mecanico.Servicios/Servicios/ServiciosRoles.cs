@@ -32,6 +32,19 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
+        public bool EstaRelacionado(Roles rol)
+        {
+            try
+            {
+                return _repositorio.EstaRelacionado(rol);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool Existe(Roles rol)
         {
             try

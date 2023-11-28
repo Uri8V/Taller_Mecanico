@@ -14,6 +14,7 @@ namespace Taller_Mecanico.Servicios.Interfaces
         bool Existe(TipoDePagos tipo);
         int GetCantidad(string textoFiltro);
         List<TipoDePagos> GetTipoDePagos();
+        bool EstaRelacionado(TipoDePagos tipo);
         TipoDePagos GetTipoDePagosPorId(int idMovimiento);
     }
 }

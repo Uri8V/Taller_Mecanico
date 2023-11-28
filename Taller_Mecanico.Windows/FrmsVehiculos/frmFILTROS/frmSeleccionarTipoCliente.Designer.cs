@@ -34,12 +34,13 @@
             this.comboBoxTipoCliente = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnAgregarTipoCliente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(35, 132);
+            this.btnCancelar.Location = new System.Drawing.Point(204, 62);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 0;
@@ -49,7 +50,7 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(210, 134);
+            this.btnConfirmar.Location = new System.Drawing.Point(42, 62);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(87, 23);
             this.btnConfirmar.TabIndex = 0;
@@ -61,7 +62,7 @@
             // 
             this.comboBoxTipoCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipoCliente.FormattingEnabled = true;
-            this.comboBoxTipoCliente.Location = new System.Drawing.Point(173, 51);
+            this.comboBoxTipoCliente.Location = new System.Drawing.Point(159, 12);
             this.comboBoxTipoCliente.Name = "comboBoxTipoCliente";
             this.comboBoxTipoCliente.Size = new System.Drawing.Size(175, 21);
             this.comboBoxTipoCliente.TabIndex = 1;
@@ -69,7 +70,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 59);
+            this.label1.Location = new System.Drawing.Point(21, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 2;
@@ -79,12 +80,23 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnAgregarTipoCliente
+            // 
+            this.btnAgregarTipoCliente.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
+            this.btnAgregarTipoCliente.Location = new System.Drawing.Point(352, 6);
+            this.btnAgregarTipoCliente.Name = "btnAgregarTipoCliente";
+            this.btnAgregarTipoCliente.Size = new System.Drawing.Size(50, 43);
+            this.btnAgregarTipoCliente.TabIndex = 5;
+            this.btnAgregarTipoCliente.UseVisualStyleBackColor = true;
+            this.btnAgregarTipoCliente.Click += new System.EventHandler(this.btnAgregarTipoCliente_Click);
+            // 
             // frmSeleccionarTipoCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 169);
+            this.ClientSize = new System.Drawing.Size(429, 100);
             this.ControlBox = false;
+            this.Controls.Add(this.btnAgregarTipoCliente);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxTipoCliente);
             this.Controls.Add(this.btnConfirmar);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.ComboBox comboBoxTipoCliente;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnAgregarTipoCliente;
     }
 }

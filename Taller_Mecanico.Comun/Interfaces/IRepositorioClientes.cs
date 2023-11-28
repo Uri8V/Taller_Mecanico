@@ -20,5 +20,6 @@ namespace Taller_Mecanico.Comun.Interfaces
         List<ClienteDto> GetClientesPorPagina(int registrosPorPagina, int paginaActual, int? TipoClienteId);
         Clientes GetClientePorId(int clienteId);
         List<Clientes> GetClientesCombos();
+        List<Clientes> GetClientesCombosEmpresa();
     }
 }

@@ -6,8 +6,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Taller_Mecanico.Comun.Interfaces;
 using Taller_Mecanico.Entidades.Dtos.Empleados;
+using Taller_Mecanico.Entidades.Dtos.Telefono;
 using Taller_Mecanico.Entidades.Dtos.Vehiculos;
 using Taller_Mecanico.Entidades.Entidades;
 
@@ -51,32 +53,70 @@ namespace Taller_Mecanico.Datos.Repositorios
             }
         }
 
-        public bool EstaRelacionada(Entidades.Entidades.Vehiculos vehiculos)
+        public bool EstaRelacionada(Vehiculos vehiculos)
         {
-            throw new NotImplementedException();
+            int cantidadHistoriales = 0;
+            int cantidadVehiculosServicios = 0;
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery = @"SELECT COUNT(*) FROM Historiales WHERE IdVehiculo=@IdVehiculo;
+                                          SELECT COUNT(*) FROM VehiculosServicios WHERE IdVehiculo = @IdVehiculo";
+                using (var resultado = conn.QueryMultiple(selectQuery, new { IdVehiculo = vehiculos.IdVehiculo }))
+                {
+                    cantidadHistoriales = resultado.Read<int>().First();
+                    cantidadVehiculosServicios = resultado.Read<int>().First();
+                }
+            }
+            return cantidadHistoriales + cantidadVehiculosServicios > 0;
         }
 
-        public bool Existe(Entidades.Entidades.Vehiculos vehiculos)
+        public bool Existe(Vehiculos vehiculos)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery;
+                if (vehiculos.IdVehiculo == 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Vehiculos 
+                            WHERE Patente=@Patente";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Patente = vehiculos.Patente });
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Vehiculos 
+                WHERE Patente=@Patente AND  IdVehiculo!=@IdVehiculo";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { Patente = vehiculos.Patente ,IdVehiculo = vehiculos.IdVehiculo});
+                }
+            }
+            return cantidad > 0;
         }
 
-        public int GetCantidad(int? vehiculoId)
+        public int GetCantidad(int? IdModelo, int? IdTipoVehiculo)
         {
             int cantidad = 0;
             using (var conn = new SqlConnection(cadenaConexion))
             {
                 string selectQuery;
-                if (vehiculoId == null)
+                if (IdModelo == null && IdTipoVehiculo==null)
                 {
                     selectQuery = "SELECT COUNT(*) FROM Vehiculos";
                     cantidad = conn.ExecuteScalar<int>(selectQuery);
                 }
+                else if(IdModelo == null && IdTipoVehiculo!=null)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Vehiculos 
+                        WHERE  (IdTipoVehiculo=@IdTipoVehiculo)";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdTipoVehiculo = IdTipoVehiculo });
+                }
                 else
                 {
                     selectQuery = @"SELECT COUNT(*) FROM Vehiculos 
-                        WHERE (IdModelo=@vehiculoId) OR (IdTipoVehiculo=@vehiculoId)";
-                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { Idvehiculo = vehiculoId });
+                        WHERE  (IdModelo=@IdModelo)";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdModelo = IdModelo });
+
                 }
             }
             return cantidad;
@@ -102,53 +142,48 @@ namespace Taller_Mecanico.Datos.Repositorios
             {
                 string selectQuery = @"SELECT IdVehiculo, Patente, Kilometros, IdTipoVehiculo, IdModelo 
                     FROM Vehiculos WHERE IdVehiculo=@IdVehiculo";
-                vehiculo = conn.QuerySingleOrDefault<Entidades.Entidades.Vehiculos>(selectQuery,
+                vehiculo = conn.QuerySingleOrDefault<Vehiculos>(selectQuery,
                     new { IdVehiculo = vehiculoId });
             }
             return vehiculo;
         }
 
-        public List<VehiculoDto> GetVehiculosPorPagina(int registrosPorPagina, int paginaActual, int? tipo , int? model)
+        public List<VehiculoDto> GetVehiculosPorPagina(int registrosPorPagina, int paginaActual, int? model , int? tipo)
         {
             List<VehiculoDto> lista = new List<VehiculoDto>();
             using (var conn = new SqlConnection(cadenaConexion))
             {
-                string selectQuery;
-                if (tipo != null || model!=null)
-                {
-                    selectQuery = @"SELECT v.IdVehiculo, v.Patente, v.Kilometros, t.TipoVehiculo, m.Modelo FROM Vehiculos v
-                                  INNER JOIN TiposDeVehiculo t ON v.IdTipoVehiculo=v.IdTipoVehiculo
-                                  INNER JOIN Modelos m ON m.IdModelo=v.IdModelo
-                                  WHERE v.TipoVehiculo=@tipo OR m.Modelo=@modelo 
-                                  ORDER BY t.TipoVehiculo, m.Modelo 
-                                  OFFSET @cantidadRegistros ROWS FETCH NEXT @CantidadPorPagina ROWS ONLY";
-                    var registrosSateados = registrosPorPagina * (paginaActual - 1);
+                StringBuilder selectQuery = new StringBuilder();
+                selectQuery.AppendLine("SELECT");
+                selectQuery.AppendLine("v.IdVehiculo,");
+                selectQuery.AppendLine("v.Patente,");
+                selectQuery.AppendLine("v.Kilometros,");
+                selectQuery.AppendLine("t.TipoVehiculo,");
+                selectQuery.AppendLine("m.Modelo");
+                selectQuery.AppendLine("FROM Vehiculos v");
+                selectQuery.AppendLine("INNER JOIN Modelos m ON v.IdModelo = m.IdModelo");
+                selectQuery.AppendLine("INNEr JOIN TiposDeVehiculo t ON v.IdTipoVehiculo = t.IdTipoVehiculo");
 
-                    lista = conn.Query<VehiculoDto>(selectQuery, new
-                    {
-                        tipo = tipo.Value,
-                        modelo = model.Value,
-                        cantidadRegistros = registrosSateados,
-                        cantidadPorPagina = registrosPorPagina
-                    }).ToList();
-                }
-                else
+                if (tipo != null || model != null)
                 {
-                    selectQuery = @"SELECT v.IdVehiculo, v.Patente, v.Kilometros, t.TipoVehiculo, m.Modelo FROM Vehiculos v
-                                   INNER JOIN TiposDeVehiculo T ON t.IdTipoVehiculo=v.IdTipoVehiculo
-                                   INNER JOIN Modelos m ON m.IdModelo=v.IdModelo
-                                  ORDER BY t.TipoVehiculo, m.Modelo 
-                                  OFFSET @cantidadRegistros ROWS FETCH NEXT @CantidadPorPagina ROWS ONLY";
-                    var registrosSateados = registrosPorPagina * (paginaActual - 1);
-
-                    lista = conn.Query<VehiculoDto>(selectQuery, new
-                    {
-                        cantidadRegistros = registrosSateados,
-                        cantidadPorPagina = registrosPorPagina
-                    }).ToList();
+                    selectQuery.AppendLine("WHERE  m.IdModelo= @model OR t.IdTipoVehiculo = @tipo ");
                 }
-                return lista;
+                selectQuery.AppendLine("ORDER BY t.TipoVehiculo, m.Modelo");
+                selectQuery.AppendLine("OFFSET @cantidadRegistros ROWS FETCH NEXT @CantidadPorPagina ROWS ONLY");
+
+                var parametros = new
+                {
+                   model,
+                   tipo,
+                    cantidadRegistros = registrosPorPagina * (paginaActual - 1),
+                    cantidadPorPagina = registrosPorPagina
+                };
+
+                lista = conn.Query<VehiculoDto>(selectQuery.ToString(), parametros).ToList();
+
             }
+
+            return lista;
         }
     }
 }

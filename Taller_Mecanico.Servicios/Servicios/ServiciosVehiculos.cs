@@ -39,19 +39,35 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Vehiculos vehiculos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(vehiculos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Vehiculos vehiculos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(vehiculos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public int GetCantidad(int? vehiculoId)
+        public int GetCantidad(int? IdModelo, int? IdTipoVehiculo)
         {
             try
             {
-               return _repo.GetCantidad(vehiculoId);
+               return _repo.GetCantidad(IdModelo, IdTipoVehiculo);
             }
             catch (Exception)
             {
@@ -86,11 +102,11 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<VehiculoDto> GetVehiculosPorPagina(int registrosPorPagina, int paginaActual, int? tipoId, int? modeloId)
+        public List<VehiculoDto> GetVehiculosPorPagina(int registrosPorPagina, int paginaActual, int? idModelo, int? idTipo)
         {
             try
             {
-                return _repo.GetVehiculosPorPagina(registrosPorPagina, paginaActual, tipoId, modeloId);
+                return _repo.GetVehiculosPorPagina(registrosPorPagina, paginaActual, idModelo, idTipo);
             }
             catch (Exception)
             {

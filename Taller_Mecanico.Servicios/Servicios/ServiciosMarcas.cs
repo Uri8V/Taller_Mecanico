@@ -103,5 +103,18 @@ namespace Taller_Mecanico.Servicios.Servicios
                 throw;
             }
         }
+
+        public bool EstaRelacionado(Marca marca)
+        {
+            try
+            {
+                return _servicio.EstaRelacionado(marca);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -54,12 +54,28 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Clientes cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repositorio.EstaRelacionada(cliente);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Clientes cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repositorio.Existe(cliente);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int GetCantidad(int? TipoClienteId)
@@ -114,5 +130,19 @@ namespace Taller_Mecanico.Servicios.Servicios
                 throw;
             }
         }
+
+        public List<Clientes> GetClientesCombosEmpresa()
+        {
+            try
+            {
+                return _repositorio.GetClientesCombosEmpresa();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

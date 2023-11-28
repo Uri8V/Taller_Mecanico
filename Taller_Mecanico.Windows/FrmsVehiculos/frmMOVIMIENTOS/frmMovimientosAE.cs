@@ -26,7 +26,6 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmMOVIMIENTOS
             {
                 txtServicio.Text = movimientos.Servicio;
                 txtDebe.Text=movimientos.Debe.ToString();   
-                txtSenia.Text=movimientos.Senia.ToString();
                 comboBox1.SelectedValue = movimientos.IdTipoDePago;
             }
         }
@@ -56,14 +55,6 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmMOVIMIENTOS
                 }
                movimientos.Servicio= txtServicio.Text;
                 movimientos.Debe=decimal.Parse(txtDebe.Text);
-                if(string.IsNullOrEmpty(txtSenia.Text))
-                {
-                    movimientos.Senia = 0;
-                }
-                else
-                {
-                    movimientos.Senia=decimal.Parse(txtSenia.Text);
-                }
                 movimientos.IdTipoDePago = (int)comboBox1.SelectedValue;
                 movimientos.TipoDePago = (TipoDePagos)comboBox1.SelectedItem;
                 DialogResult=DialogResult.OK;

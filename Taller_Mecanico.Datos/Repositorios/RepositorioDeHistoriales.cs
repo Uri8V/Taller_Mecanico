@@ -52,30 +52,70 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public bool EstaRelacionada(Historiales historial)
         {
-            throw new NotImplementedException();
+            int cantidad = 0;
+            using (var conn = new SqlConnection(CadenaConexion))
+            {
+
+                string selectQuery = @"SELECT COUNT(*) FROM Sueldos WHERE IdHistorial=@IdHistorial";
+                cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdHistorial = historial.IdHistorial });
+            }
+            return cantidad > 0;
         }
 
         public bool Existe(Historiales historial)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(CadenaConexion))
+            {
+                string selectQuery;
+                if (historial.IdHistorial == 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Historiales 
+                            WHERE IdEmpleado=@IdEmpleado AND IdReserva=@IdReserva AND IdVehiculo=@IdVehiculo";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdEmpleado = historial.IdEmpleado, IdReserva=historial.IdReserva, IdVehiculo=historial.IdVehiculo });
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Historiales 
+                WHERE IdEmpleado=@IdEmpleado AND IdReserva=@IdReserva AND IdVehiculo=@IdVehiculo AND IdHistorial!=@IdHistorial";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdEmpleado = historial.IdEmpleado, IdReserva = historial.IdReserva, IdVehiculo=historial.IdVehiculo, IdHistorial=historial.IdHistorial });
+                }
+            }
+            return cantidad > 0;
         }
 
-        public int GetCantidad(int? IdHistorial)
+        public int GetCantidad(int? IdCliente, int? IdEmpleado, DateTime? Fecha)
         {
             int cantidad = 0;
             using (var conn = new SqlConnection(CadenaConexion))
             {
                 string selectQuery;
-                if (IdHistorial == null)
+                if (IdCliente == null && IdEmpleado == null && Fecha==null)
                 {
                     selectQuery = "SELECT COUNT(*) FROM Historiales";
                     cantidad = conn.ExecuteScalar<int>(selectQuery);
                 }
-                else
+                else if(IdCliente!=null && IdEmpleado == null && Fecha==null)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Historiales h
+                        INNER JOIN Reservas r ON r.IdReserva=h.IdReserva
+                        WHERE (r.IdCliente=@IdCliente)";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdCliente = IdCliente });
+                }
+                else if(IdCliente==null && IdEmpleado != null && Fecha == null)
                 {
                     selectQuery = @"SELECT COUNT(*) FROM Historiales 
-                        WHERE (IdHistorial=@IdHistorial)";
-                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdHistorial = IdHistorial });
+                        WHERE (IdEmpleado=@IdEmpleado)";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdEmpleado = IdEmpleado });
+                }
+                else if(IdCliente==null && IdEmpleado == null && Fecha != null)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Historiales h
+                        INNER JOIN Reservas r ON r.IdReserva=h.IdReserva 
+                        WHERE (r.FechaEntrada=CONVERT(DATE, @Fecha))";
+                    cantidad = conn.ExecuteScalar<int>(selectQuery, new { Fecha = Fecha });
                 }
             }
             return cantidad;
@@ -94,7 +134,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
-        public List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? ReservaId)
+        public List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? IdCliente, int? IdEmpleado, DateTime? Fecha)
         {
             List<HistorialDto> lista = new List<HistorialDto>();
             using (var conn = new SqlConnection(CadenaConexion))
@@ -108,15 +148,15 @@ namespace Taller_Mecanico.Datos.Repositorios
                 selectQuery.AppendLine("INNER JOIN Vehiculos v ON v.IdVehiculo=h.IdVehiculo");
                 selectQuery.AppendLine("INNER JOIN Clientes c ON c.IdCliente=r.IdCliente");
 
-                if (ReservaId != null)
+                if (IdCliente != null || IdEmpleado!=null || Fecha!=null)
                 {
-                    selectQuery.AppendLine("WHERE r.IdReserva = @ReservaId");
+                    selectQuery.AppendLine("WHERE r.IdCliente = @IdCliente OR h.IdEmpleado=@IdEmpleado OR r.FechaEntrada=CONVERT(DATE, @Fecha)");
                 }
 
                 selectQuery.AppendLine("ORDER BY r.FechaEntrada");
                 selectQuery.AppendLine("OFFSET @registrosSaltados ROWS FETCH NEXT @registrosPorPagina ROWS ONLY");
 
-                var parametros = new { ReservaId, registrosSaltados = registrosPorPagina * (paginaActual - 1), registrosPorPagina };
+                var parametros = new { IdCliente,IdEmpleado,Fecha, registrosSaltados = registrosPorPagina * (paginaActual - 1), registrosPorPagina };
 
                 lista = conn.Query<HistorialDto>(selectQuery.ToString(), parametros).ToList();
                 return lista;

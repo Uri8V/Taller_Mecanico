@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,9 +84,16 @@ namespace Taller_Mecanico.Windows.Helpers
                     r.Cells[3].Value = vehiculo.Modelo;
                     break;
                 case TelefonoDto telefono:
-                    if (!string.IsNullOrEmpty(telefono.DocumentoCliente))
+                    if (!string.IsNullOrEmpty(telefono.DocumentoCliente) || !string.IsNullOrEmpty(telefono.CUIT))
                     {
-                        r.Cells[0].Value = $"{telefono.ApellidoCliente.ToUpper()}, {telefono.NombreCliente} ({telefono.DocumentoCliente})";
+                        if (!string.IsNullOrEmpty(telefono.DocumentoCliente))
+                        { 
+                            r.Cells[0].Value = $"{telefono.ApellidoCliente.ToUpper()}, {telefono.NombreCliente} ({telefono.DocumentoCliente})";
+                        }
+                        else
+                        {
+                            r.Cells[0].Value = $"{telefono.ApellidoCliente.ToUpper()}, {telefono.NombreCliente} ({telefono.CUIT})";
+                        }
                         r.Cells[1].Value = "";
                         r.Cells[2].Value = telefono.Telefono;
                         r.Cells[3].Value = telefono.TipoDeTelefono;
@@ -98,7 +107,15 @@ namespace Taller_Mecanico.Windows.Helpers
                     }
                     break;
                 case ReservaDto reserva:
+                    if (reserva.Documento != "")
+                    {
                     r.Cells[0].Value = $"{reserva.Apellido.ToUpper()}, {reserva.Nombre} ({reserva.Documento})";
+
+                    }
+                    else
+                    {
+                        r.Cells[0].Value = $"{reserva.Apellido.ToUpper()}, {reserva.Nombre} ({reserva.CUIT})";
+                    }
                     r.Cells[1].Value = reserva.FechaEntrada.ToShortDateString();
                     r.Cells[2].Value = reserva.HoraEntrada;
                     if (reserva.FechaSalida == new DateTime(2023, 01, 01) && reserva.HoraSalida == TimeSpan.Zero)
@@ -150,18 +167,32 @@ namespace Taller_Mecanico.Windows.Helpers
                 case MovimientosDto movimientos:
                     r.Cells[0].Value = movimientos.Servicio;
                     r.Cells[1].Value = movimientos.Debe;
-                    r.Cells[2].Value = movimientos.Senia;
-                    r.Cells[3].Value = movimientos.NombreDePago;
+                    r.Cells[2].Value = movimientos.NombreDePago;
                     break;
                 case VehiculosServiciosDto servicios:
                     r.Cells[0].Value = servicios.Patente;
-                    r.Cells[1].Value = $"{servicios.Apellido.ToUpper()}, {servicios.Nombre} ({servicios.Documento})";
-                    r.Cells[2].Value = $"{servicios.Servicio}, Debe:{servicios.DebeServicio}, Seña:{servicios.Senia}";
-                    r.Cells[3].Value = (servicios.Debe - servicios.Senia).ToString();
+                    r.Cells[1].Value = $"{servicios.Apellido.ToUpper()}, {servicios.Nombre} ({servicios.Documento} {servicios.CUIT})";
+                    r.Cells[2].Value = $"{servicios.Servicio}, Debe:{servicios.DebeServicio}";
+                    r.Cells[3].Value = (servicios.Debe - servicios.Haber).ToString();
+                    if (servicios.Debe - servicios.Haber <= 0)
+                    {
+                        r.Cells[3].Style.BackColor=Color.Purple ;
+                    }
+                    else
+                    {
+                        r.Cells[3].Style.BackColor= Color.White;
+                    }
                     r.Cells[4].Value = servicios.Haber;
                     r.Cells[5].Value = servicios.Descripcion;
-                    r.Cells[6].Value = servicios.Fecha.ToShortDateString();
-                    break;
+                    if (servicios.Fecha!=new DateTime(2023,01,01))
+                    {
+                        r.Cells[6].Value = servicios.Fecha.ToShortDateString();
+                    }
+                    else
+                    {
+                        r.Cells[6].Value = "Aún no se realizó el Servicio";
+                    }
+                     break;
             }
             r.Tag = obj;
 
@@ -174,6 +205,17 @@ namespace Taller_Mecanico.Windows.Helpers
         public static void QuitarFila(DataGridView dgv, DataGridViewRow r)
         {
             dgv.Rows.Remove(r);
+        }
+
+        internal static void MostrarDatosEnGrilla<T>(DataGridView dgv, List<T> lista)
+        {
+            GridHelpers.LimpiarGrilla(dgv);
+            foreach (var obj in lista)
+            {
+                DataGridViewRow r = GridHelpers.ConstruirFila(dgv);
+                GridHelpers.SetearFila(r, obj);
+                GridHelpers.AgregarFila(dgv, r);
+            }
         }
     }
 }

@@ -44,6 +44,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxCliente = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnAgregarCliente = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboEmpresa = new System.Windows.Forms.ComboBox();
+            this.checkBoxEmpresa = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,7 +169,7 @@
             // 
             this.comboBoxCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCliente.FormattingEnabled = true;
-            this.comboBoxCliente.Location = new System.Drawing.Point(310, 158);
+            this.comboBoxCliente.Location = new System.Drawing.Point(330, 144);
             this.comboBoxCliente.Name = "comboBoxCliente";
             this.comboBoxCliente.Size = new System.Drawing.Size(194, 21);
             this.comboBoxCliente.TabIndex = 4;
@@ -173,11 +177,50 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(257, 161);
+            this.label5.Location = new System.Drawing.Point(277, 147);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 5;
             this.label5.Text = "Clientes:";
+            // 
+            // btnAgregarCliente
+            // 
+            this.btnAgregarCliente.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
+            this.btnAgregarCliente.Location = new System.Drawing.Point(539, 147);
+            this.btnAgregarCliente.Name = "btnAgregarCliente";
+            this.btnAgregarCliente.Size = new System.Drawing.Size(48, 42);
+            this.btnAgregarCliente.TabIndex = 12;
+            this.btnAgregarCliente.UseVisualStyleBackColor = true;
+            this.btnAgregarCliente.Click += new System.EventHandler(this.btnAgregarCliente_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(277, 186);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Empresas:";
+            // 
+            // comboEmpresa
+            // 
+            this.comboEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboEmpresa.FormattingEnabled = true;
+            this.comboEmpresa.Location = new System.Drawing.Point(339, 183);
+            this.comboEmpresa.Name = "comboEmpresa";
+            this.comboEmpresa.Size = new System.Drawing.Size(194, 21);
+            this.comboEmpresa.TabIndex = 13;
+            // 
+            // checkBoxEmpresa
+            // 
+            this.checkBoxEmpresa.AutoSize = true;
+            this.checkBoxEmpresa.Location = new System.Drawing.Point(179, 161);
+            this.checkBoxEmpresa.Name = "checkBoxEmpresa";
+            this.checkBoxEmpresa.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxEmpresa.TabIndex = 15;
+            this.checkBoxEmpresa.Text = "Es Empresa?";
+            this.checkBoxEmpresa.UseVisualStyleBackColor = true;
+            this.checkBoxEmpresa.CheckedChanged += new System.EventHandler(this.checkBoxEmpresa_CheckedChanged);
             // 
             // frmReservasAE
             // 
@@ -185,6 +228,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 289);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBoxEmpresa);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboEmpresa);
+            this.Controls.Add(this.btnAgregarCliente);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxCliente);
             this.Controls.Add(this.label4);
@@ -226,5 +273,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerHoraDeSalida;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxCliente;
+        private System.Windows.Forms.Button btnAgregarCliente;
+        private System.Windows.Forms.CheckBox checkBoxEmpresa;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboEmpresa;
     }
 }

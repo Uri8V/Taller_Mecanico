@@ -30,10 +30,10 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.colTipoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCantidadTiposPago = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.colTipoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripButtonCerrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
@@ -61,8 +61,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtCantidadTiposPago);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 396);
-            this.splitContainer1.SplitterDistance = 321;
+            this.splitContainer1.Size = new System.Drawing.Size(619, 215);
+            this.splitContainer1.SplitterDistance = 177;
             this.splitContainer1.TabIndex = 3;
             // 
             // dgvDatos
@@ -78,14 +78,21 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(800, 321);
+            this.dgvDatos.Size = new System.Drawing.Size(619, 177);
             this.dgvDatos.TabIndex = 0;
+            // 
+            // colTipoPago
+            // 
+            this.colTipoPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTipoPago.HeaderText = "Tipos de Pagos";
+            this.colTipoPago.Name = "colTipoPago";
+            this.colTipoPago.ReadOnly = true;
             // 
             // txtCantidadTiposPago
             // 
             this.txtCantidadTiposPago.Enabled = false;
             this.txtCantidadTiposPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidadTiposPago.Location = new System.Drawing.Point(218, 11);
+            this.txtCantidadTiposPago.Location = new System.Drawing.Point(162, 3);
             this.txtCantidadTiposPago.Name = "txtCantidadTiposPago";
             this.txtCantidadTiposPago.Size = new System.Drawing.Size(61, 20);
             this.txtCantidadTiposPago.TabIndex = 1;
@@ -94,7 +101,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 18);
+            this.label1.Location = new System.Drawing.Point(13, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 13);
             this.label1.TabIndex = 0;
@@ -109,16 +116,9 @@
             this.toolStripButtonEditar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 54);
+            this.toolStrip1.Size = new System.Drawing.Size(619, 54);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // colTipoPago
-            // 
-            this.colTipoPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTipoPago.HeaderText = "Tipos de Pagos";
-            this.colTipoPago.Name = "colTipoPago";
-            this.colTipoPago.ReadOnly = true;
             // 
             // toolStripButtonCerrar
             // 
@@ -169,11 +169,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(619, 269);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
+            this.MaximumSize = new System.Drawing.Size(635, 308);
+            this.MinimumSize = new System.Drawing.Size(635, 308);
             this.Name = "frmTipoDePago";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmTipoDePago";
             this.Load += new System.EventHandler(this.frmTipoDePago_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

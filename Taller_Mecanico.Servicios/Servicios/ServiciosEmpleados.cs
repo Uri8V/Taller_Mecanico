@@ -35,12 +35,28 @@ namespace Taller_Mecanico.Servicios.Servicios
 
         public bool EstaRelacionada(Empleado empleado)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.EstaRelacionada(empleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool Existe(Empleado empleado)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repo.Existe(empleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int GetCantidad(int? empleadoId)

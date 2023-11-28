@@ -15,6 +15,7 @@ using Taller_Mecanico.Entidades.Dtos.Modelos;
 using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
 using Taller_Mecanico.Servicios.Servicios;
+using Taller_Mecanico.Windows.FrmsVehiculos.frmEMPLEADOS;
 using Taller_Mecanico.Windows.Helpers;
 
 namespace Taller_Mecanico.Windows.FrmsVehiculos
@@ -25,7 +26,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         {
             InitializeComponent();
             _servicio = new ServiciosEmpleados();
-            _servicioRoles= new ServiciosRoles();
+            _servicioRoles = new ServiciosRoles();
         }
         private List<EmpleadoDto> lista;
         private IServiciosEmpleados _servicio;
@@ -35,7 +36,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         int paginas = 0;
         int registrosPorPagina = 3;
 
-        int? rol=null;
+        int? rol = null;
         private void toolStripButtonCerrar_Click(object sender, EventArgs e)
         {
             Close();
@@ -43,6 +44,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void toolStripButtonActualizar_Click(object sender, EventArgs e)
         {
+            rol = null;
             RecargarGrilla();
             HabilitarBotones();
         }
@@ -53,6 +55,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
         }
 
         private void frmEmpleados_Load(object sender, EventArgs e)
@@ -69,7 +75,14 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void MostrarPaginado()
         {
-            lista = _servicio.GetEmpleadosPorPagina(registrosPorPagina, paginaActual, rol);
+            if (rol == null)
+            {
+                lista = _servicio.GetEmpleadosPorPagina(registrosPorPagina, paginaActual, rol);
+            }
+            else
+            {
+                lista = _servicio.GetEmpleadosPorPagina(registrosPorPagina, paginaActual, rol);
+            }
             MostrarDatosEnGrilla();
         }
 
@@ -121,7 +134,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         private void toolStripButtonAgregar_Click(object sender, EventArgs e)
         {
-            frmEmpleadoAE frm= new frmEmpleadoAE();
+            frmEmpleadoAE frm = new frmEmpleadoAE();
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel)
             {
@@ -129,11 +142,19 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             }
             var empleado = frm.GetEmpleado();
             //preguntar si existe
-            _servicio.Guardar(empleado);
-            MessageBox.Show("Empleado Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            registros = _servicio.GetCantidad(null);
-            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            MostrarPaginado();
+            if (!_servicio.Existe(empleado))
+            {
+                _servicio.Guardar(empleado);
+                MessageBox.Show("Empleado Agregado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                registros = _servicio.GetCantidad(null);
+                paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+                MostrarPaginado();
+
+            }
+            else
+            {
+                MessageBox.Show("El empleado ya existe!!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonBorrar_Click(object sender, EventArgs e)
@@ -146,10 +167,18 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             EmpleadoDto empleadoABorrar = (EmpleadoDto)r.Tag;
             DialogResult dr = MessageBox.Show($"¿Desea eliminar el empleado: {empleadoABorrar.Apellido}, {empleadoABorrar.Nombre}, DNI:{empleadoABorrar.Documento}?", "Confirmar Selcción", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
+            Empleado EMPLEADOaborrar = _servicio.GetEmpleadoPorId(empleadoABorrar.IdEmpleado);
             //Falta metodo de objeto relacionado
-            GridHelpers.QuitarFila(dgvDatos, r);
-            _servicio.Borrar(empleadoABorrar.IdEmpleado);
-            RecargarGrilla();
+            if (!_servicio.EstaRelacionada(EMPLEADOaborrar))
+            {
+                GridHelpers.QuitarFila(dgvDatos, r);
+                _servicio.Borrar(empleadoABorrar.IdEmpleado);
+                RecargarGrilla();
+            }
+            else
+            {
+                MessageBox.Show("El/La empleado/a esta relacionado/a!!!!!!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void toolStripButtonEditar_Click(object sender, EventArgs e)
@@ -165,7 +194,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             Empleado empleados = _servicio.GetEmpleadoPorId(empleadoDto.IdEmpleado);
             try
             {
-               frmEmpleadoAE frm = new frmEmpleadoAE() { Text = "Editar Empleado" };
+                frmEmpleadoAE frm = new frmEmpleadoAE() { Text = "Editar Empleado" };
                 frm.SetEmpleado(empleados);
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.Cancel)
@@ -175,21 +204,28 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     return;
                 }
                 empleados = frm.GetEmpleado();
-                if (empleados != null)
+                if (!_servicio.Existe(empleados))
                 {
-                    //Crear el dto
-                    empleadoDto.IdEmpleado = empleados.IdEmpleado;
-                    empleadoDto.Nombre= empleados.Nombre;
-                    empleadoDto.Documento= empleados.Documento;
-                    empleadoDto.Rol= _servicioRoles.GetRolesPorId(empleados.IdRolEmpleado).Rol;
-                    GridHelpers.SetearFila(r, empleadoDto);
-                    _servicio.Guardar(empleados);
+                    if (empleados != null)
+                    {
+                        //Crear el dto
+                        empleadoDto.IdEmpleado = empleados.IdEmpleado;
+                        empleadoDto.Nombre = empleados.Nombre;
+                        empleadoDto.Documento = empleados.Documento;
+                        empleadoDto.Rol = _servicioRoles.GetRolesPorId(empleados.IdRolEmpleado).Rol;
+                        GridHelpers.SetearFila(r, empleadoDto);
+                        _servicio.Guardar(empleados);
+                    }
+                    else
+                    {
+                        //Recupero la copia del dto
+                        GridHelpers.SetearFila(r, CopiaEmpleado);
+
+                    }
                 }
                 else
                 {
-                    //Recupero la copia del dto
-                    GridHelpers.SetearFila(r, CopiaEmpleado);
-
+                    MessageBox.Show("El empleado ya existe!!!!", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception)
@@ -198,5 +234,46 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 throw;
             }
         }
+        private void toolStripButtonFiltrar_Click(object sender, EventArgs e)
+        {
+            frmSeleccionarRol frm = new frmSeleccionarRol();
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                HabilitarBotones();
+                return;
+            }
+            var roles = frm.GetRol();
+            registros = _servicio.GetCantidad(roles.IdRolEmpleado);
+            rol = roles.IdRolEmpleado;
+            paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            lista = _servicio.GetEmpleadosPorPagina(registrosPorPagina, paginaActual, rol);
+            DesabilitarBotones();
+            MostrarDatosEnGrilla();
+        }
+
+        private void DesabilitarBotones()
+        {
+            toolStripButtonFiltrar.BackColor = Color.DarkViolet;
+            toolStripButtonEditar.Enabled = false;
+            toolStripButtonBorrar.Enabled = false;
+            toolStripButtonAgregar.Enabled = false;
+            toolStripButtonFiltrar.Enabled = false;
+            if (paginas == 1)
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+        }
+
     }
 }

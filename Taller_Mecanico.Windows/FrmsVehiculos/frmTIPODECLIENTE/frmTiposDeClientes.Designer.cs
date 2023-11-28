@@ -38,6 +38,7 @@
             this.toolStripButtonAgregar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBorrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEditar = new System.Windows.Forms.ToolStripButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -48,7 +49,6 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 54);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -59,10 +59,11 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
             this.splitContainer1.Panel2.Controls.Add(this.txtCantidadMarcas);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Size = new System.Drawing.Size(800, 396);
-            this.splitContainer1.SplitterDistance = 321;
+            this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 3;
             // 
             // dgvDatos
@@ -78,7 +79,7 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(800, 321);
+            this.dgvDatos.Size = new System.Drawing.Size(800, 352);
             this.dgvDatos.TabIndex = 0;
             // 
             // colTipoDeClinente
@@ -92,16 +93,16 @@
             // 
             this.txtCantidadMarcas.Enabled = false;
             this.txtCantidadMarcas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidadMarcas.Location = new System.Drawing.Point(183, 20);
+            this.txtCantidadMarcas.Location = new System.Drawing.Point(183, 13);
             this.txtCantidadMarcas.Name = "txtCantidadMarcas";
-            this.txtCantidadMarcas.Size = new System.Drawing.Size(61, 20);
+            this.txtCantidadMarcas.Size = new System.Drawing.Size(0, 20);
             this.txtCantidadMarcas.TabIndex = 1;
             this.txtCantidadMarcas.Text = "0";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 23);
+            this.label1.Location = new System.Drawing.Point(24, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(153, 13);
             this.label1.TabIndex = 0;
@@ -165,6 +166,14 @@
             this.toolStripButtonEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonEditar.Click += new System.EventHandler(this.toolStripButtonEditar_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(183, 13);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(45, 20);
+            this.textBox1.TabIndex = 2;
+            // 
             // frmTiposDeClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,5 +211,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonBorrar;
         private System.Windows.Forms.ToolStripButton toolStripButtonEditar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTipoDeClinente;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

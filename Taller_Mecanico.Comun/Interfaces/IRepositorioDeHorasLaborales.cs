@@ -15,6 +15,7 @@ namespace Taller_Mecanico.Comun.Interfaces
         bool Existe(HorasLaborales horas);
         int GetCantidad(DateTime? Fecha);
         List<HorasLaborales> GetHoras();
+        bool EstRelacionada(HorasLaborales horas);
         List<HorasLaborales> Filtrar(DateTime horas);
         HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales);
         List<HorasLaborales> GetHorasLaboralesCombo();

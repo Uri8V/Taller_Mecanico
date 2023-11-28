@@ -53,12 +53,39 @@ namespace Taller_Mecanico.Datos.Repositorios
 
         public bool EstaRelacionada(Model modelos)
         {
-            throw new NotImplementedException();
+            int cantidad = 0;
+            using (var conn = new SqlConnection(CadenaDeConexion))
+            {
+
+                string selectQuery = @"SELECT COUNT(*) FROM Vehiculos WHERE IdModelo=@IdModelo";
+                cantidad = conn.ExecuteScalar<int>(selectQuery, new { IdModelo = modelos.IdModelo });
+            }
+            return cantidad > 0;
         }
 
         public bool Existe(Model  modelos)
         {
-            throw new NotImplementedException();
+            var cantidad = 0;
+            using (var conn = new SqlConnection(CadenaDeConexion))
+            {
+                string selectQuery;
+                if (modelos.IdModelo == 0)
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Modelos 
+                            WHERE IdMarca=@IdMarca AND Modelo=@Modelo ";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdMarca = modelos.IdMarca, Modelo = modelos.Modelo });
+                }
+                else
+                {
+                    selectQuery = @"SELECT COUNT(*) FROM Modelos 
+                WHERE IdMarca=@IdMarca AND Modelo=@Modelo AND IdModelo!=@IdModelo";
+                    cantidad = conn.ExecuteScalar<int>(
+                        selectQuery, new { IdMarca = modelos.IdMarca, Modelo = modelos.Modelo, IdModelo=modelos.IdModelo });
+
+                }
+            }
+            return cantidad > 0;
         }
 
         public int GetCantidad(int? IdMarca)
@@ -116,7 +143,7 @@ namespace Taller_Mecanico.Datos.Repositorios
                 if (marca != null)
                 {
                     selectQuery = @"SELECT m.IdModelo, m.Modelo, mm.Marca FROM Modelos m
-                                  INNER JOIN Marcas mm ON m.IdMarca=mm.IdMarca WHERE m.Marca=@marca ORDER BY Modelo
+                                  INNER JOIN Marcas mm ON m.IdMarca=mm.IdMarca WHERE m.IdMarca=@marca ORDER BY Modelo
                                   OFFSET @cantidadRegistros ROWS FETCH NEXT @CantidadPorPagina ROWS ONLY";
                     var registrosSateados = registrosPorPagina * (paginaActual - 1);
 

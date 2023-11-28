@@ -288,6 +288,7 @@
             this.toolStripButtonFiltrar.Size = new System.Drawing.Size(41, 51);
             this.toolStripButtonFiltrar.Text = "Filtrar";
             this.toolStripButtonFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonFiltrar.Click += new System.EventHandler(this.toolStripButtonFiltrar_Click);
             // 
             // toolStripButtonActualizar
             // 

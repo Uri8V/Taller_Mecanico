@@ -14,8 +14,8 @@ namespace Taller_Mecanico.Servicios.Interfaces
         void Borrar(int reservaId);
         bool Existe(Reservas reserva);
         bool EstaRelacionada(Reservas reserva);
-        int GetCantidad(int? reservaId);
-        List<ReservaDto> GetReservasPorPagina(int registrosPorPagina, int paginaActual, int? clienteId);
+        int GetCantidad(int? reservaId, DateTime? FechaEntrada);
+        List<ReservaDto> GetReservasPorPagina(int registrosPorPagina, int paginaActual, int? clienteId, DateTime? FechaEntrada);
         Reservas GetReservasPorId(int clienteId);
         List<Reservas> GetReservasCombos();
     }

@@ -104,5 +104,18 @@ namespace Taller_Mecanico.Servicios.Servicios
                 throw;
             }
         }
+
+        public bool EstaRelacionado(TiposDeClientes tipo)
+        {
+            try
+            {
+                return _servicio.EstaRelacionado(tipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

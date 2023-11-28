@@ -22,12 +22,12 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
         {
             Close();
         }
-        private DateTime horas;
+        private DateTime fecha;
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
             {
-                horas = (DateTime)dateTimePickerFiltro.Value;
+                fecha = (DateTime)dateTimePickerFiltro.Value;
                 DialogResult = DialogResult.OK;
             }
         }
@@ -46,7 +46,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
 
         internal DateTime GetFecha()
         {
-            return horas;
+            return fecha;
         }
     }
 }
