@@ -84,7 +84,15 @@ namespace Taller_Mecanico.Windows.Helpers
                     PdfFile = PdfFile.Replace("@DOCUMENTO", $"{datosCliente.Documento}{datosCliente.CUIT}");
                 }
                 lineas += "<tr>";
-                lineas += "<td>" + datosCliente.Fecha.ToShortDateString() + "</td>";
+                if (datosCliente.Fecha!=new DateTime(2023,01,01 ))
+                {
+                 lineas += "<td>" + datosCliente.Fecha.ToShortDateString() + "</td>";
+
+                }
+                else
+                {
+                    lineas += "<td>" + "Aún no se realizó el servicio" + "</td>";
+                }
                 lineas += "<td>" + datosCliente.Patente + "</td>";
                 lineas += "<td>" + datosCliente.Servicio + "</td>";
                 lineas += "<td>" + datosCliente.Descripcion + "</td>";

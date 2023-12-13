@@ -84,8 +84,14 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
         }
 
         private void CrearFila(DataGridViewRow r, VehiculosServiciosDto item)
-        {   
-            r.Cells[0].Value = item.Fecha.ToShortDateString();
+        {   if(item.Fecha==new DateTime(2023, 01, 01))
+            {
+                r.Cells[0].Value = "Aún no se realizo el servicio";
+            }
+            else
+            {
+                r.Cells[0].Value = item.Fecha.ToShortDateString();
+            }
             r.Cells[1].Value = item.Patente;
             r.Cells[2].Value = item.Servicio;
             r.Cells[3].Value = item.Descripcion;

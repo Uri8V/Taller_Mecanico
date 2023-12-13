@@ -30,8 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,8 +48,6 @@
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHaber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDebe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,6 +81,9 @@
             // 
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
+            this.dgvDatos.AllowUserToResizeColumns = false;
+            this.dgvDatos.AllowUserToResizeRows = false;
+            this.dgvDatos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFecha,
@@ -101,9 +105,35 @@
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDatos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(796, 276);
             this.dgvDatos.TabIndex = 0;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Image = global::Taller_Mecanico.Windows.Properties.Resources.Close_32px;
+            this.btnCancelar.Location = new System.Drawing.Point(329, 9);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(92, 52);
+            this.btnCancelar.TabIndex = 10;
+            this.btnCancelar.Text = "CANCELAR";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnOK
+            // 
+            this.btnOK.Image = global::Taller_Mecanico.Windows.Properties.Resources.Done_32px;
+            this.btnOK.Location = new System.Drawing.Point(78, 9);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(92, 52);
+            this.btnOK.TabIndex = 9;
+            this.btnOK.Text = "CONFIRMAR";
+            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // txtTotal
             // 
@@ -202,30 +232,6 @@
             this.colDebe.HeaderText = "Debe";
             this.colDebe.Name = "colDebe";
             this.colDebe.ReadOnly = true;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::Taller_Mecanico.Windows.Properties.Resources.Close_32px;
-            this.btnCancelar.Location = new System.Drawing.Point(329, 9);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(92, 52);
-            this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.Text = "CANCELAR";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnOK
-            // 
-            this.btnOK.Image = global::Taller_Mecanico.Windows.Properties.Resources.Done_32px;
-            this.btnOK.Location = new System.Drawing.Point(78, 9);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(92, 52);
-            this.btnOK.TabIndex = 9;
-            this.btnOK.Text = "CONFIRMAR";
-            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // frmImprimirServicios
             // 
