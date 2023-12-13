@@ -131,6 +131,23 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
+        public List<VehiculosServiciosDto> GetVehiculoServicioPorCliente(string Cuit)
+        {
+            List<VehiculosServiciosDto> lista = new List<VehiculosServiciosDto>();
+            using (var conn = new SqlConnection(cadenaConexion))
+            {
+                string selectQuery = @"SELECT vs.IdVehiculosSevicios, v.Patente, m.Servicio, m.Debe as DebeServicio, c.Apellido, c.Nombre,c.Documento,c.CUIT,vs.Descripcion,vs.Debe,vs.Haber,vs.Fecha
+                    FROM VehiculosServicios vs
+                    INNER JOIN Vehiculos v ON v.IdVehiculo=vs.IdVehiculo
+                    INNER JOIN Movimientos m ON vs.IdMovimiento=m.IdMovimiento
+                    INNER JOIN Clientes c ON vs.IdCliente=c.IdCliente
+                    WHERE c.Documento=@Cuit OR c.CUIT=@Cuit";
+                var parametros = new { Cuit };
+                lista = conn.Query<VehiculosServiciosDto>(selectQuery, parametros).ToList();
+            }
+            return lista;
+        }
+
         public VehiculosServicios GetVehiculoServicioPorId(int IdVehiculoServicios)
         {
             VehiculosServicios vehiculosServicios = null;

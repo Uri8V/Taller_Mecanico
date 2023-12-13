@@ -96,6 +96,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripButtonFiltrar.Enabled = true;
+            btnAnterior.Enabled = true;
+            btnPrimero.Enabled = true;
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled= true;
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
@@ -249,9 +253,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             registros = _servicio.GetCantidad(empleadoSeleccionado.IdEmpleado, null);
             IdEmpleado = empleadoSeleccionado.IdEmpleado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual, IdEmpleado, Fecha);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void fechaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -263,9 +267,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             registros = _servicio.GetCantidad(null, FechaSeleccionado);
             Fecha = FechaSeleccionado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetSueldosPorPagina(registrosPorPagina, paginaActual,IdEmpleado, Fecha);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
         private void DesabilitarBotones()
         {

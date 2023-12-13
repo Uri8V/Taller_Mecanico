@@ -89,7 +89,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 errorProvider1.SetError(dateTimePickerFecha, "Debe ingresar la fecha actual");
                 validar = false;
             }
-            if(dateTimePickerFin.Value.Hour>DateTime.Now.Hour)
+            else if(dateTimePickerFin.Value.Hour>DateTime.Now.Hour && dateTimePickerFecha.Value==DateTime.Today.Date)
             {
                 errorProvider1.SetError(dateTimePickerFin, "La hora debe ser no puede sobrepasar las horas actuales");
                 validar = false;

@@ -62,7 +62,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 vehiculos.Kilometros=txtKilometros.Text;    
                 vehiculos.NombreTipoVehiculo = (TipoVehiculo)comboTipoVehiculo.SelectedItem;
                 vehiculos.IdTipoVehiculo = (int)comboTipoVehiculo.SelectedValue;
-                vehiculos.NombreModelo = (Model)comboModelo.SelectedItem; //NO FUNCIONA CON EL EDITAR NI AGREGAR
+                vehiculos.NombreModelo = (Model)comboModelo.SelectedItem;
                 vehiculos.IdModelo = (int)comboModelo.SelectedValue;
         
                 DialogResult = DialogResult.OK;

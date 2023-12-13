@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Taller_Mecanico.Entidades.Dtos.HorasLaborales;
 using Taller_Mecanico.Entidades.Entidades;
 
 namespace Taller_Mecanico.Servicios.Interfaces
@@ -17,6 +18,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         bool EstRelacionada(HorasLaborales horas);
         List<HorasLaborales> Filtrar(DateTime horas);
         HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales);
-        List<HorasLaborales> GetHorasLaboralesCombo();
+        List<HorasLaboralesComboDto> GetHorasLaboralesCombo();
     }
 }

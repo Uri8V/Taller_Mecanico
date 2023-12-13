@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Taller_Mecanico.Entidades.Dtos.Historiales;
+using Taller_Mecanico.Entidades.Dtos.HorasLaborales;
 using Taller_Mecanico.Entidades.Dtos.Sueldos;
 using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
@@ -32,12 +34,14 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
             base.OnLoad(e);
             ComboHelper.CargarComboHorasLaborales(ref comboHorasLaborales);
             ComboHelper.CargarComboHistoriales(ref comboHistorial);
-            if (sueldos!=null)
+            if (sueldos != null)
             {
                 txtTotalAPagar.Text = sueldos.TotalAPagar.ToString();
-                txtTotalExtra.Text=sueldos.TotalExtra.ToString();
+                txtTotalExtra.Text = sueldos.TotalExtra.ToString();
                 comboHistorial.SelectedValue = sueldos.IdHistorial;
                 comboHorasLaborales.SelectedValue = sueldos.IdHorasLaborales;
+                txtValorPorHora.Text = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHora.ToString();
+                txtValorPorHoraExtra.Text = _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHoraExtra.ToString();
             }
         }
         internal Sueldos GetSueldo()
@@ -69,9 +73,11 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
                     sueldos = new Sueldos();
                 }
                 sueldos.IdHistorial = (int)comboHistorial.SelectedValue;
-                sueldos.Historial = (Historiales)comboHistorial.SelectedItem;
+                HistorialComboDto historialSeleccionado= (HistorialComboDto)comboHistorial.SelectedItem;
+                sueldos.Historial = _serviciosHistoriales.GetHistorialPorId(historialSeleccionado.IdHistorial);
                 sueldos.IdHorasLaborales = (int)comboHorasLaborales.SelectedValue;
-                sueldos.HoraLaboral = (HorasLaborales)comboHorasLaborales.SelectedItem;
+                HorasLaboralesComboDto horasSeleccionadas = (HorasLaboralesComboDto)comboHorasLaborales.SelectedItem;
+                sueldos.HoraLaboral = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(horasSeleccionadas.IdHorasLaborales);
                 sueldos.TotalAPagar = _serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horaslaborales * _serviciosHistoriales.GetHistorialPorId(sueldos.IdHistorial).ValorPorHora;
                 if (_serviciosDeHorasLaborales.GetHorasLaboralesPorId(sueldos.IdHorasLaborales).horasExtras == 0)
                 {
@@ -122,6 +128,47 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmSUELDOS
                 ComboHelper.CargarComboHorasLaborales(ref comboHorasLaborales);
                 return;
             }
+        }
+
+        private void comboHorasLaborales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MostrarTotalAPagar();
+        }
+        private void MostrarTotalAPagar()
+        {
+            if (comboHistorial.SelectedIndex>0)
+            {
+                txtValorPorHora.Text = (_serviciosHistoriales.GetHistorialPorId((int)comboHistorial.SelectedValue).ValorPorHora).ToString();
+                txtValorPorHoraExtra.Text = (_serviciosHistoriales.GetHistorialPorId((int)comboHistorial.SelectedValue).ValorPorHoraExtra).ToString();
+            }
+            else
+            {
+                txtValorPorHora.Text=0.ToString();
+                txtValorPorHoraExtra.Text=0.ToString();
+            }
+
+            if (comboHorasLaborales.SelectedIndex != 0 && comboHistorial.SelectedIndex != 0)
+            {
+                txtTotalAPagar.Text = (_serviciosDeHorasLaborales.GetHorasLaboralesPorId((int)comboHorasLaborales.SelectedValue).horaslaborales * _serviciosHistoriales.GetHistorialPorId((int)comboHistorial.SelectedValue).ValorPorHora).ToString();
+                if (_serviciosDeHorasLaborales.GetHorasLaboralesPorId((int)comboHorasLaborales.SelectedValue).horasExtras == 0)
+                {
+                    txtTotalExtra.Text = 0.ToString();
+                }
+                else
+                {
+                    txtTotalExtra.Text = (_serviciosDeHorasLaborales.GetHorasLaboralesPorId((int)comboHorasLaborales.SelectedValue).horasExtras * _serviciosHistoriales.GetHistorialPorId((int)comboHistorial.SelectedValue).ValorPorHoraExtra).ToString();
+                }
+            }
+            else
+            {
+                txtTotalAPagar.Text=0.ToString();
+                txtTotalExtra.Text=0.ToString();
+            }
+        }
+
+        private void comboHistorial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MostrarTotalAPagar();
         }
     }
 }

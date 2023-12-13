@@ -17,6 +17,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         int GetCantidad(int? IdCliente, int? IdEmpresa, DateTime? Fecha);
         List<HistorialDto> GetHistorialesPorPagina(int registrosPorPagina, int paginaActual, int? IdCliente, int? IdEmpresa, DateTime? Fecha);
         Historiales GetHistorialPorId(int IdHistorial);
-        List<Historiales> GetHistorialesCombos();
+        List<HistorialComboDto> GetHistorialesCombos();
     }
 }

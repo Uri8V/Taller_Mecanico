@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Taller_Mecanico.Entidades.Dtos.Reservas;
 using Taller_Mecanico.Entidades.Entidades;
+using Taller_Mecanico.Servicios.Interfaces;
+using Taller_Mecanico.Servicios.Servicios;
 using Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS;
 using Taller_Mecanico.Windows.Helpers;
 
@@ -18,6 +21,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
         public frmHistorialesAE()
         {
             InitializeComponent();
+            _serviciosReservas = new ServiciosReservas();
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -35,6 +39,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
             }
         }
         private Historiales historiales;
+        private IServiciosReservas _serviciosReservas;
         internal Historiales GetHistorial()
         {
            return historiales;
@@ -61,16 +66,17 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
             {
                 if (historiales == null)
                 {
-                    historiales= new Historiales();
+                    historiales = new Historiales();
                 }
                 historiales.ValorPorHora = decimal.Parse(txtValorPorHora.Text);
                 if (string.IsNullOrEmpty(txtValorPorHoraExtra.Text))
                 {
-                    txtValorPorHoraExtra.Text=0.ToString();
+                    txtValorPorHoraExtra.Text = 0.ToString();
                 }
-                historiales.ValorPorHoraExtra=decimal.Parse(txtValorPorHoraExtra.Text);
-                historiales.IdReserva=(int)comboReserva.SelectedValue;
-                historiales.Reserva = (Reservas)comboReserva.SelectedItem;
+                historiales.ValorPorHoraExtra = decimal.Parse(txtValorPorHoraExtra.Text);
+                historiales.IdReserva = (int)comboReserva.SelectedValue;
+                ReservaComboDto reservaSleeccionada=(ReservaComboDto)comboReserva.SelectedItem;
+                historiales.Reserva = _serviciosReservas.GetReservasPorId(reservaSleeccionada.IdReserva);
                 historiales.IdVehiculo=(int)comboVehiculos.SelectedValue;
                 historiales.Vehiculo = (Vehiculos)comboVehiculos.SelectedItem;
                 historiales.IdEmpleado=(int)comboEmpleados.SelectedValue;

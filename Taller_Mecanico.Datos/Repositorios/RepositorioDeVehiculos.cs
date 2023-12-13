@@ -27,7 +27,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             using (var conn = new SqlConnection(cadenaConexion))
             {
                 string selectQuery = @"INSERT INTO Vehiculos (Patente, Kilometros, IdTipoVehiculo, IdModelo) 
-                                    Values (@Patente, @Kilometros, @IdTipoVehiculo, @IdModelo); SELECT SCOPE_IDENTITY();";
+                                    Values (UPPER(@Patente), @Kilometros, @IdTipoVehiculo, @IdModelo); SELECT SCOPE_IDENTITY();";
                 int id = conn.ExecuteScalar<int>(selectQuery, vehiculos);
                 vehiculos.IdVehiculo = id;
             }
@@ -47,7 +47,7 @@ namespace Taller_Mecanico.Datos.Repositorios
         {
             using (var conn = new SqlConnection(cadenaConexion))
             {
-                string updateQuery = @"UPDATE Vehiculos SET Patente=@Patente, Kilometros=@Kilometros, IdTipoVehiculo=@IdTipoVehiculo, IdModelo=@IdModelo 
+                string updateQuery = @"UPDATE Vehiculos SET Patente=UPPER(@Patente), Kilometros=@Kilometros, IdTipoVehiculo=@IdTipoVehiculo, IdModelo=@IdModelo 
                 WHERE IdVehiculo=@IdVehiculo";
                 conn.Execute(updateQuery, vehiculos);
             }
@@ -127,8 +127,10 @@ namespace Taller_Mecanico.Datos.Repositorios
             List<Vehiculos> lista;
             using (var conn = new SqlConnection(cadenaConexion))
             {
-                string selectQuery = @"SELECT IdVehiculo, Patente FROM Vehiculos
-                        ORDER BY Patente";
+                string selectQuery = @"SELECT v.IdVehiculo, CONCAT(UPPER(v.Patente),' | Tipo Vehiculo: ',t.TipoVehiculo,' | Modelo: ', m.Modelo) AS Patente FROM Vehiculos v
+                                       INNER JOIN TiposDeVehiculo t ON v.IdTipoVehiculo=t.IdTipoVehiculo
+                                       INNER JOIN Modelos m ON m.IdModelo=v.IdModelo
+                                       ORDER BY v.Patente";
                 lista = conn.Query<Vehiculos>(selectQuery).ToList();
 
             }
@@ -178,11 +180,8 @@ namespace Taller_Mecanico.Datos.Repositorios
                     cantidadRegistros = registrosPorPagina * (paginaActual - 1),
                     cantidadPorPagina = registrosPorPagina
                 };
-
                 lista = conn.Query<VehiculoDto>(selectQuery.ToString(), parametros).ToList();
-
             }
-
             return lista;
         }
     }

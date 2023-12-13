@@ -24,5 +24,16 @@ namespace Taller_Mecanico.Windows.Helpers
                 return registros / registrosPorPagina + 1;
             }
         }
+
+        public static int RetornoPrimerPagina(int registrosPagina, int paginaActual)
+        {
+            int PaginaActual = paginaActual;
+            if (paginaActual > 1 && registrosPagina >= registrosPagina)
+            {
+                PaginaActual= 1;
+            }
+            return PaginaActual;
+
+        }
     }
 }

@@ -60,7 +60,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.checkBoxEmpresa);
-            this.panel1.Location = new System.Drawing.Point(404, 44);
+            this.panel1.Location = new System.Drawing.Point(499, 40);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(83, 34);
             this.panel1.TabIndex = 29;
@@ -91,13 +91,13 @@
             this.comboEmpresa.FormattingEnabled = true;
             this.comboEmpresa.Location = new System.Drawing.Point(129, 73);
             this.comboEmpresa.Name = "comboEmpresa";
-            this.comboEmpresa.Size = new System.Drawing.Size(175, 21);
+            this.comboEmpresa.Size = new System.Drawing.Size(253, 21);
             this.comboEmpresa.TabIndex = 27;
             // 
             // btnAgregarCliente
             // 
             this.btnAgregarCliente.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarCliente.Location = new System.Drawing.Point(310, 31);
+            this.btnAgregarCliente.Location = new System.Drawing.Point(405, 27);
             this.btnAgregarCliente.Name = "btnAgregarCliente";
             this.btnAgregarCliente.Size = new System.Drawing.Size(76, 58);
             this.btnAgregarCliente.TabIndex = 26;
@@ -119,7 +119,7 @@
             this.comboCliente.FormattingEnabled = true;
             this.comboCliente.Location = new System.Drawing.Point(129, 24);
             this.comboCliente.Name = "comboCliente";
-            this.comboCliente.Size = new System.Drawing.Size(175, 21);
+            this.comboCliente.Size = new System.Drawing.Size(253, 21);
             this.comboCliente.TabIndex = 24;
             // 
             // btnConfirmar
@@ -145,7 +145,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 136);
+            this.label3.Location = new System.Drawing.Point(4, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 31;
@@ -155,9 +155,9 @@
             // 
             this.comboVehiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVehiculo.FormattingEnabled = true;
-            this.comboVehiculo.Location = new System.Drawing.Point(129, 133);
+            this.comboVehiculo.Location = new System.Drawing.Point(120, 133);
             this.comboVehiculo.Name = "comboVehiculo";
-            this.comboVehiculo.Size = new System.Drawing.Size(160, 21);
+            this.comboVehiculo.Size = new System.Drawing.Size(322, 21);
             this.comboVehiculo.TabIndex = 30;
             // 
             // label4
@@ -175,16 +175,16 @@
             this.comboMovimiento.FormattingEnabled = true;
             this.comboMovimiento.Location = new System.Drawing.Point(142, 194);
             this.comboMovimiento.Name = "comboMovimiento";
-            this.comboMovimiento.Size = new System.Drawing.Size(175, 21);
+            this.comboMovimiento.Size = new System.Drawing.Size(266, 21);
             this.comboMovimiento.TabIndex = 32;
             this.comboMovimiento.SelectedIndexChanged += new System.EventHandler(this.comboMovimiento_SelectedIndexChanged);
             // 
             // btnAgregarVehiculo
             // 
             this.btnAgregarVehiculo.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarVehiculo.Location = new System.Drawing.Point(295, 124);
+            this.btnAgregarVehiculo.Location = new System.Drawing.Point(468, 122);
             this.btnAgregarVehiculo.Name = "btnAgregarVehiculo";
-            this.btnAgregarVehiculo.Size = new System.Drawing.Size(46, 37);
+            this.btnAgregarVehiculo.Size = new System.Drawing.Size(48, 40);
             this.btnAgregarVehiculo.TabIndex = 34;
             this.btnAgregarVehiculo.UseVisualStyleBackColor = true;
             this.btnAgregarVehiculo.Click += new System.EventHandler(this.btnAgregarVehiculo_Click);
@@ -192,7 +192,7 @@
             // btnAgregarMovimiento
             // 
             this.btnAgregarMovimiento.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarMovimiento.Location = new System.Drawing.Point(323, 185);
+            this.btnAgregarMovimiento.Location = new System.Drawing.Point(435, 185);
             this.btnAgregarMovimiento.Name = "btnAgregarMovimiento";
             this.btnAgregarMovimiento.Size = new System.Drawing.Size(46, 37);
             this.btnAgregarMovimiento.TabIndex = 35;
@@ -205,7 +205,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(443, 111);
+            this.txtDescripcion.Location = new System.Drawing.Point(539, 113);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(171, 62);
@@ -214,15 +214,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(371, 114);
+            this.label5.Location = new System.Drawing.Point(582, 97);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.Size = new System.Drawing.Size(83, 13);
             this.label5.TabIndex = 37;
-            this.label5.Text = "Descripción:";
+            this.label5.Text = "DESCRIPCIÓN:";
             // 
             // txtHaber
             // 
-            this.txtHaber.Location = new System.Drawing.Point(443, 254);
+            this.txtHaber.Location = new System.Drawing.Point(557, 253);
             this.txtHaber.Name = "txtHaber";
             this.txtHaber.Size = new System.Drawing.Size(153, 20);
             this.txtHaber.TabIndex = 41;
@@ -230,7 +230,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(398, 257);
+            this.label7.Location = new System.Drawing.Point(512, 256);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 40;
@@ -259,7 +259,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Enabled = false;
-            this.label6.Location = new System.Drawing.Point(398, 208);
+            this.label6.Location = new System.Drawing.Point(512, 207);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 38;
@@ -268,7 +268,7 @@
             // txtDebe
             // 
             this.txtDebe.Enabled = false;
-            this.txtDebe.Location = new System.Drawing.Point(443, 205);
+            this.txtDebe.Location = new System.Drawing.Point(557, 204);
             this.txtDebe.Name = "txtDebe";
             this.txtDebe.Size = new System.Drawing.Size(153, 20);
             this.txtDebe.TabIndex = 39;
@@ -277,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 367);
+            this.ClientSize = new System.Drawing.Size(736, 367);
             this.ControlBox = false;
             this.Controls.Add(this.dateTimePickerFecha);
             this.Controls.Add(this.label8);
@@ -301,8 +301,8 @@
             this.Controls.Add(this.comboCliente);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnCancelar);
-            this.MaximumSize = new System.Drawing.Size(642, 406);
-            this.MinimumSize = new System.Drawing.Size(642, 406);
+            this.MaximumSize = new System.Drawing.Size(752, 406);
+            this.MinimumSize = new System.Drawing.Size(752, 406);
             this.Name = "frmVehiculosServiciosAE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmVehiculosServiciosAE";

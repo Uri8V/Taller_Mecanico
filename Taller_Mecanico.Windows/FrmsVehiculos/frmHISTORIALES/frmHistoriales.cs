@@ -264,9 +264,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
             registros = _servicio.GetCantidad(null, empleadoSeleccionado.IdEmpleado, null);
             IdEmpleado = empleadoSeleccionado.IdEmpleado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetHistorialesPorPagina(registrosPorPagina, paginaActual, IdCliente, IdEmpleado, Fecha);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
         private void DesabilitarBotones()
         {
@@ -304,9 +304,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
             registros = _servicio.GetCantidad(clienteSeleccionado.IdCliente, null, null);
             IdCliente = clienteSeleccionado.IdCliente;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetHistorialesPorPagina(registrosPorPagina, paginaActual, IdCliente, IdEmpleado, Fecha);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void fechaEntradaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -318,9 +318,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmHISTORIALES
             registros = _servicio.GetCantidad(IdCliente, IdEmpleado, FechaSeleccionado);
             Fecha = FechaSeleccionado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetHistorialesPorPagina(registrosPorPagina, paginaActual, IdCliente, IdEmpleado, Fecha);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
     }
 }

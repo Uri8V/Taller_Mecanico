@@ -73,7 +73,7 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<Reservas> GetReservasCombos()
+        public List<ReservaComboDto> GetReservasCombos()
         {
             try
             {

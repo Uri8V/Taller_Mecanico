@@ -109,6 +109,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             toolStripButtonBorrar.Enabled = true;
             toolStripButtonAgregar.Enabled = true;
             toolStripDropDownButtonFiltrar.Enabled = true;
+            toolStripTextBox1.Enabled=true;
             btnAnterior.Enabled = true;
             btnPrimero.Enabled = true;
             btnSiguiente.Enabled = true;
@@ -180,7 +181,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             }
             var r = dgvDatos.SelectedRows[0];
             VehiculosServiciosDto ServicioABorrar = (VehiculosServiciosDto)r.Tag;
-            DialogResult dr = MessageBox.Show($"¿Desea eliminar el Servicio {ServicioABorrar.Servicio} del Cliente {ServicioABorrar.Apellido.ToUpper()}, {ServicioABorrar.Nombre} ({ServicioABorrar.Documento}) con el vehiculo de la patente ({ServicioABorrar.Patente}) el cual debe (${ServicioABorrar.DebeServicio})?", "Confirmar Selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            DialogResult dr = MessageBox.Show($"¿Desea eliminar el Servicio {ServicioABorrar.Servicio} del Cliente {ServicioABorrar.Apellido.ToUpper()}, {ServicioABorrar.Nombre} ({ServicioABorrar.Documento} {ServicioABorrar.CUIT}) con el vehiculo de la patente ({ServicioABorrar.Patente}) el cual debe (${ServicioABorrar.DebeServicio})?", "Confirmar Selección", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (dr == DialogResult.No) { return; }
             //Falta metodo de objeto relacionado
             GridHelpers.QuitarFila(dgvDatos, r);
@@ -255,6 +256,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             toolStripButtonBorrar.Enabled = false;
             toolStripButtonAgregar.Enabled = false;
             toolStripDropDownButtonFiltrar.Enabled = false;
+            toolStripTextBox1.Enabled = false;
             if (paginas == 1)
             {
                 btnAnterior.Enabled = false;
@@ -280,6 +282,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             registros = _servicio.GetCantidad(IdVehiculo,IDMovimiento,IdCliente,Fecha);
             fecha = Fecha;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
             MostrarPaginado();
             DesabilitarBotones();
         }
@@ -298,6 +301,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             registros = _servicio.GetCantidad(IdVehiculo, movimiento.IdMovimiento, IdCliente, fecha);
             IDMovimiento = movimiento.IdMovimiento;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
             MostrarPaginado();
             DesabilitarBotones();
         }
@@ -311,6 +315,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             registros = _servicio.GetCantidad(vehiculo.IdVehiculo, IDMovimiento, IdCliente, fecha);
             IdVehiculo = vehiculo.IdVehiculo;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
             MostrarPaginado();
             DesabilitarBotones();
         }
@@ -320,9 +325,8 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
             var listaFiltrada = serviciosVehiculosDto;
             if (texto.Length != 0)
             {
-                Func<VehiculosServiciosDto, bool> condicion = c => c.Apellido.ToUpper().Contains(texto.ToUpper()) || c.Nombre.ToUpper().Contains(texto.ToUpper())||c.CUIT.Contains(texto.ToUpper())||c.Documento.Contains(texto.ToUpper());
+                Func<VehiculosServiciosDto, bool> condicion = c => c.Apellido.ToUpper().Contains(texto.ToUpper()) || c.Nombre.ToUpper().Contains(texto.ToUpper()) || c.CUIT.Contains(texto.ToUpper()) || c.Documento.Contains(texto.ToUpper());
                 listaFiltrada = serviciosVehiculosDto.Where(condicion).ToList();
-
             }
             GridHelpers.MostrarDatosEnGrilla<VehiculosServiciosDto>(dgvDatos, listaFiltrada);
         }
@@ -331,6 +335,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
         {
             if (e.RowIndex < 0)
             {
+                toolStripButtonImprimir.Enabled= false;
                 return;
             }
             var r = dgvDatos.Rows[e.RowIndex];
@@ -351,6 +356,27 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
         {
             var texto = toolStripTextBox1.Text;
             BuscarCliente(lista, texto);
+        }
+
+        private void txtImprimir_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0)
+            {
+                return;
+            }
+            var r = dgvDatos.SelectedRows[0];
+            VehiculosServiciosDto vehiculosServiciosDto = (VehiculosServiciosDto)r.Tag;
+            try
+            {
+                frmImprimirServicios frm = new frmImprimirServicios(vehiculosServiciosDto);
+                DialogResult dr= frm.ShowDialog(this);
+                if (dr == DialogResult.Cancel) { return; }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

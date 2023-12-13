@@ -121,14 +121,18 @@ namespace Taller_Mecanico.Datos.Repositorios
             return cantidad;
         }
 
-        public List<Historiales> GetHistorialesCombos()
+        public List<HistorialComboDto> GetHistorialesCombos()
         {
-            List<Historiales> lista;
+            List<HistorialComboDto>lista;
             using (var conn = new SqlConnection(CadenaConexion))
             {
-                string selectQuery = @"SELECT IdHistorial FROM Historiales 
-                        ORDER BY IdHistorial";
-                lista = conn.Query<Historiales>(selectQuery).ToList();
+                string selectQuery = @"SELECT h.IdHistorial, CONCAT('Patente: ',v.Patente,' | Empleado: ',CONCAT(UPPER(e.Apellido),' ',e.Nombre,' (',e.Documento,')'),' | Fecha: ',r.FechaEntrada, ' | Hora: ', r.HoraEntrada ) AS Info
+                                       FROM Historiales h
+                                       INNER JOIN Vehiculos V ON h.IdVehiculo=v.IdVehiculo
+                                       INNER JOIN Empleados e ON h.IdEmpleado=e.IdEmpleado
+                                       INNER JOIN Reservas r ON r.IdReserva=h.IdReserva 
+                                       ORDER BY r.FechaEntrada";
+                lista = conn.Query<HistorialComboDto>(selectQuery).ToList();
 
             }
             return lista;

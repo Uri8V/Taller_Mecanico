@@ -153,6 +153,16 @@ namespace Taller_Mecanico.Windows.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Done_32px {
+            get {
+                object obj = ResourceManager.GetObject("Done_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_property_32px {
             get {
                 object obj = ResourceManager.GetObject("edit_property_32px", resourceCulture);
@@ -241,6 +251,37 @@ namespace Taller_Mecanico.Windows.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Factura del Cliente&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///            table.border th {
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///
+        ///            table.border td {
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table style=&quot;width:100%&quot;&gt;
+        ///        &lt; [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string NuevaFactura {
+            get {
+                return ResourceManager.GetString("NuevaFactura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap people_32px {
@@ -266,6 +307,16 @@ namespace Taller_Mecanico.Windows.Properties {
         internal static System.Drawing.Bitmap previous_32px {
             get {
                 object obj = ResourceManager.GetObject("previous_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap print_32px {
+            get {
+                object obj = ResourceManager.GetObject("print_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

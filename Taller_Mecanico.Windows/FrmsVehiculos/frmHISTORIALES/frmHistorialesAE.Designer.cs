@@ -50,9 +50,9 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(170, 183);
+            this.btnConfirmar.Location = new System.Drawing.Point(253, 176);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(128, 75);
+            this.btnConfirmar.Size = new System.Drawing.Size(106, 45);
             this.btnConfirmar.TabIndex = 0;
             this.btnConfirmar.Text = "CONFIRMAR";
             this.btnConfirmar.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(462, 183);
+            this.btnCancelar.Location = new System.Drawing.Point(545, 176);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(126, 75);
+            this.btnCancelar.Size = new System.Drawing.Size(103, 45);
             this.btnCancelar.TabIndex = 0;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             // btnAgregarEmpleado
             // 
             this.btnAgregarEmpleado.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarEmpleado.Location = new System.Drawing.Point(703, 11);
+            this.btnAgregarEmpleado.Location = new System.Drawing.Point(870, 12);
             this.btnAgregarEmpleado.Name = "btnAgregarEmpleado";
             this.btnAgregarEmpleado.Size = new System.Drawing.Size(48, 42);
             this.btnAgregarEmpleado.TabIndex = 18;
@@ -81,7 +81,7 @@
             // btnAgregarReserva
             // 
             this.btnAgregarReserva.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarReserva.Location = new System.Drawing.Point(703, 83);
+            this.btnAgregarReserva.Location = new System.Drawing.Point(732, 71);
             this.btnAgregarReserva.Name = "btnAgregarReserva";
             this.btnAgregarReserva.Size = new System.Drawing.Size(48, 42);
             this.btnAgregarReserva.TabIndex = 19;
@@ -92,24 +92,24 @@
             // 
             this.comboReserva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboReserva.FormattingEnabled = true;
-            this.comboReserva.Location = new System.Drawing.Point(479, 99);
+            this.comboReserva.Location = new System.Drawing.Point(156, 83);
             this.comboReserva.Name = "comboReserva";
-            this.comboReserva.Size = new System.Drawing.Size(213, 21);
+            this.comboReserva.Size = new System.Drawing.Size(548, 21);
             this.comboReserva.TabIndex = 16;
             // 
             // comboEmpleados
             // 
             this.comboEmpleados.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEmpleados.FormattingEnabled = true;
-            this.comboEmpleados.Location = new System.Drawing.Point(479, 23);
+            this.comboEmpleados.Location = new System.Drawing.Point(562, 23);
             this.comboEmpleados.Name = "comboEmpleados";
-            this.comboEmpleados.Size = new System.Drawing.Size(213, 21);
+            this.comboEmpleados.Size = new System.Drawing.Size(293, 21);
             this.comboEmpleados.TabIndex = 17;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(424, 102);
+            this.label4.Location = new System.Drawing.Point(101, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 14;
@@ -118,7 +118,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(411, 26);
+            this.label3.Location = new System.Drawing.Point(494, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 15;
@@ -130,15 +130,15 @@
             // 
             // txtValorPorHora
             // 
-            this.txtValorPorHora.Location = new System.Drawing.Point(122, 136);
+            this.txtValorPorHora.Location = new System.Drawing.Point(94, 136);
             this.txtValorPorHora.Name = "txtValorPorHora";
-            this.txtValorPorHora.Size = new System.Drawing.Size(100, 20);
+            this.txtValorPorHora.Size = new System.Drawing.Size(311, 20);
             this.txtValorPorHora.TabIndex = 26;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 139);
+            this.label5.Location = new System.Drawing.Point(9, 139);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 27;
@@ -147,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(37, 83);
+            this.label6.Location = new System.Drawing.Point(513, 142);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 13);
             this.label6.TabIndex = 29;
@@ -155,15 +155,15 @@
             // 
             // txtValorPorHoraExtra
             // 
-            this.txtValorPorHoraExtra.Location = new System.Drawing.Point(149, 80);
+            this.txtValorPorHoraExtra.Location = new System.Drawing.Point(625, 139);
             this.txtValorPorHoraExtra.Name = "txtValorPorHoraExtra";
-            this.txtValorPorHoraExtra.Size = new System.Drawing.Size(100, 20);
+            this.txtValorPorHoraExtra.Size = new System.Drawing.Size(230, 20);
             this.txtValorPorHoraExtra.TabIndex = 28;
             // 
             // btnAgregarVehiculo
             // 
             this.btnAgregarVehiculo.Image = global::Taller_Mecanico.Windows.Properties.Resources.add_32px;
-            this.btnAgregarVehiculo.Location = new System.Drawing.Point(318, 11);
+            this.btnAgregarVehiculo.Location = new System.Drawing.Point(422, 12);
             this.btnAgregarVehiculo.Name = "btnAgregarVehiculo";
             this.btnAgregarVehiculo.Size = new System.Drawing.Size(48, 42);
             this.btnAgregarVehiculo.TabIndex = 32;
@@ -174,15 +174,15 @@
             // 
             this.comboVehiculos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVehiculos.FormattingEnabled = true;
-            this.comboVehiculos.Location = new System.Drawing.Point(99, 23);
+            this.comboVehiculos.Location = new System.Drawing.Point(71, 23);
             this.comboVehiculos.Name = "comboVehiculos";
-            this.comboVehiculos.Size = new System.Drawing.Size(213, 21);
+            this.comboVehiculos.Size = new System.Drawing.Size(334, 21);
             this.comboVehiculos.TabIndex = 31;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(37, 26);
+            this.label7.Location = new System.Drawing.Point(9, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 30;
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 273);
+            this.ClientSize = new System.Drawing.Size(921, 232);
             this.ControlBox = false;
             this.Controls.Add(this.btnAgregarVehiculo);
             this.Controls.Add(this.comboVehiculos);
@@ -209,8 +209,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConfirmar);
-            this.MaximumSize = new System.Drawing.Size(776, 312);
-            this.MinimumSize = new System.Drawing.Size(776, 312);
             this.Name = "frmHistorialesAE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmHistorialesAE";

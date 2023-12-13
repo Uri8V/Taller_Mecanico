@@ -254,9 +254,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(clienteSeleccionado.IdCliente,null, null);
             cliente = clienteSeleccionado.IdCliente;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void DesabilitarBotones()
@@ -295,9 +295,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(null, empleadoSeleccionado.IdEmpleado, null);
             empleado = empleadoSeleccionado.IdEmpleado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void tipoDeTelefonoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -312,9 +312,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(null, null, texto);
             Texto = texto;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetTelefonosPorPagina(registrosPorPagina, paginaActual, cliente, empleado, Texto);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
     }
 }

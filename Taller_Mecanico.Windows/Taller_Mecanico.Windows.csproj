@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.3\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -280,6 +289,12 @@
     <Compile Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoVehiculo.Designer.cs">
       <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmImprimirServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmImprimirServicios.Designer.cs">
+      <DependentUpon>frmImprimirServicios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServicios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +334,7 @@
     <Compile Include="Helpers\ComboHelper.cs" />
     <Compile Include="Helpers\formHelper.cs" />
     <Compile Include="Helpers\GridHelpers.cs" />
+    <Compile Include="Helpers\ImprimirHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmsVehiculos\frmCLIENTES\frmClienteAE.resx">
@@ -438,6 +454,9 @@
     <EmbeddedResource Include="FrmsVehiculos\frmTIPOSDEVEHICULOS\frmTipoVehiculo.resx">
       <DependentUpon>frmTipoVehiculo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmImprimirServicios.resx">
+      <DependentUpon>frmImprimirServicios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmsVehiculos\frmVEHICULOSSERVICIOS\frmVehiculosServicios.resx">
       <DependentUpon>frmVehiculosServicios.cs</DependentUpon>
     </EmbeddedResource>
@@ -466,6 +485,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -578,6 +598,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search_more_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Done_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NuevaFactura.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

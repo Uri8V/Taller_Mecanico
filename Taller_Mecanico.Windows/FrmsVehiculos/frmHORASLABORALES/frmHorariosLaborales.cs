@@ -179,7 +179,6 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             lista = _servicios.Filtrar(horas);
             MostrarDatos(horas);
             MostrarDatosEnGrilla();
-
         }
 
         private void DesabilitarBotones()

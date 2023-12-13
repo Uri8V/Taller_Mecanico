@@ -71,7 +71,7 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<Historiales> GetHistorialesCombos()
+        public List<HistorialComboDto> GetHistorialesCombos()
         {
             try
             {

@@ -17,6 +17,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         int GetCantidad(int? reservaId, DateTime? FechaEntrada);
         List<ReservaDto> GetReservasPorPagina(int registrosPorPagina, int paginaActual, int? clienteId, DateTime? FechaEntrada);
         Reservas GetReservasPorId(int clienteId);
-        List<Reservas> GetReservasCombos();
+        List<ReservaComboDto> GetReservasCombos();
     }
 }

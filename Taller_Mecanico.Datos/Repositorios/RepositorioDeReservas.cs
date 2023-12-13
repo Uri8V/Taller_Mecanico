@@ -116,14 +116,15 @@ namespace Taller_Mecanico.Datos.Repositorios
             return cantidad;
         }
 
-        public List<Reservas> GetReservasCombos()
+        public List<ReservaComboDto> GetReservasCombos()
         {
-            List<Reservas> lista;
+            List<ReservaComboDto> lista;
             using (var conn = new SqlConnection(cadenaConexion))
             {
-                string selectQuery = @"SELECT IdReserva FROM Reservas
-                        ORDER BY IdReserva";
-                lista = conn.Query<Reservas>(selectQuery).ToList();
+                string selectQuery = @"SELECT r.IdReserva, CONCAT(CONCAT(UPPER(c.Apellido),' ',c.Nombre,' (',c.Documento,') '),' | Fecha de Entrada: ' ,r.FechaEntrada,' | Hora de Entrada: ',r.HoraEntrada ) AS Info FROM Reservas r
+                                       INNER JOIN Clientes c ON r.IdCliente=c.IdCliente
+                                       ORDER BY r.FechaEntrada";
+                lista = conn.Query<ReservaComboDto>(selectQuery).ToList();
 
             }
             return lista;

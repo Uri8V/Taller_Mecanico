@@ -68,6 +68,21 @@ namespace Taller_Mecanico.Servicios.Servicios
             throw new NotImplementedException();
         }
 
+     
+
+        public List<VehiculosServiciosDto> GetVehiculoServicioPorCliente(string cUIT)
+        {
+            try
+            {
+                return _repo.GetVehiculoServicioPorCliente(cUIT);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public VehiculosServicios GetVehiculoServicioPorId(int IdVehiculoServicio)
         {
             try

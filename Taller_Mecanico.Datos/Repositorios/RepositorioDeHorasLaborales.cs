@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Taller_Mecanico.Comun.Interfaces;
+using Taller_Mecanico.Entidades.Dtos.HorasLaborales;
 using Taller_Mecanico.Entidades.Entidades;
 
 namespace Taller_Mecanico.Datos.Repositorios
@@ -250,38 +251,16 @@ namespace Taller_Mecanico.Datos.Repositorios
             return lista;
         }
 
-        public List<HorasLaborales> GetHorasLaboralesCombo()
+        public List<HorasLaboralesComboDto> GetHorasLaboralesCombo()
         {
-            List<HorasLaborales> lista = new List<HorasLaborales>();
+            List<HorasLaboralesComboDto> lista = new List<HorasLaboralesComboDto>();
             using (var conn = new SqlConnection(cadenaDeConexion))
             {
-                string selectQuery = @"SELECT IdHorasLaborales, Fecha FROM HorasLaborales
-                         ORDER BY Fecha";
-                conn.Open();
-                using (var comando = new SqlCommand(selectQuery, conn))
-                {
-                    using (var reader = comando.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var tipo = ConstruirHorasLaboralesCombo(reader);
-
-                            lista.Add(tipo);
-                        }
-
-                    }
-                }
+                string selectQuery = @"SELECT h.IdHorasLaborales, CONCAT('Fecha: ',CONVERT(DATE,h.Fecha),' | Hora Inicio: ',CONVERT(TIME(0),h.HoraDeInicio), ' | Hora Fin: ',CONVERT(TIME(0),h.HoraDeFin)) AS Info FROM HorasLaborales h
+                         ORDER BY h.Fecha";
+                lista = conn.Query<HorasLaboralesComboDto>(selectQuery).ToList();
             }
             return lista;
-        }
-
-        private HorasLaborales ConstruirHorasLaboralesCombo(SqlDataReader reader)
-        {
-            return new HorasLaborales
-            {
-                IdHorasLaborales = reader.GetInt32(0),
-                Fecha = reader.GetDateTime(1)
-            };
         }
 
         public HorasLaborales GetHorasLaboralesPorId(int idHorasLaborales)

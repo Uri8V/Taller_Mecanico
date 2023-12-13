@@ -125,7 +125,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             List<Clientes> lista = new List<Clientes>();
             using (var conn= new SqlConnection(cadenaConexion))
             {
-                string selectQuery = @"SELECT c.IdCliente, c.Documento FROM Clientes c WHERE c.CUIT=''; ";
+                string selectQuery = @"SELECT c.IdCliente, CONCAT(UPPER(c.Apellido),'  ',c.Nombre,' (',c.Documento,')')AS Documento FROM Clientes c WHERE c.CUIT=''; ";
                 lista = conn.Query<Clientes>(selectQuery).ToList();
             }
             return lista;
@@ -186,7 +186,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             List<Clientes> lista = new List<Clientes>();
             using (var conn = new SqlConnection(cadenaConexion))
             {
-                string selectQuery = @"SELECT c.IdCliente, c.CUIT FROM Clientes c WHERE c.Documento=''; ";
+                string selectQuery = @"SELECT c.IdCliente, CONCAT(UPPER(c.Apellido),'  ',c.Nombre,' (',c.CUIT,')')AS CUIT FROM Clientes c WHERE c.Documento=''; ";
                 lista = conn.Query<Clientes>(selectQuery).ToList();
             }
             return lista;

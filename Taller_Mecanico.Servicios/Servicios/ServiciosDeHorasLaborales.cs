@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Taller_Mecanico.Comun.Interfaces;
 using Taller_Mecanico.Datos.Repositorios;
+using Taller_Mecanico.Entidades.Dtos.HorasLaborales;
 using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
 
@@ -96,7 +97,7 @@ namespace Taller_Mecanico.Servicios.Servicios
             }
         }
 
-        public List<HorasLaborales> GetHorasLaboralesCombo()
+        public List<HorasLaboralesComboDto> GetHorasLaboralesCombo()
         {
             try
             {

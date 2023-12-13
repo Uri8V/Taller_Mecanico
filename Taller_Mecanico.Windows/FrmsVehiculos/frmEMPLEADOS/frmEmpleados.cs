@@ -149,7 +149,6 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                 registros = _servicio.GetCantidad(null);
                 paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
                 MostrarPaginado();
-
             }
             else
             {
@@ -247,9 +246,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(roles.IdRolEmpleado);
             rol = roles.IdRolEmpleado;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetEmpleadosPorPagina(registrosPorPagina, paginaActual, rol);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void DesabilitarBotones()

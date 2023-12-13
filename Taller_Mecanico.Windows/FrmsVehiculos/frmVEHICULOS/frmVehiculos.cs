@@ -249,9 +249,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(modeloSeleccionado.IdModelo, null);
             modelo = modeloSeleccionado.IdModelo;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetVehiculosPorPagina(registrosPorPagina, paginaActual, modelo, tipo);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
         private void DesabilitarBotones()
         {
@@ -287,9 +287,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(null, tipoVehiculoSeleccionado.IdTipoVehiculo);
             tipo = tipoVehiculoSeleccionado.IdTipoVehiculo;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetVehiculosPorPagina(registrosPorPagina, paginaActual, modelo, tipo);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void toolStripButtonFiltrar_Click(object sender, EventArgs e)

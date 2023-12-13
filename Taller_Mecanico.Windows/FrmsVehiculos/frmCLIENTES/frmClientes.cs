@@ -219,7 +219,6 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
                     {
                         //Recupero la copia del dto
                         GridHelpers.SetearFila(r, CopiaCliente);
-
                     }
                 }
                 else
@@ -247,9 +246,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(tipoCliente.IdTipoCliente);
             tipo = tipoCliente.IdTipoCliente;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetClientesPorPagina(registrosPorPagina, paginaActual, tipo);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void DesabilitarBotones()

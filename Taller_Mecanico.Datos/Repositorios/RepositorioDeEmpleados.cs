@@ -173,7 +173,7 @@ namespace Taller_Mecanico.Datos.Repositorios
             List<Empleado> lista = new List<Empleado>();
             using (var conn = new SqlConnection(CadenaConexion))
             {
-                string selectQuery = @"SELECT e.IdEmpleado, e.Documento FROM Empleados e ";
+                string selectQuery = @"SELECT e.IdEmpleado, CONCAT(UPPER(e.Apellido),'  ',e.Nombre,' (',e.Documento,')')AS Documento FROM Empleados e";
                 lista = conn.Query<Empleado>(selectQuery).ToList();
             }
             return lista;

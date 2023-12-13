@@ -18,5 +18,6 @@ namespace Taller_Mecanico.Servicios.Interfaces
         List<VehiculosServiciosDto> GetVehiculoServicioPorPagina(int registrosPorPagina, int paginaActual, int? IdVehiculo, int? IdMovimiento, int? IdCliente, DateTime? FechaServicios);
         VehiculosServicios GetVehiculoServicioPorId(int IdVehiculoServicio);
         List<VehiculosServicios> GetVehiculoServicioCombos();
+        List<VehiculosServiciosDto> GetVehiculoServicioPorCliente(string cUIT);
     }
 }

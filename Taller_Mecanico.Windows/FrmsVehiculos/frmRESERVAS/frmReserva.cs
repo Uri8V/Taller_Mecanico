@@ -251,6 +251,7 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
             registros = _servicio.GetCantidad(cliente, Fecha);
             fecha = Fecha;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
             MostrarPaginado();
             DesabilitarBotones();
         }
@@ -289,8 +290,10 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmRESERVAS
             registros = _servicio.GetCantidad(Cliente.IdCliente, fecha);
             cliente = Cliente.IdCliente;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
             DesabilitarBotones();
             MostrarPaginado();
         }
+
     }
 }

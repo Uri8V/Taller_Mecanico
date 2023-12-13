@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Taller_Mecanico.Entidades.Dtos.Clientes;
 using Taller_Mecanico.Entidades.Dtos.Empleados;
+using Taller_Mecanico.Entidades.Dtos.Historiales;
+using Taller_Mecanico.Entidades.Dtos.HorasLaborales;
 using Taller_Mecanico.Entidades.Dtos.Modelos;
+using Taller_Mecanico.Entidades.Dtos.Reservas;
 using Taller_Mecanico.Entidades.Entidades;
 using Taller_Mecanico.Servicios.Interfaces;
 using Taller_Mecanico.Servicios.Servicios;
@@ -174,13 +177,14 @@ namespace Taller_Mecanico.Windows.Helpers
         {
             IServiciosReservas serviciosReserva = new ServiciosReservas();
             var lista = serviciosReserva.GetReservasCombos();
-            var defaultEmpleado = new Reservas()
+            var defaultEmpleado = new ReservaComboDto()
             {
-                IdReserva = 0
+                IdReserva = 0,
+                Info="Seleccione la Reserva"
             };
             lista.Insert(0, defaultEmpleado);
             combo.DataSource = lista;
-            combo.DisplayMember = "IdReserva";
+            combo.DisplayMember = "Info";
             combo.ValueMember = "IdReserva";
             combo.SelectedIndex = 0;
         }
@@ -188,14 +192,15 @@ namespace Taller_Mecanico.Windows.Helpers
         {
             IServiciosHistoriales serviciosHistoriales = new ServiciosHistoriales();
             var lista = serviciosHistoriales.GetHistorialesCombos();
-            var defaultEmpleado = new Historiales()
+            var defaultEmpleado = new HistorialComboDto()
             {
                 IdHistorial=0,
+                Info="Seleccione el Historial"
                 
             };
             lista.Insert(0, defaultEmpleado);
             combo.DataSource = lista;
-            combo.DisplayMember = "IdHistorial";
+            combo.DisplayMember = "Info";
             combo.ValueMember = "IdHistorial";
             combo.SelectedIndex = 0;
         }
@@ -203,14 +208,14 @@ namespace Taller_Mecanico.Windows.Helpers
         {
             IServiciosDeHorasLaborales serviciosHorasLaborales = new ServiciosDeHorasLaborales();
             var lista = serviciosHorasLaborales.GetHorasLaboralesCombo();
-            var defaultEmpleado = new HorasLaborales()
+            var defaultEmpleado = new HorasLaboralesComboDto()
             {
                 IdHorasLaborales=0,
-                Fecha=new DateTime(2023,01,01)
+                Info="Seleccione una Jornada"
             };
             lista.Insert(0, defaultEmpleado);
             combo.DataSource = lista;
-            combo.DisplayMember = "Fecha";
+            combo.DisplayMember = "Info";
             combo.ValueMember = "IdHorasLaborales";
             combo.SelectedIndex = 0;
         }

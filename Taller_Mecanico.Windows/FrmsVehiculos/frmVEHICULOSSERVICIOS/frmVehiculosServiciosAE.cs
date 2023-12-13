@@ -22,32 +22,34 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
         {
             InitializeComponent();
             _servicio = new ServiciosMovimientos();
+            _servicioCliente = new ServiciosClientes();
         }
         private IServiciosMovimientos _servicio;
+        private IServiciosClientes _servicioCliente;
         private VehiculosServicios servicios;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            if (!checkBoxEmpresa.Checked)
-            {
-                checkBoxEmpresa.Checked = false;
-                comboEmpresa.Enabled = false;
-                comboCliente.Enabled = true;
-            }
-            else
-            {
-                checkBoxEmpresa.Checked = true;
-                comboEmpresa.Enabled = true;
-                comboCliente.Enabled = false;
-            }
+            ComboHelper.CargarComboClientesEmpresas(ref comboEmpresa);
+            ComboHelper.CargarComboClientesPersonas(ref comboCliente);
+            ComboHelper.CargarComboVehiculos(ref comboVehiculo);
+            ComboHelper.CargarComboMovimiento(ref comboMovimiento);
             if (servicios != null)
             {
-                if (checkBoxEmpresa.Checked)
+                if (_servicioCliente.GetClientePorId(servicios.IdCliente).CUIT!="")
                 {
+                    checkBoxEmpresa.Checked = true;
+                    comboEmpresa.Enabled = true;
+                    comboCliente.Enabled = false;
+                    comboCliente.SelectedIndex = 0;
                     comboEmpresa.SelectedValue = servicios.IdCliente;
                 }
                 else
                 {
+                    checkBoxEmpresa.Checked = false;
+                    comboEmpresa.Enabled = false;
+                    comboCliente.Enabled = true;
+                    comboEmpresa.SelectedIndex = 0;
                     comboCliente.SelectedValue = servicios.IdCliente;
                 }
                 comboMovimiento.SelectedValue = servicios.IdMovimiento;
@@ -75,11 +77,11 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos.frmVEHICULOSSERVICIOS
 
         private void frmVehiculosServiciosAE_Load(object sender, EventArgs e)
         {
-            ComboHelper.CargarComboClientesEmpresas(ref comboEmpresa);
-            ComboHelper.CargarComboClientesPersonas(ref comboCliente);
-            ComboHelper.CargarComboVehiculos(ref comboVehiculo);
-            ComboHelper.CargarComboMovimiento(ref comboMovimiento);
-
+            if (checkBoxEmpresa.Checked==false)
+            {
+                comboEmpresa.Enabled = false;
+                comboCliente.Enabled = true;
+            }
         }
 
         private void checkBoxEmpresa_CheckedChanged(object sender, EventArgs e)

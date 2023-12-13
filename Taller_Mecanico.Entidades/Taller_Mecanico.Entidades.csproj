@@ -45,10 +45,13 @@
     <Compile Include="Dtos\Clientes\ClienteDto.cs" />
     <Compile Include="Dtos\Empleados\EmpleadoComboDto.cs" />
     <Compile Include="Dtos\Empleados\EmpleadoDto.cs" />
+    <Compile Include="Dtos\Historiales\HistorialComboDto.cs" />
     <Compile Include="Dtos\Historiales\HistorialDto.cs" />
+    <Compile Include="Dtos\HorasLaborales\HorasLaboralesComboDto.cs" />
     <Compile Include="Dtos\Modelos\ModeloComboDto.cs" />
     <Compile Include="Dtos\Modelos\ModelosDto.cs" />
     <Compile Include="Dtos\Movimientos\MovimientosDto.cs" />
+    <Compile Include="Dtos\Reservas\ReservaComboDto.cs" />
     <Compile Include="Dtos\Reservas\ReservaDto.cs" />
     <Compile Include="Dtos\Sueldos\SueldosDto.cs" />
     <Compile Include="Dtos\Telefono\TelefonoComboDto.cs" />

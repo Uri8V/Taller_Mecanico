@@ -237,9 +237,9 @@ namespace Taller_Mecanico.Windows.FrmsVehiculos
             registros = _servicio.GetCantidad(MArca.MarcaId);
             marca = MArca.MarcaId;
             paginas = formHelper.CalcularPaginas(registros, registrosPorPagina);
-            lista = _servicio.GetModelosPorPagina(registrosPorPagina, paginaActual, marca);
+            paginaActual = formHelper.RetornoPrimerPagina(registrosPorPagina, paginaActual);
+            MostrarPaginado();
             DesabilitarBotones();
-            MostrarDatosEnGrilla();
         }
 
         private void DesabilitarBotones()
